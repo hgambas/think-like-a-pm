@@ -8,11 +8,11 @@
   "plugins": [
     {
       "name": "context-is-queen",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "./",
       "description": "Context first. Goal second. Execution last. Your agent interviews you, researches, proposes a goal you correct, then holds itself to it.",
       "category": "productivity",
-      "homepage": "https://hgambas.github.io/context-is-queen/",
+      "homepage": "https://www.thinklikeapm.style/docs/",
       "tags": ["planning", "goals", "interview", "briefing", "product", "non-coders"]
     }
   ]

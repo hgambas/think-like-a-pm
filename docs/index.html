@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>context-is-queen · Docs</title>
+<title>Context is Queen · Docs · Think Like a PM</title>
+<meta name="description" content="Docs for Context is Queen: the agent skill that interviews you, proposes a goal you correct, then holds itself to it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%238E2F26'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -35,6 +37,13 @@
   nav a code{font-family:var(--sans)}
   .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
   .side-foot a{color:var(--ink-soft)}
+  nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
+  nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  .backhome:hover{color:var(--red-deep)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
+  .skip:focus{left:8px;top:8px}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
 
   /* ——— main ——— */
   main{padding:56px 64px 120px;max-width:calc(var(--measure) + 128px)}
@@ -107,8 +116,18 @@
 
   @media (max-width:860px){
     .shell{grid-template-columns:1fr}
-    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:20px 22px 22px}
     main{padding:36px 22px 80px}
+    .tagline{margin-bottom:18px}
+    /* collapse the long stacked nav into wrapped chips so content isn't a screen away */
+    nav{display:flex;flex-wrap:wrap;gap:6px}
+    nav h3{width:100%;margin:14px 0 2px}
+    nav h3:first-child{margin-top:0}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
+    nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
+    nav .soon small{display:none}
+    .side-foot{margin-top:20px;padding-top:14px}
   }
   @media (prefers-reduced-motion:no-preference){
     .page{animation:fade .25s ease-out}
@@ -117,14 +136,16 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#docs">Skip to content</a>
 <div class="shell">
 
 <aside>
+  <a class="backhome" href="/">← Think Like a PM</a>
   <a class="wordmark" href="#docs">
     <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
       <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
-    <b>context-is-queen</b>
+    <b>Context is Queen</b>
   </a>
   <div class="tagline">Context first. Goal second. Execution last.</div>
   <nav aria-label="Docs">
@@ -137,20 +158,24 @@
     <h3>After the goal</h3>
     <a href="#drift-check" data-nav="drift-check"><code>drift-check</code></a>
     <a href="#backlog" data-nav="backlog"><code>backlog</code></a>
+    <h3>More skills</h3>
+    <span class="soon">Turning Research Into Strategy <small>In the workshop</small></span>
+    <span class="soon">Judgment Queue <small>In the workshop</small></span>
+    <span class="soon">AI Output Clinic <small>In the workshop</small></span>
   </nav>
   <div class="side-foot">
     Made by Hiba Ganta ·
-    <a href="https://github.com/hgambas/context-is-queen">GitHub</a>
+    <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
   </div>
 </aside>
 
 <main>
 
 <!-- ================= DOCS INDEX ================= -->
-<section class="page default" id="docs">
-  <div class="crumb">Docs · <b>Overview</b></div>
-  <h1 class="corrected"><s>Goal</s> <ins>Context</ins> first.</h1>
-  <p class="lede">context-is-queen is a Claude Code skill that makes your AI
+<section class="page default" id="docs" tabindex="-1">
+  <div class="crumb">Context is Queen · <b>Overview</b></div>
+  <h1 class="corrected" aria-label="Context first."><span aria-hidden="true"><s>Goal</s> <ins>Context</ins> first.</span></h1>
+  <p class="lede">Context is Queen is a Claude Code skill that makes your AI
   agent do better work on complex tasks — by getting it to a clear, correct
   goal before it builds anything. It interviews <strong>you</strong>, researches what
   it can, and proposes the goal for you to correct. Work aimed at a goal
@@ -160,7 +185,7 @@
   <h2>Three steps to your first briefing</h2>
   <ol class="agenda">
     <li><span class="no">1.</span><div><b>Install</b>
-      <p>Open Claude Code and paste into the chat: <em>Install the context-is-queen skill globally from github.com/hgambas/context-is-queen</em>. “Globally” makes it available in every project.</p></div></li>
+      <p>Open Claude Code and paste into the chat: <em>Install the Context is Queen skill globally from github.com/hgambas/think-like-a-pm</em>. “Globally” makes it available in every project.</p></div></li>
     <li><span class="no">2.</span><div><b>Ask for something complex, in your own words</b>
       <p>“Rework our onboarding so people finish setup.” No special syntax — the briefing starts on its own for multi-step work. Simple asks skip it.</p></div></li>
     <li><span class="no">3.</span><div><b>Correct the proposed goal</b>
@@ -196,7 +221,7 @@
 
 <!-- ================= BRIEF ================= -->
 <section class="page" id="brief">
-  <div class="crumb">Docs · The ritual</div>
+  <div class="crumb">Context is Queen · The ritual</div>
   <h1><span class="cmd">brief</span></h1>
   <p class="lede">The full briefing: interview, research, then goal. Runs by
   default when you use /context-is-queen with no command.</p>
@@ -232,7 +257,7 @@
 
 <!-- ================= INTERVIEW ================= -->
 <section class="page" id="interview">
-  <div class="crumb">Docs · The ritual</div>
+  <div class="crumb">Context is Queen · The ritual</div>
   <h1><span class="cmd">interview</span></h1>
   <p class="lede">Get asked the right questions, one at a time, and only the
   ones you alone can answer.</p>
@@ -276,7 +301,7 @@
 
 <!-- ================= SET-GOAL ================= -->
 <section class="page" id="set-goal">
-  <div class="crumb">Docs · The ritual</div>
+  <div class="crumb">Context is Queen · The ritual</div>
   <h1><span class="cmd">set-goal</span></h1>
   <p class="lede">Turn context already gathered into a specific goal you can
   correct.</p>
@@ -317,7 +342,7 @@
 
 <!-- ================= DRIFT-CHECK ================= -->
 <section class="page" id="drift-check">
-  <div class="crumb">Docs · After the goal</div>
+  <div class="crumb">Context is Queen · After the goal</div>
   <h1><span class="cmd">drift-check</span></h1>
   <p class="lede">A mid-project check: which decisions were made since the
   goal was set, and did the agent have permission to make them?</p>
@@ -351,7 +376,7 @@
 
 <!-- ================= BACKLOG ================= -->
 <section class="page" id="backlog">
-  <div class="crumb">Docs · After the goal</div>
+  <div class="crumb">Context is Queen · After the goal</div>
   <h1><span class="cmd">backlog</span></h1>
   <p class="lede">Turn the approved goal into work items: generate a backlog
   from it, or review an existing one against it.</p>

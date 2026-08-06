@@ -1,10 +1,26 @@
-# context-is-queen
+# Think Like a PM
+
+Agent skills for the person who owns the product, not the codebase.
+Made by [Hiba Ganta](https://www.linkedin.com/in/hibaganta/).
+
+**[thinklikeapm.style →](https://www.thinklikeapm.style/)**
+
+| Skill | What it does | Status |
+|---|---|---|
+| **Context is Queen** | Interviews you, proposes a goal you correct, then holds itself to it | Available now |
+| Turning Research Into Strategy | Rebuilds product direction from the raw evidence, with every count checked | In the workshop |
+| Judgment Queue | Collects the decisions your agents owe you into one page, evidence attached | In the workshop |
+| AI Output Clinic | Fixes generic or off-tone AI copy by fixing the instruction behind it | In the workshop |
+
+---
+
+## Context is Queen
 
 Your AI agent asks one question at a time until it actually understands the
 job — then agrees the goal with you, and checks its own work against it.
 A Claude Code skill for people who drive agents without writing code.
 
-**[Read the docs →](https://hgambas.github.io/context-is-queen/)**
+**[Read the docs →](https://www.thinklikeapm.style/docs/)**
 
 > **You:** We're adding team workspaces to our app, which will replace the
 > current personal folders feature. Get going.
@@ -34,14 +50,18 @@ The easiest way — paste this into Claude Code (or your favorite coding
 agent):
 
 ```text
-Install the context-is-queen skill globally from https://github.com/hgambas/context-is-queen
+Install the Context is Queen skill globally from https://github.com/hgambas/think-like-a-pm
 ```
 
 Or as a Claude Code plugin, which also installs the session-start harness:
 
 ```text
-/plugin marketplace add hgambas/context-is-queen
+/plugin marketplace add hgambas/think-like-a-pm
 ```
+
+The skill installs under its own name, `context-is-queen`, so anyone who
+installed it before the repo was renamed keeps working without changing
+anything.
 
 ## How to use it
 
@@ -86,7 +106,12 @@ code.
 
 ## More
 
-Made by **Hiba Ganta** · [GitHub](https://github.com/hgambas)
+Made by **Hiba Ganta** ·
+[Site](https://www.thinklikeapm.style/) ·
+[LinkedIn](https://www.linkedin.com/in/hibaganta/) ·
+[GitHub](https://github.com/hgambas) ·
+[Substack](https://theneedful.substack.com/) ·
+[X](https://x.com/GantaHiba)
 
 ## License
 

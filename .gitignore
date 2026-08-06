@@ -1,0 +1,7 @@
+# Unshipped skills and design explorations — public when each one ships
+workshop/
+
+# Local tool caches, not part of the plugin
+.omc/
+.impeccable/
+.DS_Store
