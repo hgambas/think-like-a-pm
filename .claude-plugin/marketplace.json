@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "context-is-queen",
+  "owner": {
+    "name": "Hiba Ganta",
+    "url": "https://github.com/hgambas"
+  },
+  "plugins": [
+    {
+      "name": "context-is-queen",
+      "version": "1.0.0",
+      "source": "./",
+      "description": "Context first. Goal second. Execution last. Your agent interviews you, researches, proposes a goal you correct, then holds itself to it.",
+      "category": "productivity",
+      "homepage": "https://hgambas.github.io/context-is-queen/",
+      "tags": ["planning", "goals", "interview", "briefing", "product", "non-coders"]
+    }
+  ]
+}

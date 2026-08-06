@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/.claude/skills/context-is-queen/hooks/session-start.sh\"",
+            "timeout": 10,
+            "statusMessage": "Loading context-is-queen harness..."
+          }
+        ]
+      }
+    ]
+  }
+}

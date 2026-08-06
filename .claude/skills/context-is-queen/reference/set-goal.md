@@ -1,0 +1,90 @@
+# Setting the goal
+
+The goal is the last step of context-gathering, not the first step of work.
+Propose it only once the interview and your research are done — it is built
+FROM them. Everything downstream hangs off this, so it must be correctable:
+concrete enough that the user can point at the wrong part.
+
+## One goal authority
+
+If a Claude Code /goal is active, or another system already defines this
+run's goal, don't propose a competitor: read the existing goal back,
+propose corrections to it, and steer by it. If a design, spec, or plan
+document already exists for the task, derive the goal from it and say
+which document it came from. And when the agreed goal has a testable end
+state, offer to write it into /goal so the harness enforces it rather
+than your memory.
+
+## What a goal contains
+
+Write it in plain, human-readable language — no jargon, no implementation
+detail. It states:
+
+1. **What "done" looks like** — the outcome, not the activity.
+2. **How it will be judged** — the test or measure the user gave you in
+   the interview.
+3. **The decision split** — which calls come back to the user, which ones
+   you own.
+4. **What's out of scope** — the nearest things you are deliberately NOT
+   doing.
+5. **The loop** — the checkpoints for the run. For complex work, name at
+   least two: one before anything hard to reverse, one before final
+   delivery. A line or two is enough — the checkpoint mechanics live in
+   [brief.md](brief.md), not in the goal.
+
+If the work replaces something that exists, the goal also names the
+replacement policy — migrate, dual-run, sunset, or leave untouched — or
+explicitly marks it as an open call.
+
+## Example
+
+> **Goal:** New users complete setup on their own, without help from your
+> team — judged by setup completion rate and fewer setup-related support
+> emails. I'll bring structural decisions (screens added or removed, step
+> order) to you and own copy and styling. Out of scope: pricing changes
+> and the mobile app. Checkpoints: after the flow is mapped and after the
+> first working pass — at each, I'll test the work against this goal and
+> report any decisions made along the way.
+>
+> Correct anything before I start.
+
+## The correction loop
+
+Present the goal and ask the user to correct it — one proposal, their
+edits, done. A goal that comes back untouched deserves suspicion: either
+you nailed it or they skimmed it. If the ask was complex and the goal got
+no pushback, check the riskiest line explicitly in that same exchange —
+one question, not a second round ("you're sure structural calls are the
+only ones you want to see?").
+
+## After it's agreed
+
+The goal is your standing instruction for the whole run — re-read it
+before each pass (the actual text, not your memory of it), and when
+momentum and the goal disagree, the goal wins.
+Run the loop exactly as [brief.md](brief.md) step 5 defines it: every
+checkpoint marks each criterion pass, fail, or uncertain, with evidence,
+and "done" is only claimable when every criterion passes or the user
+waives it. If checkpoints show the goal itself is wrong or stale, refresh
+it here instead of pushing on. Write the judged-by criteria concretely
+enough that a pass/fail verdict on each is actually possible.
+
+Write the agreed goal down somewhere that survives the session — a /goal
+condition, a short file, or wherever this project keeps decisions. A goal
+that lives only in the conversation is gone after a compaction, and the
+drift check then has nothing to check against.
+
+## Pitfalls
+
+- **Restating their ask.** A goal is a proposal with something at stake —
+  if it contains only their own words, there's nothing to correct.
+- **Setting it and never reading it again.** A goal only steers if it's
+  re-read. Momentum is not a target.
+- **A grab-bag of criteria.** Criteria that describe one coherent outcome
+  are held and recalled together; a list of unrelated conditions falls
+  out of mind mid-run. If the criteria don't hang together, it's probably
+  two goals.
+- **Goal as spec.** It's a compass, not a work plan. Keep it under ten
+  lines.
+- **Setting it silently.** The user must see and correct the goal before
+  work starts — an unshown goal is a decision you took from them.
