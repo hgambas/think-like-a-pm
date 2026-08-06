@@ -43,6 +43,7 @@
   .page.default{display:block}
   .page:target ~ .page.default{display:none}
   main:has(.page:target) .page.default{display:none}
+  main:has(.page:target) .page.default:target{display:block}
 
   .crumb{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
   .crumb b{color:var(--red-deep);font-weight:600}
