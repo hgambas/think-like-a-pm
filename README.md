@@ -16,7 +16,7 @@ https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
 | Skill | What it does | Status |
 |---|---|---|
 | **Context is Queen** | Asks before it builds, then shows you the decisions it made without you | Available now |
-| Turning Research Into Strategy | Traces every claim back to the person who said it | In the workshop |
+| **Turning Research Into Strategy** | Traces every claim back to the person who said it | Available now |
 | Best Use of My Time | Every decision waiting on you, on one page, sorted by what you can't undo | In the workshop |
 | AI Output Clinic | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
 
