@@ -1,112 +1,153 @@
 # Think Like a PM
 
-Agent skills for the person who owns the product, not the codebase.
-Made by [Hiba Ganta](https://www.linkedin.com/in/hibaganta/).
+Agent skills for people building things who want to build the right thing.
+For PMs, engineers, founders and designers: anyone whose agent builds
+faster than they can decide.
 
-**[thinklikeapm.style →](https://www.thinklikeapm.style/)**
+Made by [Hiba Ganta](https://www.linkedin.com/in/hibaganta/) ·
+[thinklikeapm.style](https://www.thinklikeapm.style/)
 
 | Skill | What it does | Status |
 |---|---|---|
-| **Context is Queen** | Interviews you, proposes a goal you correct, then holds itself to it | Available now |
-| Turning Research Into Strategy | Rebuilds product direction from the raw evidence, with every count checked | In the workshop |
-| Judgment Queue | Collects the decisions your agents owe you into one page, evidence attached | In the workshop |
-| AI Output Clinic | Fixes generic or off-tone AI copy by fixing the instruction behind it | In the workshop |
+| **Context is Queen** | Gets your agent to the right goal before it builds | Available now |
+| Turning Research Into Strategy | Turns a pile of research into direction, with every claim traced back to the evidence | In the workshop |
+| Best Use of My Time | Puts the decisions waiting on you on one page, each with a recommendation and the evidence to judge it | In the workshop |
+| AI Output Clinic | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
+
+Context is Queen is the one you can install today. Everything below is
+about that skill.
 
 ---
 
 ## Context is Queen
 
-Your AI agent asks one question at a time until it actually understands the
-job — then agrees the goal with you, and checks its own work against it.
-A Claude Code skill for people who drive agents without writing code.
+**Your agent ships fast. This makes sure it ships the right thing.**
 
-**[Read the docs →](https://www.thinklikeapm.style/docs/)**
+<!-- VIDEO GOES HERE: 30-60 second screen recording of a real briefing.
+     Record it, drag the file into a GitHub issue comment, and paste the
+     URL GitHub gives you on this line. -->
 
-> **You:** We're adding team workspaces to our app, which will replace the
-> current personal folders feature. Get going.
->
-> **Agent:** This isn't just a new feature — it's a replacement, which means
-> there's a migration and a transition story attached, not only new screens.
-> I searched the codebase first so I don't spend your time on things I can
-> look up. First question, and I'll go one at a time from here: …
+## Problem
 
-*(real transcript from the skill's first test run)*
+You ask your agent for something big. It starts building straight away. It
+never asks a question. Three hours later you look up and think: when did we
+decide that?
 
-## The problem
+By then it has already:
 
-You hand your agent something big. It charges off and builds — fast,
-confident — and three hours later you look up and think: *wait, when did we
-decide that?* When you don't read code, the risk isn't that the AI
-misunderstands one instruction. It's that it keeps moving and quietly makes
-decisions you never approved, because nobody ever agreed what "done" meant.
+- picked an approach you never saw
+- dropped something you assumed was included
+- called the work done while half of what you wanted was missing
 
-I'm a product person and a designer. I don't read code; my agent is my
-engineer. This skill is the rule I refined over months of daily work with
-it.
+None of that shows up as a bug. It shows up when you look at the finished
+thing and it is not what you wanted.
+
+I'm a product person and a designer. I don't read code, so I could never
+catch a wrong turn by reading the work. I had to catch it in how the work
+got decided. That is where this skill came from.
+
+## Before and after
+
+Without the skill:
+
+```text
+You:    Rework our onboarding so people actually finish setup.
+Agent:  I'll review the current flow and implement improvements.
+```
+
+With it:
+
+```text
+You:    Rework our onboarding so people actually finish setup.
+Agent:  Before I build: what counts as finished here? Account created,
+        first integration connected, or first project made?
+You:    First project made.
+Agent:  Then here is the goal I'd work to, and the calls I think are
+        yours. Correct anything before I start.
+```
+
+Same request. The second one cannot quietly build the wrong thing.
 
 ## How to install
 
-The easiest way — paste this into Claude Code (or your favorite coding
-agent):
+Paste this into Claude Code, or your favourite coding agent:
 
 ```text
 Install the Context is Queen skill globally from https://github.com/hgambas/think-like-a-pm
 ```
 
-Or as a Claude Code plugin, which also installs the session-start harness:
+"Globally" means it works in every project, not just the one you're in.
+
+There is a second way to install it, as a Claude Code plugin. Same skill,
+except it also offers itself at the start of a session instead of waiting
+to be asked. Use it if you'd rather be prompted than remember:
 
 ```text
 /plugin marketplace add hgambas/think-like-a-pm
 ```
 
-The skill installs under its own name, `context-is-queen`, so anyone who
-installed it before the repo was renamed keeps working without changing
-anything.
-
 ## How to use it
 
-Ask for something complex, in your own words — *"rework our onboarding so
-people finish setup."* No special syntax: the skill fires on its own for
-multi-step work, and simple asks skip it entirely. To steer directly:
-`/context-is-queen`, or the commands `interview`, `set-goal`, `drift-check`,
-and `backlog`.
+Ask for something big in your own words. The skill starts the questions on
+its own:
+
+```text
+Rework our onboarding so people actually finish setup.
+```
+
+Or steer it directly:
+
+```text
+/context-is-queen interview     Ask me the right questions, one at a time
+/context-is-queen set-goal      Turn what we discussed into a goal I can correct
+/context-is-queen drift-check   Show me what got decided without me
+/context-is-queen backlog       Turn the goal into a list of work
+```
+
+Small requests skip all of this. You won't get interviewed about a typo.
 
 ## What this skill lets you do
 
-- **Get interviewed properly.** One question at a time — a batch of five
-  gets skimmed; one gets a real answer. It researches first, so your time
-  goes only to questions you alone can answer.
-- **Agree the goal before anything is built.** What "done" looks like, how
-  it's judged, which decisions stay yours, what's out of scope — proposed
-  in plain English for you to correct once, up front.
-- **Watch it hold itself to the goal.** It works in passes with
-  checkpoints: each success measure marked pass, fail, or uncertain, with
-  evidence. "Done" is only claimable when every measure passes — or you've
-  said one doesn't matter.
-- **Keep moving while you decide.** Open decisions are listed with
-  recommendations, and the agent works the lanes your decisions don't
-  block — never the ones they do.
-- **Catch decision drift.** `drift-check` lists every decision made since
-  the goal was set, and whether it was actually yours to make.
-- **Turn the goal into work.** `backlog` generates a work list from the
-  agreed goal, or audits an existing one against it. Items describe
-  problems and outcomes, never implementation.
+- **Get asked the right questions.** One at a time, never five at once. It
+  looks up whatever it can first, so you only answer what you alone know.
+- **Correct the goal before anything is built.** It writes down what "done"
+  means, how you'll judge it, and which calls stay yours. You fix it before
+  work starts.
+- **See it check its own work.** It reports back against that goal and marks
+  each part done, not done, or unsure. It can't call the job finished while
+  something is still missing.
+- **Keep it working while you think.** Slow decisions don't stall it. It
+  works on the parts your answer doesn't affect and leaves the rest alone.
+- **Catch decisions made without you.** Ask what got decided since you set
+  the goal and it lists every one, including the ones that should have come
+  back to you:
 
-I use it for exactly the situations it was born from: features that replace
-existing ones, redesigns, anything where I own the decisions but not the
-code.
+```text
+Decisions since the goal:
+- Chose a three-step flow. You didn't approve this. Should have come to you.
+- Dropped the old checklist. Changes scope.
+- Treated email verification as out of scope. Needs your confirmation.
+```
+
+I use it for the situations it was born from: features that replace
+existing ones, redesigns, and anything where I own the decisions but not
+the code.
 
 ## What's inside
 
-- `SKILL.md` — the always-loaded router: philosophy, commands, precedence
-- `reference/` — five playbooks, loaded one at a time: brief, interview,
-  set-goal, drift-check, backlog
-- `hooks/` — the session-start nudge, so fresh sessions offer the briefing
-  on complex work
+The skill is instructions written in plain English, not code. You can read
+every word of it yourself, and there is nothing to configure.
+
+- `SKILL.md` tells your agent when to run and what to do.
+- `reference/` holds the five playbooks, one per command.
+- `hooks/` is the one small script, which offers the briefing when a
+  session starts.
+
+Everything runs on your own machine, inside the agent you already use. No
+account, no cloud service, no API key.
 
 ## More
 
-Made by **Hiba Ganta** ·
 [Site](https://www.thinklikeapm.style/) ·
 [LinkedIn](https://www.linkedin.com/in/hibaganta/) ·
 [GitHub](https://github.com/hgambas) ·
