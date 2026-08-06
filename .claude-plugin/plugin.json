@@ -1,7 +1,7 @@
 {
-  "name": "context-is-queen",
-  "version": "1.0.1",
-  "description": "Makes your AI agent do better work on complex tasks: it interviews you one question at a time, researches what it can, proposes a goal you correct, then runs a self-checking loop against it.",
+  "name": "think-like-a-pm",
+  "version": "2.0.0",
+  "description": "Agent skills for the person who owns the product, not the code. Your agent interviews you before it starts, and turns your customer research into a strategy where every number carries its receipts.",
   "author": {
     "name": "Hiba Ganta",
     "url": "https://github.com/hgambas"

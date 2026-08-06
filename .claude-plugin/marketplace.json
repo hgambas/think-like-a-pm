@@ -1,19 +1,19 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "context-is-queen",
+  "name": "think-like-a-pm",
   "owner": {
     "name": "Hiba Ganta",
     "url": "https://github.com/hgambas"
   },
   "plugins": [
     {
-      "name": "context-is-queen",
-      "version": "1.0.1",
+      "name": "think-like-a-pm",
+      "version": "2.0.0",
       "source": "./",
-      "description": "Context first. Goal second. Execution last. Your agent interviews you, researches, proposes a goal you correct, then holds itself to it.",
+      "description": "Agent skills for the person who owns the product, not the code. Context first, goal second, execution last — plus a method for turning a pile of customer research into a strategy you can defend.",
       "category": "productivity",
       "homepage": "https://www.thinklikeapm.style/docs/",
-      "tags": ["planning", "goals", "interview", "briefing", "product", "non-coders"]
+      "tags": ["planning", "goals", "interview", "briefing", "product", "research", "strategy", "non-coders"]
     }
   ]
 }
