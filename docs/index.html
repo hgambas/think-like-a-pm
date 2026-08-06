@@ -88,6 +88,16 @@
   a.cmdlink{font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
   a.cmdlink:hover{border-bottom-color:var(--red)}
 
+  /* install command blocks, matching the home page */
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 14px}
+  .cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .prompt{color:var(--ink-faint);user-select:none}
+  .cmd .arg{color:var(--red-deep)}
+  .copy{flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer;min-height:34px}
+  .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+  .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+  @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
+
   /* try-it / command samples */
   .try{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;max-width:var(--measure);margin:10px 0 18px;border-radius:3px}
   .try .c{color:var(--ink-faint)}
@@ -136,12 +146,12 @@
 </style>
 </head>
 <body>
-<a class="skip" href="#docs">Skip to content</a>
+<a class="skip" href="#overview">Skip to content</a>
 <div class="shell">
 
 <aside>
   <a class="backhome" href="/">← Think Like a PM</a>
-  <a class="wordmark" href="#docs">
+  <a class="wordmark" href="#overview">
     <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
       <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
@@ -150,7 +160,7 @@
   <div class="tagline">Context first. Goal second. Execution last.</div>
   <nav aria-label="Docs">
     <h3>Start</h3>
-    <a href="#docs" aria-current="page" data-nav="docs">Overview &amp; install</a>
+    <a href="#overview" aria-current="page" data-nav="overview">Overview &amp; install</a>
     <h3>The ritual</h3>
     <a href="#brief" data-nav="brief"><code>brief</code> — the full briefing</a>
     <a href="#interview" data-nav="interview"><code>interview</code></a>
@@ -172,7 +182,7 @@
 <main>
 
 <!-- ================= DOCS INDEX ================= -->
-<section class="page default" id="docs" tabindex="-1">
+<section class="page default" id="overview" tabindex="-1">
   <div class="crumb">Context is Queen · <b>Overview</b></div>
   <h1 class="corrected" aria-label="Context first."><span aria-hidden="true"><s>Goal</s> <ins>Context</ins> first.</span></h1>
   <p class="lede">Context is Queen is a Claude Code skill that makes your AI
@@ -182,14 +192,31 @@
   you've corrected is simply better work, and you stay the decision-maker
   on your own project.</p>
 
-  <h2>Three steps to your first briefing</h2>
+  <h2 id="install">Install</h2>
+  <p>Open Claude Code, or your favourite coding agent, and paste this into
+  the chat:</p>
+  <div class="cmdbox">
+    <code class="cmd" id="install-cmd"><span class="prompt">›</span> Install the Context is Queen skill globally from <span class="arg">github.com/hgambas/think-like-a-pm</span></code>
+    <button class="copy" type="button" data-copy="#install-cmd" aria-live="polite">Copy</button>
+  </div>
+  <p class="note">“Globally” means it works in every project, not just the
+  one you're in.</p>
+  <p>There is a second way to install it, as a Claude Code plugin. Same
+  skill, except it also offers itself at the start of a session instead of
+  waiting to be asked:</p>
+  <div class="cmdbox">
+    <code class="cmd" id="plugin-cmd"><span class="prompt">›</span> <span class="arg">/plugin marketplace add hgambas/think-like-a-pm</span></code>
+    <button class="copy" type="button" data-copy="#plugin-cmd" aria-live="polite">Copy</button>
+  </div>
+
+  <h2>Your first briefing, in three steps</h2>
   <ol class="agenda">
-    <li><span class="no">1.</span><div><b>Install</b>
-      <p>Open Claude Code and paste into the chat: <em>Install the Context is Queen skill globally from github.com/hgambas/think-like-a-pm</em>. “Globally” makes it available in every project.</p></div></li>
-    <li><span class="no">2.</span><div><b>Ask for something complex, in your own words</b>
-      <p>“Rework our onboarding so people finish setup.” No special syntax — the briefing starts on its own for multi-step work. Simple asks skip it.</p></div></li>
+    <li><span class="no">1.</span><div><b>Ask for something complex, in your own words</b>
+      <p>“Rework our onboarding so people finish setup.” No special syntax needed. The briefing starts on its own for multi-step work, and simple asks skip it.</p></div></li>
+    <li><span class="no">2.</span><div><b>Answer the questions, one at a time</b>
+      <p>Three to eight of them, covering only what your agent can't research for itself.</p></div></li>
     <li><span class="no">3.</span><div><b>Correct the proposed goal</b>
-      <p>Answer the interview one question at a time, then correct the goal it proposes before any work starts.</p></div></li>
+      <p>Fix anything wrong in the goal it proposes, before any work starts.</p></div></li>
   </ol>
 
   <h2>Choose a command</h2>
@@ -418,7 +445,7 @@
 <script>
   // sidebar current-page highlight on hash change
   function sync(){
-    var h=(location.hash||"#docs").slice(1);
+    var h=(location.hash||"#overview").slice(1);
     document.querySelectorAll("nav a").forEach(function(a){
       if(a.getAttribute("data-nav")===h){a.setAttribute("aria-current","page")}
       else{a.removeAttribute("aria-current")}
@@ -426,6 +453,23 @@
     window.scrollTo(0,0);
   }
   addEventListener("hashchange",sync); sync();
+
+  document.querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var el = document.querySelector(btn.dataset.copy);
+      function failed(){
+        btn.textContent = "Select it";
+        setTimeout(function(){ btn.textContent = "Copy"; }, 2000);
+      }
+      if (!el || !navigator.clipboard || !navigator.clipboard.writeText) { failed(); return; }
+      var text = el.textContent.replace(/^\s*›\s*/, "").trim();
+      navigator.clipboard.writeText(text).then(function(){
+        btn.textContent = "Copied";
+        btn.dataset.done = "1";
+        setTimeout(function(){ btn.textContent = "Copy"; delete btn.dataset.done; }, 2000);
+      }).catch(failed);
+    });
+  });
 </script>
 </body>
 </html>
