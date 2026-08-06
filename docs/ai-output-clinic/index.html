@@ -5,23 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Output Clinic · Docs · Think Like a PM</title>
 <meta name="description" content="Docs for AI Output Clinic: the agent skill that finds where AI-written content actually broke, builds a bar by hand, and pins every failure as a test.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%238E2F26'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%232440D8'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Castoro:ital@0;1&family=Castoro+Titling&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F7F3EC; --panel:#EFE9DD; --line:#DCD4C4;
-    --ink:#221D15; --ink-soft:#5C5546; --ink-faint:#8A8171;
-    --red:#8E2F26; --red-deep:#74251E;
-    --serif:"Newsreader",Georgia,serif; --sans:"Instrument Sans",-apple-system,sans-serif;
+    --paper:#F2EEE4; --panel:#E8E1D2; --line:#D6CDBC;
+    --ink:#141628; --ink-soft:#3A3F5C; --ink-faint:#5C627A;
+    --red:#2440D8; --red-deep:#182FA6; --kiln:#A54923; --ochre:#C8952F;
+    --serif:"Ibarra Real Nova",Georgia,serif; --sans:"Castoro",Georgia,serif;
+    --label:"Castoro Titling",Georgia,serif; --mono:"Courier Prime",ui-monospace,Menlo,monospace;
     --measure:64ch;
+    /* the palm shadow: offset, zero blur, solid. never a soft drop shadow. */
+    --cast:6px 6px 0 rgba(20,22,40,.10);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{font-size:16px}
   body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
   ::selection{background:var(--red);color:var(--paper)}
-  a{color:var(--red-deep)}
+  a{color:var(--red-deep);text-underline-offset:2px;text-decoration-thickness:1px}
+  /* Castoro ships regular and italic only — emphasis is italic, never faux bold */
+  b,strong{font-weight:400;font-style:italic}
 
   .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
 
@@ -29,20 +34,21 @@
   aside{border-right:1px solid var(--line);padding:32px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}
   .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-bottom:6px}
   .wordmark svg{flex:none}
-  .wordmark b{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
-  .tagline{font-size:.72rem;color:var(--ink-faint);margin-bottom:36px;letter-spacing:.02em}
-  nav h3{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);font-weight:600;margin:28px 0 10px}
-  nav a{display:block;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);font-size:.9rem;border-left:2px solid transparent;border-radius:0 3px 3px 0}
+  .wordmark b{font-family:var(--serif);font-weight:600;font-style:normal;font-size:1.05rem;letter-spacing:-.01em;line-height:1.25}
+  .tagline{font-family:var(--serif);font-style:italic;font-size:.84rem;line-height:1.45;color:var(--ink-faint);margin-bottom:36px}
+  nav h3{font-family:var(--label);font-weight:400;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);margin:28px 0 10px}
+  nav a{display:block;font-family:var(--serif);font-size:.92rem;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);border-left:2px solid transparent;border-radius:0 3px 3px 0}
   nav a:hover{color:var(--ink);background:var(--panel)}
   nav a[aria-current="page"]{color:var(--red-deep);border-left-color:var(--red);font-weight:600;background:none}
-  nav a code{font-family:var(--sans)}
+  nav a code{font-family:inherit}
   .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
   .side-foot a{color:var(--ink-soft)}
-  nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
-  nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
-  .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  nav .soon{display:block;font-family:var(--serif);font-size:.92rem;padding:6px 10px;margin-left:-10px;color:var(--ink-faint)}
+  nav .soon small{display:block;font-family:var(--label);font-weight:400;font-size:.64rem;text-transform:uppercase;letter-spacing:.12em}
+  nav a small{display:block;font-family:var(--label);font-weight:400;font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint)}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-family:var(--label);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
   .backhome:hover{color:var(--red-deep)}
-  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);font-family:var(--label);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;padding:10px 16px;z-index:20;box-shadow:var(--cast)}
   .skip:focus{left:8px;top:8px}
   :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
 
@@ -55,75 +61,92 @@
   main:has(.page:target) .page.default{display:none}
   main:has(.page:target) .page.default:target{display:block}
 
-  .crumb{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
-  .crumb b{color:var(--red-deep);font-weight:600}
+  .crumb{font-family:var(--label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .crumb b{color:var(--red-deep);font-weight:400;font-style:normal}
 
   h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
-  h1 .cmd{color:var(--red-deep)}
+  h1 .cmd{font-size:.62em;font-weight:400;letter-spacing:0;color:var(--red-deep)}
   .lede{font-size:1.15rem;color:var(--ink-soft);max-width:var(--measure);margin-bottom:8px}
   .lede strong{color:var(--ink)}
 
-  h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  h2{position:relative;font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  /* one zellige lozenge per dividing rule — punctuation, never wallpaper */
+  h2::before{content:"";position:absolute;left:0;top:-4px;width:7px;height:7px;background:var(--ochre);transform:rotate(45deg)}
   p{max-width:var(--measure);margin-bottom:14px}
   p.note{color:var(--ink-soft)}
 
-  /* corrected-line signature (used once, in the index hero) */
-  .corrected{font-family:var(--serif);font-weight:500}
-  .corrected s{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
-  .corrected ins{color:var(--red-deep);text-decoration:none;font-style:italic}
+  /* corrected-line signature — a wall being repainted: raw clay struck out,
+     the blue painted over it (used once, in the index hero) */
+  .corrected{font-family:var(--serif);font-weight:600}
+  .corrected s{color:var(--kiln);text-decoration:line-through;text-decoration-color:var(--kiln);text-decoration-thickness:.06em}
+  .corrected ins{color:var(--red);text-decoration:none;font-style:italic}
 
   /* numbered agenda rows (instead of card grids) */
   .agenda{list-style:none;max-width:var(--measure)}
   .agenda li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
   .agenda li:first-child{border-top:1px solid var(--line)}
-  .agenda .no{font-family:var(--serif);font-style:italic;font-size:1.3rem;font-weight:500;color:var(--red);line-height:1}
-  .agenda b{display:block;margin-bottom:2px}
+  .agenda .no{font-family:var(--serif);font-style:italic;font-weight:600;font-size:1.35rem;color:var(--red);line-height:1}
+  .agenda b{display:block;font-family:var(--serif);font-weight:600;font-style:normal;font-size:1.02rem;line-height:1.35;margin-bottom:3px}
   .agenda p{margin:0;color:var(--ink-soft);font-size:.92rem}
 
   /* tables */
   table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.92rem;margin:10px 0 6px}
-  th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);font-weight:600;padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+  th{text-align:left;font-family:var(--label);font-weight:400;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
   td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
   td:first-child{white-space:nowrap}
   tr:hover td{background:var(--panel)}
-  a.cmdlink{font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  a.cmdlink{font-family:var(--serif);font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
   a.cmdlink:hover{border-bottom-color:var(--red)}
 
   /* install command blocks, matching the home page */
-  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 14px}
-  .cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 18px;box-shadow:var(--cast)}
+  .cmd{font-family:var(--mono)}
+  .cmdbox .cmd{flex:1;font-size:.92rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
   .cmd .prompt{color:var(--ink-faint);user-select:none}
   .cmd .arg{color:var(--red-deep)}
-  .copy{flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer;min-height:34px}
+  .copy{flex:none;font-family:var(--label);font-weight:400;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:8px 12px;cursor:pointer;min-height:34px}
   .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
   .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
   @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
 
   /* try-it / command samples */
-  .try{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;max-width:var(--measure);margin:10px 0 18px;border-radius:3px}
-  .try .c{color:var(--ink-faint)}
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 18px;font-family:var(--mono);font-size:.92rem;line-height:1.6;max-width:var(--measure);margin:10px 0 18px;box-shadow:var(--cast)}
+  .try .c{color:var(--ink-faint);font-style:italic}
 
   /* transcript sample */
-  .transcript{max-width:var(--measure);border:1px solid var(--line);background:#FBF8F3;padding:22px 24px;margin:12px 0 6px}
-  .transcript p{font-size:.92rem;margin-bottom:12px}
-  .transcript .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;font-weight:600;color:var(--ink-faint);display:block;margin-bottom:2px}
-  .transcript .agent .who{color:var(--red-deep)}
+  .transcript{max-width:var(--measure);border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 24px;margin:12px 0 18px;box-shadow:var(--cast)}
+  .transcript p{font-size:.95rem;margin-bottom:12px}
+  .transcript p:last-child{margin-bottom:0}
+  .transcript .who{font-family:var(--label);font-weight:400;font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);display:block;margin-bottom:2px}
+  .transcript .agent{font-style:italic}
+  .transcript .agent em{font-style:normal}
+  .transcript .agent .who{color:var(--red-deep);font-style:normal}
 
-  /* pitfalls: red-pen margin notes */
+  /* pitfalls: the clay diamond in the margin */
   .pitfalls{list-style:none;max-width:var(--measure)}
   .pitfalls li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:.95rem}
-  .pitfalls li::before{content:"✗";position:absolute;left:2px;top:12px;color:var(--red);font-weight:700}
-  .pitfalls b{color:var(--red-deep)}
+  .pitfalls li::before{content:"";position:absolute;left:2px;top:21px;width:7px;height:7px;background:var(--kiln);transform:rotate(45deg)}
+  .pitfalls b{font-family:var(--serif);font-weight:600;font-style:normal;color:var(--kiln)}
   .pitfalls span{color:var(--ink-soft)}
 
-  .calibration{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;max-width:var(--measure);margin:18px 0}
+  .calibration{font-family:var(--serif);font-style:italic;font-size:1.08rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 2px;max-width:var(--measure);margin:18px 0}
 
   .related{font-size:.9rem;color:var(--ink-soft)}
-  .related a{color:var(--red-deep);font-weight:600;text-decoration:none}
+  .related a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  .related a:hover{border-bottom-color:var(--red)}
 
   .pair{color:var(--ink-faint);font-size:.85rem}
-  ul.plain{max-width:var(--measure);margin:0 0 14px 22px;color:var(--ink-soft)}
-  ul.plain li{margin-bottom:4px}
+  ul.plain{list-style:none;max-width:var(--measure);margin:0 0 14px;color:var(--ink-soft)}
+  ul.plain li{position:relative;padding-left:22px;margin-bottom:4px}
+  ul.plain li::before{content:"";position:absolute;left:3px;top:.66em;width:6px;height:6px;background:var(--kiln);transform:rotate(45deg)}
+
+  /* ——— coming-soon block (unreleased skills) ——— */
+  .soonbox{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 24px;max-width:var(--measure);margin:12px 0 18px;box-shadow:var(--cast)}
+  .soonbox p{margin-bottom:12px}
+  .soonbox p:last-child{margin-bottom:0}
+  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .soon-links a{display:inline-flex;align-items:center;font-family:var(--label);font-weight:400;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--ink-soft);padding:9px 14px;border:1px solid var(--line);border-radius:3px;background:var(--paper);min-height:38px}
+  .soon-links a:hover{color:var(--red-deep);border-color:var(--ink-faint)}
 
   @media (max-width:860px){
     .shell{grid-template-columns:1fr}
@@ -134,26 +157,18 @@
     nav{display:flex;flex-wrap:wrap;gap:6px}
     nav h3{width:100%;margin:14px 0 2px}
     nav h3:first-child{margin-top:0}
-    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
-    nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
-    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
-    nav .soon small{display:none}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:3px}
+    nav a[aria-current="page"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+    nav a[aria-current="page"]:hover{color:var(--paper);background:var(--red-deep);border-color:var(--red-deep)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:3px;font-size:.84rem}
+    nav .soon small,nav a small{display:none}
     .side-foot{margin-top:20px;padding-top:14px}
   }
   @media (prefers-reduced-motion:no-preference){
     .page{animation:fade .25s ease-out}
     @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    nav a,.backhome,.copy,.soon-links a,a.cmdlink,.related a{transition:color .15s ease,background-color .15s ease,border-color .15s ease}
   }
-
-  /* ——— page additions ——— */
-  .soonbox{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:22px 24px;max-width:var(--measure);margin:12px 0 6px}
-  .soonbox p{margin-bottom:12px}
-  .soonbox p:last-child{margin-bottom:0}
-  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-  .soon-links a{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink-soft);font-size:.88rem;font-weight:500;padding:8px 14px;border:1px solid var(--line);border-radius:100px;background:var(--paper);min-height:38px}
-  .soon-links a:hover{color:var(--ink);border-color:var(--ink-faint)}
-  nav a small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint)}
-  @media (max-width:860px){nav a small{display:none}}
 
   /* let grid columns shrink below their content, and scroll wide blocks
      inside themselves rather than stretching the page */
@@ -174,7 +189,7 @@
   <a class="backhome" href="/">← Think Like a PM</a>
   <a class="wordmark" href="#overview">
     <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
-      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#2440D8" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
     <b>AI Output Clinic</b>
   </a>
