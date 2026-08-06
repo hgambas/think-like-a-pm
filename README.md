@@ -1,6 +1,9 @@
 # Think Like a PM
 
-Agent skills for people building things who want to build the right thing.
+Your agent makes product decisions all day and mentions almost none of
+them. These skills make it ask you first, show you the calls it made on its
+own, and hand the ones that matter back to you.
+
 For PMs, engineers, founders and designers: anyone whose agent builds
 faster than they can decide.
 
@@ -12,9 +15,9 @@ https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
 
 | Skill | What it does | Status |
 |---|---|---|
-| **Context is Queen** | Gets your agent to the right goal before it builds | Available now |
-| Turning Research Into Strategy | Turns a pile of research into direction, with every claim traced back to the evidence | In the workshop |
-| Best Use of My Time | Puts the decisions waiting on you on one page, each with a recommendation and the evidence to judge it | In the workshop |
+| **Context is Queen** | Asks before it builds, then shows you the decisions it made without you | Available now |
+| Turning Research Into Strategy | Traces every claim back to the person who said it | In the workshop |
+| Best Use of My Time | Every decision waiting on you, on one page, sorted by what you can't undo | In the workshop |
 | AI Output Clinic | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
 
 Context is Queen is the one you can install today. Everything below is
@@ -24,7 +27,8 @@ about that skill.
 
 ## Context is Queen
 
-**Your agent ships fast. This makes sure it ships the right thing.**
+**Your agent decides what "done" means the moment you stop talking. This
+makes it ask you instead.**
 
 <!-- VIDEO GOES HERE: 30-60 second screen recording of a real briefing.
      Record it, drag the file into a GitHub issue comment, and paste the
