@@ -7,6 +7,9 @@ faster than they can decide.
 Made by [Hiba Ganta](https://www.linkedin.com/in/hibaganta/) ·
 [thinklikeapm.style](https://www.thinklikeapm.style/)
 
+https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
+
+
 | Skill | What it does | Status |
 |---|---|---|
 | **Context is Queen** | Gets your agent to the right goal before it builds | Available now |
