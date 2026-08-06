@@ -21,6 +21,7 @@
   html{font-size:16px}
   body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
   ::selection{background:var(--red);color:var(--paper)}
+  a{color:var(--red-deep)}
 
   .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
 
@@ -39,6 +40,7 @@
   .side-foot a{color:var(--ink-soft)}
   nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
   nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+  nav a small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint)}
   .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
   .backhome:hover{color:var(--red-deep)}
   .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
@@ -136,12 +138,22 @@
     nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
     nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
     nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
-    nav .soon small{display:none}
+    nav .soon small,nav a small{display:none}
     .side-foot{margin-top:20px;padding-top:14px}
   }
   @media (prefers-reduced-motion:no-preference){
     .page{animation:fade .25s ease-out}
     @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+
+  /* let grid columns shrink below their content, and scroll wide blocks
+     inside themselves rather than stretching the page */
+  @media (max-width:860px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    aside,main{min-width:0}
+    .try,.transcript,pre{overflow-x:auto}
+    table{table-layout:fixed;width:100%}
+    td:first-child{white-space:normal}
   }
 </style>
 </head>
@@ -169,9 +181,9 @@
     <a href="#drift-check" data-nav="drift-check"><code>drift-check</code></a>
     <a href="#backlog" data-nav="backlog"><code>backlog</code></a>
     <h3>More skills</h3>
-    <span class="soon">Turning Research Into Strategy <small>In the workshop</small></span>
-    <span class="soon">Best Use of My Time <small>In the workshop</small></span>
-    <span class="soon">AI Output Clinic <small>In the workshop</small></span>
+    <a href="/docs/turning-research-into-strategy/">Turning Research Into Strategy <small>In the workshop</small></a>
+    <a href="/docs/best-use-of-my-time/">Best Use of My Time <small>In the workshop</small></a>
+    <a href="/docs/ai-output-clinic/">AI Output Clinic <small>In the workshop</small></a>
   </nav>
   <div class="side-foot">
     Made by Hiba Ganta ·

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best Use of My Time · Docs · Think Like a PM</title>
+<meta name="description" content="Docs for Best Use of My Time: the agent skill that sends your decisions to a page you answer in the browser, recommendation first, easiest to undo first.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%238E2F26'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3EC; --panel:#EFE9DD; --line:#DCD4C4;
+    --ink:#221D15; --ink-soft:#5C5546; --ink-faint:#8A8171;
+    --red:#8E2F26; --red-deep:#74251E;
+    --serif:"Newsreader",Georgia,serif; --sans:"Instrument Sans",-apple-system,sans-serif;
+    --measure:64ch;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{font-size:16px}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  ::selection{background:var(--red);color:var(--paper)}
+  a{color:var(--red-deep)}
+
+  .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
+
+  /* ——— sidebar ——— */
+  aside{border-right:1px solid var(--line);padding:32px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+  .wordmark svg{flex:none}
+  .wordmark b{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+  .tagline{font-size:.72rem;color:var(--ink-faint);margin-bottom:36px;letter-spacing:.02em}
+  nav h3{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);font-weight:600;margin:28px 0 10px}
+  nav a{display:block;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);font-size:.9rem;border-left:2px solid transparent;border-radius:0 3px 3px 0}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a[aria-current="page"]{color:var(--red-deep);border-left-color:var(--red);font-weight:600;background:none}
+  nav a code{font-family:var(--sans)}
+  .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
+  .side-foot a{color:var(--ink-soft)}
+  nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
+  nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+  nav a small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint)}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  .backhome:hover{color:var(--red-deep)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
+  .skip:focus{left:8px;top:8px}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+  /* ——— main ——— */
+  main{padding:56px 64px 120px;max-width:calc(var(--measure) + 128px)}
+  .page{display:none}
+  .page:target{display:block}
+  .page.default{display:block}
+  .page:target ~ .page.default{display:none}
+  main:has(.page:target) .page.default{display:none}
+  main:has(.page:target) .page.default:target{display:block}
+
+  .crumb{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .crumb b{color:var(--red-deep);font-weight:600}
+
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+  h1 .cmd{color:var(--red-deep)}
+  .lede{font-size:1.15rem;color:var(--ink-soft);max-width:var(--measure);margin-bottom:8px}
+  .lede strong{color:var(--ink)}
+
+  h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  p{max-width:var(--measure);margin-bottom:14px}
+  p.note{color:var(--ink-soft)}
+
+  /* corrected-line signature (used once, in the index hero) */
+  .corrected{font-family:var(--serif);font-weight:500}
+  .corrected s{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+  .corrected ins{color:var(--red-deep);text-decoration:none;font-style:italic}
+
+  /* numbered agenda rows (instead of card grids) */
+  .agenda{list-style:none;max-width:var(--measure)}
+  .agenda li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .agenda li:first-child{border-top:1px solid var(--line)}
+  .agenda .no{font-family:var(--serif);font-style:italic;font-size:1.3rem;font-weight:500;color:var(--red);line-height:1}
+  .agenda b{display:block;margin-bottom:2px}
+  .agenda p{margin:0;color:var(--ink-soft);font-size:.92rem}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.92rem;margin:10px 0 6px}
+  th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);font-weight:600;padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+  td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{white-space:nowrap}
+  tr:hover td{background:var(--panel)}
+  a.cmdlink{font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  a.cmdlink:hover{border-bottom-color:var(--red)}
+
+  /* install command blocks, matching the home page */
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 14px}
+  .cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .prompt{color:var(--ink-faint);user-select:none}
+  .cmd .arg{color:var(--red-deep)}
+  .copy{flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer;min-height:34px}
+  .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+  .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+  @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
+
+  /* try-it / command samples */
+  .try{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;max-width:var(--measure);margin:10px 0 18px;border-radius:3px}
+  .try .c{color:var(--ink-faint)}
+
+  /* transcript sample */
+  .transcript{max-width:var(--measure);border:1px solid var(--line);background:#FBF8F3;padding:22px 24px;margin:12px 0 6px}
+  .transcript p{font-size:.92rem;margin-bottom:12px}
+  .transcript .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;font-weight:600;color:var(--ink-faint);display:block;margin-bottom:2px}
+  .transcript .agent .who{color:var(--red-deep)}
+
+  /* pitfalls: red-pen margin notes */
+  .pitfalls{list-style:none;max-width:var(--measure)}
+  .pitfalls li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .pitfalls li::before{content:"✗";position:absolute;left:2px;top:12px;color:var(--red);font-weight:700}
+  .pitfalls b{color:var(--red-deep)}
+  .pitfalls span{color:var(--ink-soft)}
+
+  .calibration{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;max-width:var(--measure);margin:18px 0}
+
+  .related{font-size:.9rem;color:var(--ink-soft)}
+  .related a{color:var(--red-deep);font-weight:600;text-decoration:none}
+
+  .pair{color:var(--ink-faint);font-size:.85rem}
+  ul.plain{max-width:var(--measure);margin:0 0 14px 22px;color:var(--ink-soft)}
+  ul.plain li{margin-bottom:4px}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:20px 22px 22px}
+    main{padding:36px 22px 80px}
+    .tagline{margin-bottom:18px}
+    /* collapse the long stacked nav into wrapped chips so content isn't a screen away */
+    nav{display:flex;flex-wrap:wrap;gap:6px}
+    nav h3{width:100%;margin:14px 0 2px}
+    nav h3:first-child{margin-top:0}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
+    nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
+    nav .soon small,nav a small{display:none}
+    .side-foot{margin-top:20px;padding-top:14px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .page{animation:fade .25s ease-out}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+
+  .soonbox{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:22px 24px;max-width:var(--measure);margin:12px 0 6px}
+  .soonbox p{margin-bottom:12px}
+  .soonbox p:last-child{margin-bottom:0}
+  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .soon-links a{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink-soft);font-size:.88rem;font-weight:500;padding:8px 14px;border:1px solid var(--line);border-radius:100px;background:var(--paper);min-height:38px}
+  .soon-links a:hover{color:var(--ink);border-color:var(--ink-faint)}
+
+  /* let grid columns shrink below their content, and scroll wide blocks
+     inside themselves rather than stretching the page */
+  @media (max-width:860px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    aside,main{min-width:0}
+    .try,.transcript,pre{overflow-x:auto}
+    table{table-layout:fixed;width:100%}
+    td:first-child{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+<div class="shell">
+
+<aside>
+  <a class="backhome" href="/">← Think Like a PM</a>
+  <a class="wordmark" href="#overview">
+    <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
+      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Best Use of My Time</b>
+  </a>
+  <div class="tagline">One page. Recommendation first. Easiest to undo first.</div>
+  <nav aria-label="Docs">
+    <h3>Start</h3>
+    <a href="#overview" aria-current="page" data-nav="overview">Overview</a>
+    <h3>Every decision</h3>
+    <a href="#contract" data-nav="contract">How a decision arrives</a>
+    <a href="#reversibility" data-nav="reversibility">How hard is it to undo</a>
+    <h3>The page</h3>
+    <a href="#one-page" data-nav="one-page">One page, always</a>
+    <a href="#knock-on" data-nav="knock-on">When one answer changes another</a>
+    <a href="#no-page" data-nav="no-page">When there is no page</a>
+    <h3>More skills</h3>
+    <a href="/docs/">Context is Queen <small>Available now</small></a>
+    <a href="/docs/turning-research-into-strategy/">Turning Research Into Strategy <small>In the workshop</small></a>
+    <a href="/docs/ai-output-clinic/">AI Output Clinic <small>In the workshop</small></a>
+  </nav>
+  <div class="side-foot">
+    Made by Hiba Ganta ·
+    <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="page default" id="overview" tabindex="-1">
+  <div class="crumb">Best Use of My Time · <b>Overview</b></div>
+  <h1>Decide in one glance.</h1>
+  <p class="lede">Best Use of My Time is a Claude Code skill that stops your
+  agent dumping a wall of decisions into the chat. The decisions go to a page
+  you answer in the browser, and the chat carries only the link. Each one
+  arrives with a <strong>recommendation already filled in</strong>, so agreeing
+  costs a glance. They are sorted by how hard each one is to undo, so the
+  five-second calls never sit next to the ones with no undo.</p>
+
+  <h2>Coming soon</h2>
+  <div class="soonbox">
+    <p><b>This skill isn't out yet.</b> It's being used and sharpened on
+    real work first, the same way Context is Queen was.</p>
+    <p>Follow along to hear when it lands:</p>
+    <nav class="soon-links" aria-label="Follow Hiba Ganta">
+      <a href="https://www.linkedin.com/in/hibaganta/">LinkedIn</a>
+      <a href="https://theneedful.substack.com/">Substack</a>
+      <a href="https://x.com/GantaHiba">X</a>
+      <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+    </nav>
+    <p class="note">In the meantime, <a href="/docs/">Context is Queen</a>
+    is available today.</p>
+  </div>
+
+  <h2>The problem</h2>
+  <p>Work with an agent for an hour and the calls pile up. Four from one
+  thread, three from another, each needing a scrap of context you no longer
+  have to hand. Then they all arrive at once, as text, at the end, when you
+  are tired. You skim, you say “fine, all of it”, and you have just approved
+  something you didn't read. A wall of decisions in chat is the failure this
+  skill exists to prevent.</p>
+  <ul class="pitfalls">
+    <li><b>Nine questions in one message.</b> <span>Nobody reads the ninth one properly. Skimming is how the bad call gets through.</span></li>
+    <li><b>A question with no recommendation.</b> <span>Being asked to choose with no view attached turns a five-second call into homework.</span></li>
+    <li><b>Cheap and expensive mixed together.</b> <span>A button colour sits next to something nobody can reverse, and on screen they look identical.</span></li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>It picks where to ask</b>
+      <p>One decision with no evidence is asked straight in the chat. Two to four quick ones become choice cards. More than four, anything that needs evidence, or anything that piled up across threads and agents, goes to the page.</p></div></li>
+    <li><span class="no">2.</span><div><b>Every decision is written to the same shape</b>
+      <p>A plain question, one line on why it matters now, the recommendation first with its reason, a pre-filled answer, evidence when the decision needs it, and a tag for how hard it is to undo.</p></div></li>
+    <li><span class="no">3.</span><div><b>Easiest to undo comes first</b>
+      <p>Groups run from things you can change back in seconds to things with no undo. The heavy ones stay visible at the bottom, so you can see what is coming.</p></div></li>
+    <li><span class="no">4.</span><div><b>You get one link, not a list</b>
+      <p>The top of the page states the totals before you read a word: seven judgments, three groups. New questions join the same page rather than starting a second one.</p></div></li>
+    <li><span class="no">5.</span><div><b>You answer at your pace</b>
+      <p>Send after each group; you never have to finish everything in one sitting. Your agent waits quietly, confirms what it received, and applies it. Answered items move to a signed list, dated, so nothing disappears.</p></div></li>
+  </ol>
+
+  <h2>Where to go next</h2>
+  <table>
+    <thead><tr><th>You're thinking…</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>“What does one look like?”</td><td><a class="cmdlink" href="#contract">How a decision arrives</a></td></tr>
+      <tr><td>“What do the tags mean?”</td><td><a class="cmdlink" href="#reversibility">How hard is it to undo</a></td></tr>
+      <tr><td>“Where do I answer these?”</td><td><a class="cmdlink" href="#one-page">One page, always</a></td></tr>
+      <tr><td>“One answer changed another”</td><td><a class="cmdlink" href="#knock-on">When one answer changes another</a></td></tr>
+      <tr><td>“I'm not on my machine”</td><td><a class="cmdlink" href="#no-page">When there is no page</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>The idea in one paragraph</h2>
+  <p>Your time is the scarce thing, and answering questions is the only part
+  of the work an agent cannot do for you. So the skill treats your attention
+  as the budget. It does the reading, forms a view, and brings you the call
+  with its recommendation already typed into the answer line, the evidence
+  attached, and a tag saying what agreeing would cost you if it turns out
+  wrong. You still make every decision. You just stop spending your day
+  reconstructing what each one is about.</p>
+</section>
+
+<!-- ================= THE CONTRACT ================= -->
+<section class="page" id="contract">
+  <div class="crumb">Best Use of My Time · Every decision</div>
+  <h1>How a decision arrives</h1>
+  <p class="lede">Six things every decision carries, whether it reaches you on
+  the page, on a card, or as a question in the chat. The page calls each one a
+  judgment: a call only you can make.</p>
+
+  <h2>When it applies</h2>
+  <p>Always. The shape does not change with the medium. A decision asked in
+  chat because there is only one of them still leads with its recommendation
+  and still says how hard it is to undo.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>One plain question</b>
+      <p>A single sentence in everyday language. You should be able to answer it without opening anything else.</p></div></li>
+    <li><span class="no">2.</span><div><b>Why it matters now</b>
+      <p>One line. If nothing depends on it this week, it does not belong in front of you this week.</p></div></li>
+    <li><span class="no">3.</span><div><b>The recommendation, first</b>
+      <p>With the reason behind it. You get a view to react to instead of a blank box to fill.</p></div></li>
+    <li><span class="no">4.</span><div><b>A pre-filled answer</b>
+      <p>The answer line already contains the recommendation. Agreeing costs one glance. Overruling means editing the line.</p></div></li>
+    <li><span class="no">5.</span><div><b>Evidence, when the decision needs it</b>
+      <p>The quote with its source, the screenshot, the table. Attached to the question, not sitting in a thread you have to go and find.</p></div></li>
+    <li><span class="no">6.</span><div><b>A tag for how hard it is to undo</b>
+      <p>One of six, from “changed back in seconds” to “no undo”. See <a href="#reversibility">how hard is it to undo</a>.</p></div></li>
+  </ol>
+
+  <h2>What one looks like</h2>
+  <div class="transcript">
+    <p class="agent"><span class="who">Judgment 3 of 7 · changing later costs rework</span>Do we keep the progress bar on the setup screen, or swap it for a checklist?</p>
+    <p><span class="who">Why now</span>The setup screen is built tomorrow, and the two need different copy.</p>
+    <p><span class="who">Recommended</span>Checklist. People finish more often when they can see what is left.</p>
+    <p><span class="who">Your answer, pre-filled</span>Checklist.</p>
+  </div>
+  <p class="calibration">Agreeing should take one glance. If a decision takes
+  five minutes to understand, the question was written badly, or the evidence
+  it needed was left behind.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Asking without a recommendation.</b> <span>A question with no view attached hands the thinking straight back to you.</span></li>
+    <li><b>Leaving the evidence elsewhere.</b> <span>If the quote or the screenshot lives in another thread, the question is not answerable where it is asked.</span></li>
+    <li><b>Making speech the only way in.</b> <span>You can dictate answers and comments if you like. You should never have to talk to settle something consequential.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#reversibility">how hard is it to undo</a> explains the tag on every decision.</p>
+</section>
+
+<!-- ================= REVERSIBILITY ================= -->
+<section class="page" id="reversibility">
+  <div class="crumb">Best Use of My Time · Every decision</div>
+  <h1>How hard is it to undo</h1>
+  <p class="lede">Every decision carries one of six tags, and the tags decide
+  the order you see things in. It is the most useful line on a card: it tells
+  you what agreeing costs if the recommendation turns out wrong.</p>
+
+  <h2>The six tags</h2>
+  <table>
+    <thead><tr><th>Tag</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td>Cosmetic</td><td>Quick to undo. Changed back in seconds, with nothing else affected.</td></tr>
+      <tr><td>Keep or cut</td><td>Easy to change later. If you get it wrong, you can recover.</td></tr>
+      <tr><td>Direction</td><td>Switching later costs rework. Real work gets thrown away.</td></tr>
+      <tr><td>Rule</td><td>Sets a standard that governs future work, not just this piece.</td></tr>
+      <tr><td>Foundation</td><td>Other work will be built on top of it.</td></tr>
+      <tr><td>One-way</td><td>No undo.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>How it works</h2>
+  <p>Easy and hard here mean reversibility and how much rests on the answer.
+  They have nothing to do with how long the answer takes to type. A one-word
+  reply can walk through a one-way door.</p>
+  <p>Groups run in that order, easiest first, so you clear the cheap ones
+  quickly and arrive at the expensive ones with attention left. The heavy
+  groups stay visible at the bottom rather than being hidden, so you always
+  know what is still coming. On the cheap groups you can accept the
+  suggestions in bulk. Anything expensive to reverse has to be touched one
+  card at a time, on purpose.</p>
+  <p class="calibration">The guard that matters most: a question that looks
+  cosmetic but would quietly set a standing convention is written as a rule
+  from the start. You should never set a rule while believing you are making
+  a decision you can undo in seconds.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Reading the tag as effort.</b> <span>It measures what it costs to change your mind, not what it costs to answer.</span></li>
+    <li><b>Bulk-accepting past the cheap groups.</b> <span>Accept-all exists for the two easiest groups only. Everything below them is deliberate work.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#one-page">one page, always</a> covers where the groups live.</p>
+</section>
+
+<!-- ================= ONE PAGE ================= -->
+<section class="page" id="one-page">
+  <div class="crumb">Best Use of My Time · The page</div>
+  <h1>One page, always</h1>
+  <p class="lede">One page for the whole session, and for other sessions
+  running alongside it. New questions join it. You never get a second link,
+  and you never have to work out which one is current.</p>
+
+  <h2>When to use it</h2>
+  <p>More than four decisions, any decision that needs evidence, or decisions
+  that piled up across turns and across agents. Below that, cards or a plain
+  question in the chat are faster than opening anything.</p>
+
+  <h2>How it works</h2>
+  <div class="try">7 JUDGMENTS · 3 GROUPS · QUICK ONES FIRST<br><span class="c">The masthead states the totals before you read a single question.</span></div>
+  <ul class="plain">
+    <li>Groups are ordered easiest to undo first, with the heavy ones visible at the bottom.</li>
+    <li>You send group by group. Finishing everything in one sitting is optional, and the page says so.</li>
+    <li>Answered decisions move to a signed list with the date. Nothing is deleted quietly.</li>
+    <li>When new questions come up, they are added to the same page. Your open tab picks them up within a couple of seconds.</li>
+    <li>When nothing is waiting, the page says so, confirms your answers reached the session, and tells you that you are free to go.</li>
+    <li>Answers can be typed or dictated, and you can select any text to leave a comment on it.</li>
+  </ul>
+  <p>The page runs on your own machine and nowhere else. Judgments name
+  customers and unreleased decisions, so they are never hosted, never routed
+  through another service, and never posted to a shared tool.</p>
+  <p class="calibration">A second page for the second batch would cost you the
+  signed history, give you two links to track, and make “which one is
+  current?” your problem. So there is only ever one.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Starting a new page per round.</b> <span>Questions from a later round belong in the same queue, not a fresh tab.</span></li>
+    <li><b>Silently clearing settled items.</b> <span>Answered decisions move to the signed list so you can see what you ruled and when.</span></li>
+    <li><b>Acting on answers from a session that has ended.</b> <span>A fresh conversation must not apply an hour-old decision it was not present for. It says what arrived and waits for your word.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#knock-on">when one answer changes another</a>.</p>
+</section>
+
+<!-- ================= KNOCK-ON ================= -->
+<section class="page" id="knock-on">
+  <div class="crumb">Best Use of My Time · The page</div>
+  <h1>When one answer changes another</h1>
+  <p class="lede">Answering one question often makes a second one pointless,
+  or changes what it is asking. You see that happen, and the call about what
+  to do next stays yours.</p>
+
+  <h2>When to use it</h2>
+  <p>You do not have to do anything. This is how the page behaves once your
+  questions start affecting each other, which happens as soon as a batch
+  covers more than one part of the work.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>You see the effect before you commit</b>
+      <p>While you are sitting on an answer, the questions it touches say what choosing it would do. Switch your selection and those warnings disappear. The effect belongs to the option you pick, not to the question: “checklist” settles other things, “bar or checklist” settles nothing.</p></div></li>
+    <li><span class="no">2.</span><div><b>Nothing retires itself</b>
+      <p>When your answer makes another question pointless, that question is marked “probably no longer needed”, with a plain sentence saying why. It waits for you to clear it.</p></div></li>
+    <li><span class="no">3.</span><div><b>An answer you have given always stands</b>
+      <p>If a later answer makes an earlier one moot, the earlier one is never quietly discarded. The knock-on effect is flagged instead, so you can see what changed and rule on it.</p></div></li>
+    <li><span class="no">4.</span><div><b>One nudge, one sentence</b>
+      <p>When a single question really does decide several others, one line at the top says so and offers you the shortcut. It never reorders anything and it never grows past a sentence.</p></div></li>
+  </ol>
+  <p class="calibration">The rule behind all of it: the page surfaces, you
+  decide. It never removes or discards your work on its own.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Auto-clearing questions to be helpful.</b> <span>Quietly binning a question and quietly keeping a stale one are the same mistake in opposite directions.</span></li>
+    <li><b>Letting the nudge become a lecture.</b> <span>One sentence, one shortcut. Anything more is the page arguing with you.</span></li>
+  </ul>
+  <p class="related">Related: <a href="#reversibility">how hard is it to undo</a> decides the order these questions appear in.</p>
+</section>
+
+<!-- ================= NO PAGE ================= -->
+<section class="page" id="no-page">
+  <div class="crumb">Best Use of My Time · The page</div>
+  <h1>When there is no page</h1>
+  <p class="lede">The page only runs on your own machine. When your session is
+  running somewhere else, you get told that in one plain line, and the
+  questions come to you directly, in the same order and the same shape.</p>
+
+  <h2>When to use it</h2>
+  <p>Whenever the session is not on your machine: a web session, a cloud
+  environment, or a plain chat. Your agent checks rather than assuming, and
+  it never says the page opened until an answer has actually come back from
+  it. A server can start and print an address you cannot reach, which reads
+  exactly like success.</p>
+
+  <h2>How it works</h2>
+  <ul class="plain">
+    <li>It tells you first: “no judgment page here, so I'll ask straight.” You never wonder where the questions went.</li>
+    <li>In a coding agent without a local page: choice cards, four at a time, easiest to undo first, with the total stated before the first card.</li>
+    <li>In a plain chat, where cards do not exist: one group per message, numbered, easiest to undo first, totals up front. You reply with numbers.</li>
+    <li>A single decision with no evidence is asked inline anywhere: one bold question, a short reason, recommendation first.</li>
+  </ul>
+  <p>Nothing gets improvised in place of the page. No hand-built substitute,
+  no hosted copy, no answers routed through a connected service. Your
+  judgments stay on your machine, and if the page cannot run, you get asked
+  plainly instead.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Claiming the page is open.</b> <span>The only proof a page reached you is an answer arriving back from it.</span></li>
+    <li><b>Improvising a stand-in.</b> <span>A hand-built copy has no send button and no way back into the session, so your answers go nowhere.</span></li>
+    <li><b>Batching more than four cards.</b> <span>Four is the limit per round, easiest to undo first, with the total said out loud beforehand.</span></li>
+  </ul>
+  <p class="related">Back to <a href="#one-page">one page, always</a> for how the real page behaves.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+  // sidebar current-page highlight on hash change
+  function sync(){
+    var h=(location.hash||"#overview").slice(1);
+    document.querySelectorAll("nav a").forEach(function(a){
+      if(a.getAttribute("data-nav")===h){a.setAttribute("aria-current","page")}
+      else{a.removeAttribute("aria-current")}
+    });
+    window.scrollTo(0,0);
+  }
+  addEventListener("hashchange",sync); sync();
+</script>
+</body>
+</html>

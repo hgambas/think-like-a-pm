@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning Research Into Strategy · Docs · Think Like a PM</title>
+<meta name="description" content="Docs for Turning Research Into Strategy: the agent skill that inventories your research, counts it under a rule you agree first, checks what the product really does, then writes the strategy.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%238E2F26'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3EC; --panel:#EFE9DD; --line:#DCD4C4;
+    --ink:#221D15; --ink-soft:#5C5546; --ink-faint:#8A8171;
+    --red:#8E2F26; --red-deep:#74251E;
+    --serif:"Newsreader",Georgia,serif; --sans:"Instrument Sans",-apple-system,sans-serif;
+    --measure:64ch;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{font-size:16px}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  ::selection{background:var(--red);color:var(--paper)}
+  a{color:var(--red-deep)}
+
+  .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
+
+  /* ——— sidebar ——— */
+  aside{border-right:1px solid var(--line);padding:32px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+  .wordmark svg{flex:none}
+  .wordmark b{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+  .tagline{font-size:.72rem;color:var(--ink-faint);margin-bottom:36px;letter-spacing:.02em}
+  nav h3{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);font-weight:600;margin:28px 0 10px}
+  nav a{display:block;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);font-size:.9rem;border-left:2px solid transparent;border-radius:0 3px 3px 0}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a[aria-current="page"]{color:var(--red-deep);border-left-color:var(--red);font-weight:600;background:none}
+  nav a code{font-family:var(--sans)}
+  .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
+  .side-foot a{color:var(--ink-soft)}
+  nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
+  nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  .backhome:hover{color:var(--red-deep)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
+  .skip:focus{left:8px;top:8px}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+  /* ——— main ——— */
+  main{padding:56px 64px 120px;max-width:calc(var(--measure) + 128px)}
+  .page{display:none}
+  .page:target{display:block}
+  .page.default{display:block}
+  .page:target ~ .page.default{display:none}
+  main:has(.page:target) .page.default{display:none}
+  main:has(.page:target) .page.default:target{display:block}
+
+  .crumb{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .crumb b{color:var(--red-deep);font-weight:600}
+
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+  h1 .cmd{color:var(--red-deep)}
+  .lede{font-size:1.15rem;color:var(--ink-soft);max-width:var(--measure);margin-bottom:8px}
+  .lede strong{color:var(--ink)}
+
+  h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  p{max-width:var(--measure);margin-bottom:14px}
+  p.note{color:var(--ink-soft)}
+
+  /* corrected-line signature (used once, in the index hero) */
+  .corrected{font-family:var(--serif);font-weight:500}
+  .corrected s{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+  .corrected ins{color:var(--red-deep);text-decoration:none;font-style:italic}
+
+  /* numbered agenda rows (instead of card grids) */
+  .agenda{list-style:none;max-width:var(--measure)}
+  .agenda li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .agenda li:first-child{border-top:1px solid var(--line)}
+  .agenda .no{font-family:var(--serif);font-style:italic;font-size:1.3rem;font-weight:500;color:var(--red);line-height:1}
+  .agenda b{display:block;margin-bottom:2px}
+  .agenda p{margin:0;color:var(--ink-soft);font-size:.92rem}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.92rem;margin:10px 0 6px}
+  th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);font-weight:600;padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+  td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{white-space:nowrap}
+  tr:hover td{background:var(--panel)}
+  a.cmdlink{font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  a.cmdlink:hover{border-bottom-color:var(--red)}
+
+  /* install command blocks, matching the home page */
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 14px}
+  .cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .prompt{color:var(--ink-faint);user-select:none}
+  .cmd .arg{color:var(--red-deep)}
+  .copy{flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer;min-height:34px}
+  .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+  .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+  @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
+
+  /* try-it / command samples */
+  .try{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;max-width:var(--measure);margin:10px 0 18px;border-radius:3px}
+  .try .c{color:var(--ink-faint)}
+
+  /* transcript sample */
+  .transcript{max-width:var(--measure);border:1px solid var(--line);background:#FBF8F3;padding:22px 24px;margin:12px 0 6px}
+  .transcript p{font-size:.92rem;margin-bottom:12px}
+  .transcript .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;font-weight:600;color:var(--ink-faint);display:block;margin-bottom:2px}
+  .transcript .agent .who{color:var(--red-deep)}
+
+  /* pitfalls: red-pen margin notes */
+  .pitfalls{list-style:none;max-width:var(--measure)}
+  .pitfalls li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .pitfalls li::before{content:"✗";position:absolute;left:2px;top:12px;color:var(--red);font-weight:700}
+  .pitfalls b{color:var(--red-deep)}
+  .pitfalls span{color:var(--ink-soft)}
+
+  .calibration{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;max-width:var(--measure);margin:18px 0}
+
+  .related{font-size:.9rem;color:var(--ink-soft)}
+  .related a{color:var(--red-deep);font-weight:600;text-decoration:none}
+
+  .pair{color:var(--ink-faint);font-size:.85rem}
+  ul.plain{max-width:var(--measure);margin:0 0 14px 22px;color:var(--ink-soft)}
+  ul.plain li{margin-bottom:4px}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:20px 22px 22px}
+    main{padding:36px 22px 80px}
+    .tagline{margin-bottom:18px}
+    /* collapse the long stacked nav into wrapped chips so content isn't a screen away */
+    nav{display:flex;flex-wrap:wrap;gap:6px}
+    nav h3{width:100%;margin:14px 0 2px}
+    nav h3:first-child{margin-top:0}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
+    nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
+    nav .soon small{display:none}
+    .side-foot{margin-top:20px;padding-top:14px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .page{animation:fade .25s ease-out}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+  .soonbox{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:22px 24px;max-width:var(--measure);margin:12px 0 6px}
+  .soonbox p{margin-bottom:12px}
+  .soonbox p:last-child{margin-bottom:0}
+  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .soon-links a{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink-soft);font-size:.88rem;font-weight:500;padding:8px 14px;border:1px solid var(--line);border-radius:100px;background:var(--paper);min-height:38px}
+  .soon-links a:hover{color:var(--ink);border-color:var(--ink-faint)}
+  nav a small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint)}
+
+  /* let grid columns shrink below their content, and scroll wide blocks
+     inside themselves rather than stretching the page */
+  @media (max-width:860px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    aside,main{min-width:0}
+    .try,.transcript,pre{overflow-x:auto}
+    table{table-layout:fixed;width:100%}
+    td:first-child{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+<div class="shell">
+
+<aside>
+  <a class="backhome" href="/">← Think Like a PM</a>
+  <a class="wordmark" href="#overview">
+    <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
+      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Turning Research Into Strategy</b>
+  </a>
+  <div class="tagline">Evidence first. Reality check second. Strategy last.</div>
+  <nav aria-label="Docs">
+    <h3>Start</h3>
+    <a href="#overview" aria-current="page" data-nav="overview">Overview</a>
+    <h3>Question a plan</h3>
+    <a href="#challenge" data-nav="challenge"><code>challenge</code></a>
+    <h3>The steps, in order</h3>
+    <a href="#collect" data-nav="collect">Collect the research</a>
+    <a href="#validate" data-nav="validate"><code>validate</code></a>
+    <a href="#reality" data-nav="reality">Check what's real</a>
+    <a href="#strategy" data-nav="strategy"><code>strategy</code></a>
+    <a href="#prioritize" data-nav="prioritize"><code>prioritize</code></a>
+    <h3>Always on</h3>
+    <a href="#decision-log" data-nav="decision-log">The running record</a>
+    <h3>More skills</h3>
+    <a href="/docs/">Context is Queen <small>Available now</small></a>
+    <a href="/docs/best-use-of-my-time/">Best Use of My Time <small>In the workshop</small></a>
+    <a href="/docs/ai-output-clinic/">AI Output Clinic <small>In the workshop</small></a>
+  </nav>
+  <div class="side-foot">
+    Made by Hiba Ganta ·
+    <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= DOCS INDEX ================= -->
+<section class="page default" id="overview" tabindex="-1">
+  <div class="crumb">Turning Research Into Strategy · <b>Overview</b></div>
+  <h1>A strategy you can back up.</h1>
+  <p class="lede">Turning Research Into Strategy is a Claude Code skill for the
+  pile of calls, notes and customer feedback nobody has turned into direction.
+  Your agent lists what you have and how far to trust each piece, counts what
+  the evidence really supports, opens the product and tries it, and only then
+  writes the strategy. Every number in the finished document can be traced back
+  to the person who said it.</p>
+
+  <h2>Coming soon</h2>
+  <div class="soonbox">
+    <p><b>This skill isn't out yet.</b> It's being used and sharpened on
+    real work first, the same way Context is Queen was.</p>
+    <p>Follow along to hear when it lands:</p>
+    <nav class="soon-links" aria-label="Follow Hiba Ganta">
+      <a href="https://www.linkedin.com/in/hibaganta/">LinkedIn</a>
+      <a href="https://theneedful.substack.com/">Substack</a>
+      <a href="https://x.com/GantaHiba">X</a>
+      <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+    </nav>
+    <p class="note">In the meantime, <a href="/docs/">Context is Queen</a>
+    is available today.</p>
+  </div>
+
+  <h2>The problem</h2>
+  <p>Research goes stale in the gap between hearing it and using it. The calls
+  get recorded, the painpoints get logged, and then a plan gets written from
+  memory. By the time anyone checks, the plan is already ordering the work.</p>
+  <ul class="pitfalls">
+    <li><b>Twenty calls and no direction.</b> <span>All transcribed, all sitting in a folder. The owner usually calls it a mess.</span></li>
+    <li><b>“Eleven customers asked for this.”</b> <span>Nobody wrote down what counted as asking, so nobody can check the number.</span></li>
+    <li><b>“The product already does that.”</b> <span>Nobody has opened it in weeks, and the button everyone remembers has nothing behind it.</span></li>
+  </ul>
+
+  <h2>How it works</h2>
+  <p>The work runs in six steps, and each one writes its own document: a real
+  file you can open, not an answer in the chat. Nothing can start before the
+  documents it depends on exist. If one is missing, your agent says which,
+  offers to run it first, and asks before starting anything big. Order governs
+  starting, not finishing: any step can be re-run when new evidence lands, and
+  doubling back is normal.</p>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>Take the material in, and grade it</b>
+      <p>Transcripts, auto-notes, the painpoint tracker, the backlog, old decks, and access to the product. Each source gets a confidence grade as it arrives.</p></div></li>
+    <li><span class="no">2.</span><div><b>Unpack each call on its own</b>
+      <p>One call at a time, sorted into six buckets, with the difference between what they asked for and what they are stuck on written down.</p></div></li>
+    <li><span class="no">3.</span><div><b>Inventory everything flat</b>
+      <p>Every item, in the words it was said in, next to the person who said it. Nothing gets grouped, ranked or interpreted at this stage.</p></div></li>
+    <li><span class="no">4.</span><div><b>Check the counts</b>
+      <p>Write the counting rule, agree it with you, then count. Publish what was claimed next to what the count found.</p></div></li>
+    <li><span class="no">5.</span><div><b>Check what's real</b>
+      <p>Open the product and try each thing it appears to do. Audit every data source twice, against official documentation and a live test.</p></div></li>
+    <li><span class="no">6.</span><div><b>Write the strategy, then the backlog</b>
+      <p>What you can honestly promise to whom, at most two goals, and rules that decide what gets built. Then the ordered work list under those rules.</p></div></li>
+  </ol>
+  <p class="note">Before the first step, you and your agent agree in one
+  sentence what the finished work has to let you do. A real one:
+  <em>“Done when the people building leave the working session knowing what
+  they are prioritizing and why.”</em> Anything that doesn't serve that
+  sentence is scope, not progress.</p>
+
+  <h2>Where you come in</h2>
+  <p>Some decisions are yours and stay yours: the counting rule, the choice
+  between candidate goals, and permission to start a long pass. At each one
+  your agent stops, asks a short question with a few concrete options, and
+  puts its recommendation first. If nobody is there to answer, in a scheduled
+  or background run, it takes its own recommendation, records it as
+  provisional, and raises it the next time you're around. It never settles one
+  of your decisions quietly.</p>
+
+  <h2>Choose a command</h2>
+  <p class="note">You don't need the command names. Plain requests work and
+  your agent routes them. The commands are for when you want to steer
+  directly:</p>
+  <table>
+    <thead><tr><th>You're thinking…</th><th>Run</th></tr></thead>
+    <tbody>
+      <tr><td>“This plan doesn't smell right”</td><td><a class="cmdlink" href="#challenge">challenge</a></td></tr>
+      <tr><td>“I have a pile of calls”</td><td><a class="cmdlink" href="#collect">discovery</a></td></tr>
+      <tr><td>“Make sense of this one call”</td><td><a class="cmdlink" href="#collect">debrief</a></td></tr>
+      <tr><td>“Lay out everything we heard”</td><td><a class="cmdlink" href="#collect">evidence</a></td></tr>
+      <tr><td>“Is that number real?”</td><td><a class="cmdlink" href="#validate">validate</a></td></tr>
+      <tr><td>“Does it really do that?”</td><td><a class="cmdlink" href="#reality">teardown</a></td></tr>
+      <tr><td>“Can we even get that data?”</td><td><a class="cmdlink" href="#reality">feasibility</a></td></tr>
+      <tr><td>“What do we build, and why?”</td><td><a class="cmdlink" href="#strategy">strategy</a></td></tr>
+      <tr><td>“What's next on the list?”</td><td><a class="cmdlink" href="#prioritize">prioritize</a></td></tr>
+      <tr><td>“What are we waiting on?”</td><td><a class="cmdlink" href="#decision-log">decision-log</a></td></tr>
+      <tr><td>“Does this clash with my setup?”</td><td><a class="cmdlink" href="#decision-log">checkup</a></td></tr>
+    </tbody>
+  </table>
+  <p class="pair">Useful pairs: <b>challenge → validate</b> (name the doubt, then settle the count) ·
+  <b>strategy → prioritize</b> (direction, then the work it implies).</p>
+
+  <h2>The idea in one paragraph</h2>
+  <p>Two habits do most of the work here. The first is writing the counting
+  rule before you count, so the count can't drift toward the answer someone
+  was hoping for. The second is opening the product and clicking the thing
+  before anyone promises it, because a button is a claim rather than a
+  feature. Everything else exists to keep those two honest: raw evidence kept
+  raw until it's counted, sources graded by where they came from, and a
+  running record of what was decided, what is open, and who you're waiting on.</p>
+
+  <h2>Where it has been proven</h2>
+  <p>This method comes from business-to-business work with a single
+  operator-buyer and a small pipeline of named customers. It's untested on
+  consumer products, large pipelines, and markets with no named customers to
+  follow. It also needs research to exist already: it mines evidence, it
+  doesn't generate it. Skip it when direction is settled and you're only
+  sequencing work inside it, or when you want to spar on one strategic
+  question rather than produce the document.</p>
+</section>
+
+<!-- ================= CHALLENGE ================= -->
+<section class="page" id="challenge">
+  <div class="crumb">Turning Research Into Strategy · Question a plan</div>
+  <h1><span class="cmd">challenge</span></h1>
+  <p class="lede">Point it at a plan you distrust. It names the bet the plan is
+  making, tests that bet against the evidence, and asks for receipts on every
+  claim doing real work.</p>
+
+  <h2>When to use it</h2>
+  <p>When a strategy, deck or roadmap already exists and is about to drive
+  commitments, or when something in it doesn't sit right. This is often where
+  the whole thing starts. It can run before any other step, and what it finds
+  usually becomes the work list for the rest.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>It names the core bet</b><p>One sentence on the main thing the plan assumes, for example “retention is the wedge”. It confirms that with you first, because everything after aims at whatever gets named here.</p></div></li>
+    <li><span class="no">2.</span><div><b>It tests the bet</b><p>What would have to be true in the evidence for the bet to hold? Where counted evidence exists, it checks against it. Where it doesn't, it lists the claims that need counting.</p></div></li>
+    <li><span class="no">3.</span><div><b>It asks for receipts, claim by claim</b><p>Each load-bearing number, quote or capability claim traces back to a named source, or gets marked untraceable where it stands. Nothing is deleted quietly: you can still see what was claimed and what couldn't be backed.</p></div></li>
+    <li><span class="no">4.</span><div><b>It compares the live documents</b><p>The deck against the strategy, the strategy against your own landing page, all of them against what people said on calls. Every contradiction becomes a numbered open question. Two documents disagreeing is the finding, so it gets written down plainly.</p></div></li>
+    <li><span class="no">5.</span><div><b>It closes with a verdict and a work list</b><p>Whether the bet survived, which claims held, which didn't, which are still open, and which commands would settle each one.</p></div></li>
+  </ol>
+
+  <h2>Try it</h2>
+  <div class="try">“Why does this deck lead with conversion when the calls said otherwise?”<br><span class="c">That question is where this method came from: a comment on a draft.</span></div>
+  <p class="calibration">A finished challenge reads like this: the draft leads
+  with conversion, but the calls, strictly counted, support retention, with 2
+  qualifying calls rather than the claimed 7. Two claims trace to no source.
+  The deck and the landing page state different prices.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Expecting it to rewrite the plan.</b> <span>It names what doesn't hold. The replacement comes later, once the evidence work is done.</span></li>
+    <li><b>Letting it half-audit the numbers here.</b> <span>Tracing a claim is this command's job. Strict recounting under a written rule belongs to validate.</span></li>
+    <li><b>Pointing it at your own decisions.</b> <span>It targets the document's claims and bets. Decisions you made get revisited by you, through the running record.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#validate">validate</a> settles the counts it put on the list.</p>
+</section>
+
+<!-- ================= COLLECT ================= -->
+<section class="page" id="collect">
+  <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
+  <h1>Collect the research</h1>
+  <p class="lede">Three commands get everything into the room and written down:
+  what you have and how far to trust it, what each call actually said, and a
+  flat list of every item next to the person who said it.</p>
+
+  <h2>When to use it</h2>
+  <p>At the very start, and again whenever new material arrives: a fresh batch
+  of calls, an updated deck. Don't wait for the pile to be complete. Your
+  agent takes what exists and files the gaps as open questions with a name
+  against each one.</p>
+
+  <h2>discovery: grade every source at the door</h2>
+  <p>It asks for the material one item at a time: call transcripts, auto-notes
+  from tools like Granola or Otter, the painpoint tracker, the backlog, any
+  existing strategy decks, and access to the product itself. If there's no
+  prototype, it asks for whatever is closest to real, like the demo or the
+  spreadsheet the founder actually runs things from.</p>
+  <p>Every source gets a confidence grade as it arrives:</p>
+  <ul class="plain">
+    <li>a transcript you recorded yourself is the strongest, and can be quoted word for word</li>
+    <li>auto-notes with a machine transcript need the wording checked before you quote them anywhere public</li>
+    <li>notes with no transcript are the weakest, and can only be paraphrased, because no exact wording exists</li>
+  </ul>
+  <p>The grade is about where a source came from, not how tidy it looks. A
+  beautifully formatted set of notes with no recording behind it is still the
+  weakest grade. The mix gets stated openly, for example “14 of 20 calls are
+  machine-transcribed, 1 is notes-only”. Decks come in as claims to be
+  audited, never as truths to inherit.</p>
+
+  <h2>debrief: one call, six buckets</h2>
+  <p>Run it right after a call that produced commitments, decisions or a
+  problem statement, or later on any recorded call nobody processed. One call
+  per run. If there's no transcript or notes, it says so and stops, rather
+  than reconstructing the call from memory.</p>
+  <ul class="plain">
+    <li>explicit commitments: who promised what, by when</li>
+    <li>things you're blocked on that the other person holds</li>
+    <li>their problem, stated precisely, in their own words where the grade allows</li>
+    <li>decisions actually reached, dated and attributed</li>
+    <li>open questions raised but not resolved</li>
+    <li>work the conversation assumes but nobody claimed, with every guess marked as a guess</li>
+  </ul>
+  <p>Then it separates what they asked for from what they're stuck on. Those
+  two often differ, and the difference is the finding. The stated ask gets
+  treated as a hypothesis rather than a work order.</p>
+
+  <h2>evidence: the flat list</h2>
+  <p>Every painpoint, quote and request from every source, recorded in the
+  original words where the grade allows, with its source, its grade, and an ID
+  so later documents can cite it. One tag per item, and only one: is this a
+  problem in the customer's own world, or friction with your product? Those
+  two get used differently later.</p>
+  <p>Nothing is merged, themed or ranked here. If your agent catches itself
+  writing “several customers said”, it stops, because that sentence belongs to
+  the counting step. Weak sources stay in the list, marked weak, rather than
+  disappearing. The point is that anyone can re-run the analysis later under a
+  different rule, because nothing was pre-digested.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Here are 20 call transcripts. Take them in and grade them.”<br><span class="c">Then: “Lay out everything we heard, flat.”</span></div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Waiting for the full pile before starting.</b> <span>Missing material becomes an open question with a name against it, not a reason to stall.</span></li>
+    <li><b>Treating the deck as evidence.</b> <span>A deck is a set of claims to check. If you're about to quote one as fact, you wanted validate.</span></li>
+    <li><b>Grouping items as you go.</b> <span>The moment the list is sorted by theme, every later count inherits those groupings.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#validate">validate</a> counts what this list supports.</p>
+</section>
+
+<!-- ================= VALIDATE ================= -->
+<section class="page" id="validate">
+  <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
+  <h1><span class="cmd">validate</span></h1>
+  <p class="lede">Write the counting rule before counting anything. Then
+  publish what was claimed next to what the count actually found.</p>
+
+  <h2>When to use it</h2>
+  <p>Whenever a number, a quote, or a “the research shows” claim is about to
+  drive a decision: a build order, a pricing move, a promise to a partner.
+  Also any time two live documents disagree. It counts out of the flat list,
+  so if that doesn't exist yet, it offers to build it first.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>The rule comes first, and you confirm it</b><p>A real one: “a call counts for a goal only if the person described the pain in their own world. Market commentary, advice, and descriptions of other people's problems do not count.” Where to draw that line is your judgment call, so it waits for your yes.</p></div></li>
+    <li><span class="no">2.</span><div><b>Then it counts, citing item IDs</b><p>Borderline cases are listed separately with the reasoning for each, so the whole count can be re-run under a looser rule without redoing the work.</p></div></li>
+    <li><span class="no">3.</span><div><b>A second count, for customer fit</b><p>Each source is graded against who the product is actually for: fits, marginal, outside, or not a buyer, with a reason. This stops loud non-buyers from outweighing your real segment.</p></div></li>
+    <li><span class="no">4.</span><div><b>Claimed next to audited, with a verdict</b><p>Then a short paragraph per mismatch explaining which assumption produced the inflated number. That explanation is the useful part, because it stops the same inflation happening again.</p></div></li>
+    <li><span class="no">5.</span><div><b>Counter-evidence gets recorded too</b><p>If a framing actively failed in three calls, that goes in the table alongside the support.</p></div></li>
+    <li><span class="no">6.</span><div><b>Whatever can't be settled goes to the record</b><p>As a numbered open question, or as a named person you're now waiting on.</p></div></li>
+  </ol>
+
+  <h2>Try it</h2>
+  <div class="try">“Eleven calls asked for matchmaking. Is that number real?”<br><span class="c">It will write the counting rule and ask you to confirm it before counting.</span></div>
+  <p class="calibration">Claimed: 11 calls supported matchmaking. Audited under
+  the own-world rule: 3 qualify. A real signal, and a long way from the
+  majority theme it was presented as.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Counting first and writing the rule after.</b> <span>The order exists so the count can't drift toward the answer someone wants.</span></li>
+    <li><b>Deleting the claims that failed.</b> <span>Downgrade them where they stand and show the gap. A quietly deleted claim teaches nobody anything.</span></li>
+    <li><b>Stopping at “the number was wrong”.</b> <span>Without an explanation of how the wrong number got made, the audit is half done.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#reality">check what's real</a> before anything gets promised.</p>
+</section>
+
+<!-- ================= REALITY ================= -->
+<section class="page" id="reality">
+  <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
+  <h1>Check what's real</h1>
+  <p class="lede">Two commands that run before anything is promised: open the
+  product and try it, and audit every data source you would be depending on.</p>
+
+  <h2>When to use it</h2>
+  <p>Before any plan, promise or backlog item references something the product
+  does or some data you expect to get. Also any time someone says “the product
+  does X” and nobody in the room has recently watched it do X.</p>
+
+  <h2>teardown: try it, don't read about it</h2>
+  <p>Your agent walks the product screen by screen and records what it saw,
+  not what was intended. Everything the interface implies gets tried. The
+  result is two lists with a hard line between them: what works, and what is a
+  mockup, meaning it looks real but isn't wired up, because it's visual only,
+  hardcoded, or running on fake data. There's no middle column for things that
+  probably work.</p>
+  <p>Things that work but work badly go on a third, separate list, because
+  fixing something and making something real are different jobs. It closes by
+  saying what it deliberately didn't test and why. An untested capability
+  listed as untested is honest. One left off the list becomes an assumed
+  capability by next week.</p>
+  <p>It also notes anything the product already holds and does nothing with.
+  In one real run, an event page held 86 registrations and only 10 of those
+  people were members. That meant 76 prospects already sitting in the product,
+  unused, which became the cheapest growth item on the backlog.</p>
+
+  <h2>feasibility: what each data source will actually give you</h2>
+  <p>The same three questions of every source you might depend on: what can be
+  read, and in how much detail; who grants that access, whether that's the
+  customer, their plan tier, or an approval process at the platform; and what
+  it costs in money, rate limits, review queues or licence terms.</p>
+  <p>Answers come from official developer documentation, the live product, or
+  a real call to the interface. Never from memory or from a vendor's marketing
+  page, because pricing pages and feature grids are claims rather than
+  evidence. Two passes run over every source, and the second one is
+  adversarial: its job is to overturn the first. Where they disagree, the
+  original documentation settles it. Where nothing settles it, the claim stays
+  marked unverified, with the specific action that would settle it, like “ask
+  the vendor in writing” or “one manual check in the browser”.</p>
+  <p>Two distinctions save a lot of wasted building. No documentation is not
+  the same as no capability. And a gate on the interface is not a gate on the
+  data: a plan tier that blocks the live connection may still allow an export,
+  which turns “we can't serve them” into “upload it instead”.</p>
+  <p>Corrections are ranked by how much each one changes a decision, not by
+  topic, so the finding that kills a build comes first. Then it asks you to
+  spot-check the top few yourself. Two agent passes are strong evidence and
+  still not enough: in the work this came from, the human check reversed three
+  assumptions about platforms. It closes by naming which sources change often
+  and must be re-checked before anything depends on them.</p>
+  <p class="calibration">The shape of a real correction: the renewal date moved
+  to a different place in the latest version of the interface, so code written
+  to the old shape stops noticing renewals, without any error to warn you.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Here's a test account. Walk the product and tell me what's real.”<br><span class="c">Then: “Audit every data source we'd be depending on.”</span></div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Reading the interface as the capability.</b> <span>A button is a claim, not a feature. Click it.</span></li>
+    <li><b>Walking only the happy path.</b> <span>The demo route is the best-lit part of the product. Walk the rest.</span></li>
+    <li><b>Auditing only the sources you like.</b> <span>The audit covers every source a promise might rest on, including the awkward ones.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#strategy">strategy</a> can only promise what these two lists support.</p>
+</section>
+
+<!-- ================= STRATEGY ================= -->
+<section class="page" id="strategy">
+  <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
+  <h1><span class="cmd">strategy</span></h1>
+  <p class="lede">The main one. What you can honestly promise to whom, the two
+  goals the work serves, and the rules that decide what gets built. It sits on
+  top of every step above and offers to run whichever ones are missing.</p>
+
+  <h2>When to use it</h2>
+  <p>When someone asks for “the strategy”, “direction”, or “what do we build
+  and why”. Also to re-derive it after new evidence lands. Before it writes
+  anything it checks for the earlier documents, names the missing ones, and
+  offers to run them in order, asking you before each. It won't write a
+  strategy over a gap, and it won't start a five-step run without your yes.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>It groups your data sources by the job each one does</b><p>Not by vendor category. A source can sit in more than one group. This grouping stays internal, and no customer ever needs to learn it.</p></div></li>
+    <li><span class="no">2.</span><div><b>It derives at most two goals from the counted evidence</b><p>Smaller goals sit under those two. It presents the candidates to you as a choice with its recommendation first, because goals are your call. The two aren't ranked once and for all: which one to lead with is decided per customer.</p></div></li>
+    <li><span class="no">3.</span><div><b>It writes the coverage-to-promise table</b><p>The centre of the document. Each row is what a customer has connected, and says what you can honestly answer from it, what you can't, and what that's good enough for.</p></div></li>
+    <li><span class="no">4.</span><div><b>It writes the build rules</b><p>A procedure for deciding, rather than a roadmap of dates.</p></div></li>
+    <li><span class="no">5.</span><div><b>It numbers the open questions and refers to them in the body</b><p>So a reader meets each question at the point where it bites, not only in a list at the end. It closes with the evidence base: the named people and their roles, and every source with its date and grade.</p></div></li>
+  </ol>
+
+  <h2>The coverage-to-promise table</h2>
+  <p>This is the table that turns a sales conversation into a diagnosis. Every
+  row states what you cannot answer as well as what you can, and at least one
+  row is a refusal:</p>
+  <table>
+    <thead><tr><th>What's connected</th><th>What you can honestly answer</th><th>Good enough for</th></tr></thead>
+    <tbody>
+      <tr><td>Revenue only</td><td>Who stopped paying, and who is about to renew. Not why, and not who might join next.</td><td>A thin version of retention work. Nothing else.</td></tr>
+      <tr><td>Revenue and chat</td><td>Who is going quiet compared to their own normal, before it costs a renewal.</td><td>Retention, for communities that live in chat.</td></tr>
+      <tr><td>Chat only</td><td>Who went quiet. Not whether they matter, or what to do about it.</td><td>Nothing on its own. Don't onboard anyone on this alone.</td></tr>
+    </tbody>
+  </table>
+  <p>Each promise carries the recipe behind it. And there's a hard rule for
+  saying no: if the outcome a customer wants has never been recorded in their
+  data, the product would be guessing. So the answer is to decline that goal
+  and tell them what's missing.</p>
+
+  <h2>The build rules</h2>
+  <p>A procedure, not a roadmap. The reference shape runs like this. When a
+  customer says yes, run the coverage check, and the gap in their coverage
+  names the integration to build. Check the data-source audit: can that source
+  really yield what's needed, and behind which gate? Across the whole
+  confirmed pipeline, build whatever frees the most blocked customers. And if
+  no confirmed customer is blocked on something missing, build nothing new and
+  onboard on what already exists. That last rule is the one most roadmaps
+  can't bring themselves to say.</p>
+
+  <h2>How the documents read</h2>
+  <p>Everything this skill writes is aimed at a smart reader outside your team
+  who wasn't in the room. Everyday words, complete sentences, and a plain
+  explanation of any internal term the first time it appears. Numbers say what
+  they mean, and people get introduced.</p>
+  <div class="transcript">
+    <p><span class="who">Before</span>MRR $5K (committed). Rev evidence: 0
+    priced. Deck targets n/a, learning goal only.</p>
+    <p class="agent"><span class="who">After</span>The deck's $5,000 monthly
+    revenue is committed, not collected. No customer has paid a price yet. We
+    inherit the deck's learning goal, and not its revenue targets.</p>
+  </div>
+  <p>At the end, the draft goes through three passes. Anything defending the
+  document rather than informing the reader is cut. Every surviving sentence
+  has to survive the question “how do you know?”. Then the order and headings
+  are made simple enough for a stranger to navigate. The finished document
+  should be shorter than the draft it came from.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Write the strategy. What can we honestly promise, and to whom?”<br><span class="c">It will list any missing steps first and ask before running them.</span></div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Writing strategy over a missing step.</b> <span>If the counts were never checked, the strategy inherits the inflation.</span></li>
+    <li><b>A third goal arriving quietly.</b> <span>New goals enter as a recorded decision, never through a promising feature idea.</span></li>
+    <li><b>Promising from the deck.</b> <span>A deck claim that hasn't been counted doesn't get promised. You can inherit a deck's learning goals, but never its targets.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#prioritize">prioritize</a> turns it into an ordered work list.</p>
+</section>
+
+<!-- ================= PRIORITIZE ================= -->
+<section class="page" id="prioritize">
+  <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
+  <h1><span class="cmd">prioritize</span></h1>
+  <p class="lede">Order the work so that every item earns its place and names
+  the goal it serves. This is where a strategy either becomes instructions or
+  quietly falls apart.</p>
+
+  <h2>When to use it</h2>
+  <p>Once the strategy exists, and again to re-order when new customers
+  confirm or new evidence lands. The list is generated from the strategy and
+  the product teardown: mockups to make real, rough edges to fix, and gaps
+  between the product and the goals. An existing backlog gets audited against
+  the rule and merged where it survives, never simply inherited.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>The qualifying rule goes at the top, and you confirm it</b><p>The reference shape: “a capability counts only if it helps the customer act on the goal. A chart nobody acts on does not qualify.” One real customer had already rejected the softer version: “I don't need a platform to tell me that people are silent.”</p></div></li>
+    <li><span class="no">2.</span><div><b>Every item is tagged</b><p>With the goal it serves, and with its kind: make real (a mockup becoming true), net new, or fix.</p></div></li>
+    <li><span class="no">3.</span><div><b>The order is stated, and so is the logic behind it</b><p>One line at the top. Blocking issues first, then the cheapest proof of a goal with thin evidence, is a reasonable default. Whatever the logic is, it gets written down, so the next re-order isn't a fresh argument.</p></div></li>
+    <li><span class="no">4.</span><div><b>What's deliberately excluded, and why</b><p>An exclusion with a reason can be argued again later, while a silent omission can't be. A real one: introductions were kept off a backlog “because building them now would add a third goal before we have decided to take one on.”</p></div></li>
+    <li><span class="no">5.</span><div><b>Dependencies are checked against the data-source audit</b><p>Any item resting on an unverified data claim gets that claim's settling action scheduled before or alongside it.</p></div></li>
+  </ol>
+
+  <h2>Try it</h2>
+  <div class="try">“Turn the strategy into an ordered backlog.”<br><span class="c">It will propose the qualifying rule and wait for you to agree it.</span></div>
+  <p class="calibration">A good test of an item: “dashboard showing customer
+  activity” usually fails the rule, while “rank these people, with a drafted
+  action for each” usually passes.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Items that describe analysis instead of capability.</b> <span>If nobody can act on the output, it doesn't qualify.</span></li>
+    <li><b>An order with no stated logic.</b> <span>Unwritten ordering rules get re-argued every time the list changes.</span></li>
+    <li><b>Sneaking in a third goal.</b> <span>An item serving no listed goal is either cut, or logged as a proposal for a new goal.</span></li>
+  </ul>
+  <p class="related">Direction itself feeling wrong? Go back to <a href="#strategy">strategy</a>.</p>
+</section>
+
+<!-- ================= DECISION LOG ================= -->
+<section class="page" id="decision-log">
+  <div class="crumb">Turning Research Into Strategy · Always on</div>
+  <h1>The running record</h1>
+  <p class="lede">One document that always answers three questions: what have
+  we decided, what is genuinely open, and who are we waiting on. Every command
+  adds to it as it works, and it's the first thing to read when you pick the
+  project back up.</p>
+
+  <h2>When to use it</h2>
+  <p>Call <span class="cmd">decision-log</span> directly to review where things
+  stand, record a decision made outside a command, close a question that got
+  settled, or tidy up after a messy week.</p>
+
+  <h2>What's in it</h2>
+  <p>Three separate registers. The split is by who can close each item, which
+  is what makes the document usable:</p>
+  <ul class="plain">
+    <li><b>Decisions locked</b>, each dated and attributed to the person who made it. A locked decision is only reopened by that person.</li>
+    <li><b>Open questions</b>, numbered so other documents can point at them, each stating what would settle it.</li>
+    <li><b>Waiting on a named person</b>, with the item, the name, and the date the wait started. A wait long enough to block work gets raised with you rather than aging quietly.</li>
+  </ul>
+  <p>A few housekeeping habits keep it honest. Terms are defined once at the
+  top and used consistently, including what counts as a confirmed customer,
+  because most contradictions between documents turn out to be two definitions
+  wearing one word. “By Friday” becomes a real date. A settled question moves
+  into the decisions list with its date rather than being deleted, because the
+  trail is the point. Corrections are recorded plainly, including the ones
+  that reverse your own earlier framing.</p>
+
+  <h2>checkup: a one-time scan of your setup</h2>
+  <p>Run it once after installing, and again after you add other research or
+  strategy skills. It looks at the other skills and standing instructions on
+  your machine and reports four things: skills that would fire on the same
+  kind of request, instructions that contradict this method, files big enough
+  to eat context every session, and whether your total skill list has outgrown
+  the space the tool gives it. Each finding comes with a suggested fix.</p>
+  <p>It's report-only and local-only. It never edits, disables or deletes
+  anything, nothing it reads leaves your machine, and any location it couldn't
+  read is listed as unchecked rather than guessed at. In a chat app with no
+  files to scan, it says so and reviews what it can see instead.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“What have we decided, and who are we waiting on?”<br><span class="c">Or, right after installing: “Scan for anything that clashes with this skill.”</span></div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Registers blurring together.</b> <span>“Waiting on Jules” filed under open questions makes it nobody's job.</span></li>
+    <li><b>Decisions with no owner or date.</b> <span>An unattributed decision gets re-argued, and an undated wait never escalates.</span></li>
+    <li><b>Using it as a to-do list.</b> <span>Work items belong in the backlog. This tracks what you know, not what you're doing.</span></li>
+  </ul>
+  <p class="related">Work items live in <a href="#prioritize">prioritize</a>.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+  // sidebar current-page highlight on hash change
+  function sync(){
+    var h=(location.hash||"#overview").slice(1);
+    document.querySelectorAll("nav a").forEach(function(a){
+      if(a.getAttribute("data-nav")===h){a.setAttribute("aria-current","page")}
+      else{a.removeAttribute("aria-current")}
+    });
+    window.scrollTo(0,0);
+  }
+  addEventListener("hashchange",sync); sync();
+</script>
+</body>
+</html>

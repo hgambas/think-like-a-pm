@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Output Clinic · Docs · Think Like a PM</title>
+<meta name="description" content="Docs for AI Output Clinic: the agent skill that finds where AI-written content actually broke, builds a bar by hand, and pins every failure as a test.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%238E2F26'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F3EC; --panel:#EFE9DD; --line:#DCD4C4;
+    --ink:#221D15; --ink-soft:#5C5546; --ink-faint:#8A8171;
+    --red:#8E2F26; --red-deep:#74251E;
+    --serif:"Newsreader",Georgia,serif; --sans:"Instrument Sans",-apple-system,sans-serif;
+    --measure:64ch;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{font-size:16px}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  ::selection{background:var(--red);color:var(--paper)}
+  a{color:var(--red-deep)}
+
+  .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
+
+  /* ——— sidebar ——— */
+  aside{border-right:1px solid var(--line);padding:32px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+  .wordmark svg{flex:none}
+  .wordmark b{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+  .tagline{font-size:.72rem;color:var(--ink-faint);margin-bottom:36px;letter-spacing:.02em}
+  nav h3{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);font-weight:600;margin:28px 0 10px}
+  nav a{display:block;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);font-size:.9rem;border-left:2px solid transparent;border-radius:0 3px 3px 0}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a[aria-current="page"]{color:var(--red-deep);border-left-color:var(--red);font-weight:600;background:none}
+  nav a code{font-family:var(--sans)}
+  .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
+  .side-foot a{color:var(--ink-soft)}
+  nav .soon{display:block;padding:6px 10px;margin-left:-10px;font-size:.9rem;color:var(--ink-faint)}
+  nav .soon small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  .backhome:hover{color:var(--red-deep)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);padding:10px 16px;z-index:20}
+  .skip:focus{left:8px;top:8px}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+  /* ——— main ——— */
+  main{padding:56px 64px 120px;max-width:calc(var(--measure) + 128px)}
+  .page{display:none}
+  .page:target{display:block}
+  .page.default{display:block}
+  .page:target ~ .page.default{display:none}
+  main:has(.page:target) .page.default{display:none}
+  main:has(.page:target) .page.default:target{display:block}
+
+  .crumb{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .crumb b{color:var(--red-deep);font-weight:600}
+
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+  h1 .cmd{color:var(--red-deep)}
+  .lede{font-size:1.15rem;color:var(--ink-soft);max-width:var(--measure);margin-bottom:8px}
+  .lede strong{color:var(--ink)}
+
+  h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  p{max-width:var(--measure);margin-bottom:14px}
+  p.note{color:var(--ink-soft)}
+
+  /* corrected-line signature (used once, in the index hero) */
+  .corrected{font-family:var(--serif);font-weight:500}
+  .corrected s{color:var(--ink-faint);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+  .corrected ins{color:var(--red-deep);text-decoration:none;font-style:italic}
+
+  /* numbered agenda rows (instead of card grids) */
+  .agenda{list-style:none;max-width:var(--measure)}
+  .agenda li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .agenda li:first-child{border-top:1px solid var(--line)}
+  .agenda .no{font-family:var(--serif);font-style:italic;font-size:1.3rem;font-weight:500;color:var(--red);line-height:1}
+  .agenda b{display:block;margin-bottom:2px}
+  .agenda p{margin:0;color:var(--ink-soft);font-size:.92rem}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.92rem;margin:10px 0 6px}
+  th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);font-weight:600;padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+  td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{white-space:nowrap}
+  tr:hover td{background:var(--panel)}
+  a.cmdlink{font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  a.cmdlink:hover{border-bottom-color:var(--red)}
+
+  /* install command blocks, matching the home page */
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 14px}
+  .cmd{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .prompt{color:var(--ink-faint);user-select:none}
+  .cmd .arg{color:var(--red-deep)}
+  .copy{flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer;min-height:34px}
+  .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+  .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+  @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
+
+  /* try-it / command samples */
+  .try{background:var(--panel);border:1px solid var(--line);padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;max-width:var(--measure);margin:10px 0 18px;border-radius:3px}
+  .try .c{color:var(--ink-faint)}
+
+  /* transcript sample */
+  .transcript{max-width:var(--measure);border:1px solid var(--line);background:#FBF8F3;padding:22px 24px;margin:12px 0 6px}
+  .transcript p{font-size:.92rem;margin-bottom:12px}
+  .transcript .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.13em;font-weight:600;color:var(--ink-faint);display:block;margin-bottom:2px}
+  .transcript .agent .who{color:var(--red-deep)}
+
+  /* pitfalls: red-pen margin notes */
+  .pitfalls{list-style:none;max-width:var(--measure)}
+  .pitfalls li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .pitfalls li::before{content:"✗";position:absolute;left:2px;top:12px;color:var(--red);font-weight:700}
+  .pitfalls b{color:var(--red-deep)}
+  .pitfalls span{color:var(--ink-soft)}
+
+  .calibration{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;max-width:var(--measure);margin:18px 0}
+
+  .related{font-size:.9rem;color:var(--ink-soft)}
+  .related a{color:var(--red-deep);font-weight:600;text-decoration:none}
+
+  .pair{color:var(--ink-faint);font-size:.85rem}
+  ul.plain{max-width:var(--measure);margin:0 0 14px 22px;color:var(--ink-soft)}
+  ul.plain li{margin-bottom:4px}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:20px 22px 22px}
+    main{padding:36px 22px 80px}
+    .tagline{margin-bottom:18px}
+    /* collapse the long stacked nav into wrapped chips so content isn't a screen away */
+    nav{display:flex;flex-wrap:wrap;gap:6px}
+    nav h3{width:100%;margin:14px 0 2px}
+    nav h3:first-child{margin-top:0}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:100px}
+    nav a[aria-current="page"]{border-color:var(--red);border-left-color:var(--red)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:100px;font-size:.82rem}
+    nav .soon small{display:none}
+    .side-foot{margin-top:20px;padding-top:14px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .page{animation:fade .25s ease-out}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+
+  /* ——— page additions ——— */
+  .soonbox{border:1px solid var(--line);background:var(--panel);border-radius:3px;padding:22px 24px;max-width:var(--measure);margin:12px 0 6px}
+  .soonbox p{margin-bottom:12px}
+  .soonbox p:last-child{margin-bottom:0}
+  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .soon-links a{display:inline-flex;align-items:center;text-decoration:none;color:var(--ink-soft);font-size:.88rem;font-weight:500;padding:8px 14px;border:1px solid var(--line);border-radius:100px;background:var(--paper);min-height:38px}
+  .soon-links a:hover{color:var(--ink);border-color:var(--ink-faint)}
+  nav a small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint)}
+  @media (max-width:860px){nav a small{display:none}}
+
+  /* let grid columns shrink below their content, and scroll wide blocks
+     inside themselves rather than stretching the page */
+  @media (max-width:860px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    aside,main{min-width:0}
+    .try,.transcript,pre{overflow-x:auto}
+    table{table-layout:fixed;width:100%}
+    td:first-child{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+<div class="shell">
+
+<aside>
+  <a class="backhome" href="/">← Think Like a PM</a>
+  <a class="wordmark" href="#overview">
+    <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
+      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#8E2F26" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>AI Output Clinic</b>
+  </a>
+  <div class="tagline">Find where. Fix what. Pin it.</div>
+  <nav aria-label="Docs">
+    <h3>Start</h3>
+    <a href="#overview" aria-current="page" data-nav="overview">Overview</a>
+    <h3>Find the cause</h3>
+    <a href="#diagnose" data-nav="diagnose">Diagnose the chain</a>
+    <h3>Set the bar</h3>
+    <a href="#spec" data-nav="spec">Get the spec out of you</a>
+    <a href="#one-field" data-nav="one-field">Take one field all the way</a>
+    <a href="#mock" data-nav="mock">Mock the target</a>
+    <a href="#voice" data-nav="voice">Voice and personality</a>
+    <h3>Make it stick</h3>
+    <a href="#tests" data-nav="tests">Pin every failure</a>
+    <h3>More skills</h3>
+    <a href="/docs/">Context is Queen <small>Available now</small></a>
+    <a href="/docs/turning-research-into-strategy/">Turning Research Into Strategy <small>In the workshop</small></a>
+    <a href="/docs/best-use-of-my-time/">Best Use of My Time <small>In the workshop</small></a>
+  </nav>
+  <div class="side-foot">
+    Made by Hiba Ganta ·
+    <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="page default" id="overview" tabindex="-1">
+  <div class="crumb">AI Output Clinic · <b>Overview</b></div>
+  <h1>Find where it broke.</h1>
+  <p class="lede">AI Output Clinic is a Claude Code skill for the moment
+  AI-written content comes back flat, generic or off-tone. It traces the whole
+  chain, from the raw input to the prompt to the screen, and finds the layer
+  that actually caused it. Then it gets your standard out of you using real
+  examples, and turns every failure into a check so the same problem cannot
+  come back.</p>
+
+  <h2>Coming soon</h2>
+  <div class="soonbox">
+    <p><b>This skill isn't out yet.</b> It's being used and sharpened on
+    real work first, the same way Context is Queen was.</p>
+    <p>Follow along to hear when it lands:</p>
+    <nav class="soon-links" aria-label="Follow Hiba Ganta">
+      <a href="https://www.linkedin.com/in/hibaganta/">LinkedIn</a>
+      <a href="https://theneedful.substack.com/">Substack</a>
+      <a href="https://x.com/GantaHiba">X</a>
+      <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+    </nav>
+    <p class="note">In the meantime, <a href="/docs/">Context is Queen</a>
+    is available today.</p>
+  </div>
+
+  <h2>The problem</h2>
+  <p>When AI content disappoints, the instinct is to rewrite the prompt. That
+  skips the real work. The cause almost always sits in one specific place: the
+  input data the model was given, the prompt itself, the shape the output has
+  to fit, or the screen it lands on. A prompt tweak does nothing about a cause
+  that lives in one of the other three.</p>
+  <ul class="pitfalls">
+    <li><b>“It reads so generic.”</b> <span>You rewrite the prompt three times, get three flavours of the same flat paragraph, and stop asking why.</span></li>
+    <li><b>“I can't explain it, it's just not right.”</b> <span>You get asked what tone you want. No adjective you can think of makes the next draft better.</span></li>
+    <li><b>“It was fine yesterday.”</b> <span>A prompt change fixed one thing and quietly broke another, and nothing was watching.</span></li>
+  </ul>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>Diagnose the chain before rewriting anything</b>
+      <p>Four layers can cause bad output. Your agent reads all four and names the one at fault, with evidence.</p></div></li>
+    <li><span class="no">2.</span><div><b>Get the spec out of you with examples</b>
+      <p>You see the real input as a numbered list, then three or four full drafts. Your pick becomes the written rule.</p></div></li>
+    <li><span class="no">3.</span><div><b>Take one field all the way, then generalise</b>
+      <p>Fix a single piece of output properly. Then work out which of its rules apply to everything else.</p></div></li>
+    <li><span class="no">4.</span><div><b>Mock the target inside the real screen</b>
+      <p>Hand-write the version you wish you had, and see it rendered with rich data, moderate data and none.</p></div></li>
+    <li><span class="no">5.</span><div><b>Describe who the agent is, if it's a voice</b>
+      <p>For personality work, a description of the agent beats a rule list. Every extra “never” takes something away.</p></div></li>
+    <li><span class="no">6.</span><div><b>Turn every failure into a check</b>
+      <p>Models vary run to run. Each failure becomes an automatic test that ships with the fix.</p></div></li>
+  </ol>
+
+  <h2>Where to start</h2>
+  <p class="note">There are no commands to learn. Say what's wrong in your own
+  words and the skill routes it. These links exist for when you already know
+  which part you need:</p>
+  <table>
+    <thead><tr><th>You're thinking…</th><th>Go to</th></tr></thead>
+    <tbody>
+      <tr><td>“This is bad and I don't know why”</td><td><a class="cmdlink" href="#diagnose">Diagnose the chain</a></td></tr>
+      <tr><td>“I'll know it when I see it”</td><td><a class="cmdlink" href="#spec">Get the spec out of you</a></td></tr>
+      <tr><td>“Everything on this page needs fixing”</td><td><a class="cmdlink" href="#one-field">Take one field all the way</a></td></tr>
+      <tr><td>“I want something to hold it against”</td><td><a class="cmdlink" href="#mock">Mock the target</a></td></tr>
+      <tr><td>“Our agent sounds like a policy document”</td><td><a class="cmdlink" href="#voice">Voice and personality</a></td></tr>
+      <tr><td>“It was fine yesterday”</td><td><a class="cmdlink" href="#tests">Pin every failure</a></td></tr>
+    </tbody>
+  </table>
+  <p class="pair">Useful pairs: <b>diagnose → spec</b> (know the cause, then say what good looks like) ·
+  <b>mock → pin</b> (build the bar, then make it permanent).</p>
+
+  <h2>How a session runs</h2>
+  <p>The whole thing is built for someone who reacts better to examples than to
+  abstract questions. So it works this way:</p>
+  <ul class="plain">
+    <li>one thing at a time, never a batch</li>
+    <li>the plan first, then your go, then the work</li>
+    <li>mockups you can react to instead of questions about what you want</li>
+    <li>numbered options, so you can point at them out loud</li>
+    <li>plain English back, whole answer first and short</li>
+  </ul>
+
+  <h2>The idea in one paragraph</h2>
+  <p>Bad AI output is a symptom, and symptoms are misleading. “Too dry” can be
+  caused by a one-sentence cap buried in a prompt, or by a set of output fields
+  that chops a story into boxes, or by a screen that truncates. Rewriting the
+  prompt is the one move that feels productive and often changes nothing. This
+  skill spends its first minutes finding where, gets a real standard out of you
+  with drafts rather than adjectives, and then pins the fix in place with tests
+  so you only have to win the argument once.</p>
+</section>
+
+<!-- ================= DIAGNOSE ================= -->
+<section class="page" id="diagnose">
+  <div class="crumb">AI Output Clinic · Find the cause</div>
+  <h1>Diagnose the chain</h1>
+  <p class="lede">Before a word of the prompt changes, find the layer that
+  caused the problem. There are four candidates: the raw input data, the prompt
+  instructions, the shape the output has to fit, and how the screen renders it.</p>
+
+  <h2>When to use it</h2>
+  <p>The moment output disappoints. “Too dry”, “too generic”, “not rich enough”
+  are all symptoms. Each one has a cause, and the cause is often not where you
+  would look first.</p>
+
+  <h2>How it works</h2>
+  <p>Your agent walks the chain end to end and reports which layer is at fault,
+  with the evidence that says so. Three causes come up again and again:</p>
+  <ul class="plain">
+    <li><b>Hidden length caps.</b> A “one sentence” instruction buried in a formatting block, or in the description of a single output field. It flattens everything and nobody sees it.</li>
+    <li><b>Verbatim copying.</b> Output that lifts one summary line straight from the input instead of drawing across the whole of it.</li>
+    <li><b>Structural causes.</b> When the output is chopped into single-idea boxes, the model has no choice but to write stacked one-liners. No prompt tweak fixes that.</li>
+  </ul>
+  <p>There is one standing rule. If you raise the same hunch twice, even after
+  your agent dismissed it the first time, it goes and proves it wrong with
+  evidence from every layer. That rule earned its place: a real “one sentence”
+  cap turned up exactly this way, after the screen had already been cleared of
+  suspicion by mistake.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Every brief it writes reads the same. Find out why before changing the prompt.”<br><span class="c">Or: /ai-output-clinic</span></div>
+  <p class="calibration">A good diagnosis names one layer and shows you the
+  line that proves it. If the answer is “let's try a different prompt and see”,
+  the chain hasn't been read yet.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Rewriting the prompt first.</b> <span>Three of the four layers cannot be fixed by a prompt, however well written.</span></li>
+    <li><b>Clearing a layer on a hunch.</b> <span>Ruling something out without evidence is how a real cap stays hidden for weeks.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#spec">get the spec out of you</a>.</p>
+</section>
+
+<!-- ================= SPEC ================= -->
+<section class="page" id="spec">
+  <div class="crumb">AI Output Clinic · Set the bar</div>
+  <h1>Get the spec out of you</h1>
+  <p class="lede">You know good output when you see it, and you can't always
+  write the rule down. This turns what you react to into a written standard the
+  model can be held to.</p>
+
+  <h2>When to use it</h2>
+  <p>After the diagnosis, when you know which layer to change and now have to
+  say what good actually looks like. Also any time you catch yourself reaching
+  for words like “warmer” or “richer”.</p>
+
+  <h2>How it works</h2>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>You see the real input</b>
+      <p>Your agent shows you the actual raw material the model had, as a numbered list. You can point at it out loud: “include 3, 7 and 11.”</p></div></li>
+    <li><span class="no">2.</span><div><b>It drafts three or four full versions</b>
+      <p>Not fragments. Complete versions of the real output, each built around a different lead idea.</p></div></li>
+    <li><span class="no">3.</span><div><b>Your pick becomes the template</b>
+      <p>Whichever you choose, plus whatever you say about why, gets written down as the rule the model follows.</p></div></li>
+  </ol>
+  <p>One example beats ten adjectives. If you can hand over roughly the
+  paragraph you wish it had written, typed badly and half finished, that is the
+  fastest input there is.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Show me the research it was working from, then draft me four versions of this summary.”<br><span class="c">Each version led by a different idea, so you have something to choose between.</span></div>
+  <p class="calibration">Adjectives don't survive the trip into a prompt. A
+  version you picked, and said one sentence about, does.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Being asked “what tone do you want?”</b> <span>That question has no good answer. Ask for drafts to react to instead.</span></li>
+    <li><b>Reviewing fragments.</b> <span>Half a sentence tells you nothing about how the whole thing reads.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#one-field">take one field all the way</a>.</p>
+</section>
+
+<!-- ================= ONE FIELD ================= -->
+<section class="page" id="one-field">
+  <div class="crumb">AI Output Clinic · Set the bar</div>
+  <h1>Take one field all the way</h1>
+  <p class="lede">Fix a single piece of output completely first. Then work out
+  which of its rules belong to everything else the AI writes.</p>
+
+  <h2>When to use it</h2>
+  <p>When more than one thing on the screen is written by AI and you're tempted
+  to fix them all at once.</p>
+
+  <h2>How it works</h2>
+  <p>One field goes the whole way through: diagnosed, spec'd, fixed, checked.
+  Only then does your agent pull out the rules that might travel. The ones that
+  usually do:</p>
+  <ul class="plain">
+    <li>no hidden length caps, so length follows the evidence available</li>
+    <li>draw on the whole input, never lift a line from it</li>
+    <li>weave the facts around one lead idea instead of stacking sentences</li>
+    <li>on thin data, say less rather than pad</li>
+  </ul>
+  <p>Then it looks at every other AI-written thing in the product and answers
+  one question out loud: one shared fix to the prompt, or field by field? Some
+  rules travel in a single edit. Some fields need their own pair of examples,
+  one good and one weak, and no shared rule will do it for them.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“We fixed the summary. Which of those rules apply to the other three things on this page?”<br><span class="c">The answer is a real fork: one shared edit, or field by field.</span></div>
+  <p class="calibration">One field done properly teaches you more than four
+  half-fixed, and it's the only way to tell which change did the work.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Fixing everything at once.</b> <span>Nothing gets proven, and you can't tell afterwards which edit helped.</span></li>
+    <li><b>Assuming one prompt edit covers it.</b> <span>Some fields only improve with their own examples.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#mock">mock the target</a>.</p>
+</section>
+
+<!-- ================= MOCK ================= -->
+<section class="page" id="mock">
+  <div class="crumb">AI Output Clinic · Set the bar</div>
+  <h1>Mock the target</h1>
+  <p class="lede">Write the output you wish you had, by hand, and see it inside
+  a faithful copy of the real screen. That mock becomes the bar the model is
+  held to.</p>
+
+  <h2>When to use it</h2>
+  <p>Once you know what good looks like and want something concrete to measure
+  against. Also whenever the screen has to survive thin data.</p>
+
+  <h2>How it works</h2>
+  <p>The ideal version is written by hand, using only real facts from the real
+  input. Nothing invented. It gets rendered inside a mock of the actual screen
+  at three levels of data richness: rich, moderate and empty. The mock is
+  labelled clearly as hand-written so nobody later mistakes it for something
+  the model produced.</p>
+  <p>Empty states get the same care rather than being left to the model. The
+  fallback copy is written by hand, honest about what's missing, pointing at
+  something you can do about it, and reviewed string by string.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Write the version you wish this card said, and show it to me in the real layout: full data, some data, and none.”<br><span class="c">Real facts only, and labelled as hand-written.</span></div>
+  <p class="calibration">If the hand-written version is hard to write, the
+  standard isn't settled yet. Go back and draft variations until it is.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Mocking with invented facts.</b> <span>It sets a bar the real data can never reach, and everyone chases it for weeks.</span></li>
+    <li><b>Leaving the empty state to the model.</b> <span>Thin data is exactly where the writing matters most.</span></li>
+  </ul>
+  <p class="related">Next: <a href="#tests">pin every failure</a>. For an agent's voice: <a href="#voice">voice and personality</a>.</p>
+</section>
+
+<!-- ================= VOICE ================= -->
+<section class="page" id="voice">
+  <div class="crumb">AI Output Clinic · Set the bar</div>
+  <h1>Voice and personality</h1>
+  <p class="lede">When the output is an agent's voice, describe who that agent
+  is. A list of rules produces something that reads like a compliance memo.</p>
+
+  <h2>When to use it</h2>
+  <p>When you're setting or changing how an agent sounds, or when a personality
+  you used to like has gone flat and you can't say when it happened.</p>
+
+  <h2>How it works</h2>
+  <p>The description says who the agent is. Boundaries stay few, plain, and
+  stated once. Two tests decide whether it's working:</p>
+  <ul class="plain">
+    <li><b>Read it aloud.</b> Does it sound like telling someone who they are, or like a compliance memo?</li>
+    <li><b>Count the “never” statements.</b> Prohibitions are a measure of bloat. A personality dies by collecting one more “never” every time something goes wrong.</li>
+  </ul>
+  <p>One more thing to watch for: a voice defined in several independent
+  places. Two separate descriptions of the same agent drift apart on their own,
+  without anyone editing either of them.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“Our agent sounds flat. Read its personality out loud and count the nevers.”<br><span class="c">Also worth asking: is its voice described in more than one place?</span></div>
+  <p class="calibration">A voice you can read aloud and recognise as a person is
+  working. A voice that reads like policy has been patched too many times.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Fixing tone by adding another rule.</b> <span>Each reactive “never” takes a little more of the character away.</span></li>
+    <li><b>Keeping the voice in several places.</b> <span>It drifts by standing still.</span></li>
+  </ul>
+  <p class="related">Related: <a href="#spec">get the spec out of you</a> works for voice too, with drafts to react to.</p>
+</section>
+
+<!-- ================= TESTS ================= -->
+<section class="page" id="tests">
+  <div class="crumb">AI Output Clinic · Make it stick</div>
+  <h1>Pin every failure</h1>
+  <p class="lede">Models vary from one run to the next. Every failure you see
+  becomes a fixed, automatic check, so the same problem can't creep back the
+  next time someone edits the prompt.</p>
+
+  <h2>When to use it</h2>
+  <p>Every time you change a prompt, and every time you catch a bad output.
+  This is the step that makes the rest of the work permanent.</p>
+
+  <h2>How it works</h2>
+  <p>Two rules come first. Never conclude anything from a single run: models
+  vary even at their steadiest setting, so one good result proves nothing and
+  one bad result proves nothing either. And never chase a failure by running it
+  again and hoping it passes. Instead, each failure you observe becomes a check
+  that runs by itself:</p>
+  <ul class="plain">
+    <li>a fact attributed to the wrong source</li>
+    <li>a field that came back blank</li>
+    <li>output shorter than it should be</li>
+    <li>output that matches a line of the input word for word</li>
+  </ul>
+  <p>The checks go into whatever testing setup your project already has, and
+  they ship together with the prompt change that fixed them. The fix and its
+  proof travel as one thing.</p>
+
+  <h2>Try it</h2>
+  <div class="try">“That blank field we just saw. Turn it into a check before we change anything else.”<br><span class="c">Then ship the check with the fix, not after it.</span></div>
+  <p class="calibration">Running it again until it passes is not a fix. It's a
+  coin flip you got lucky on, and it will land the other way in front of a
+  customer.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Judging from one run.</b> <span>One good result is not evidence. Neither is one bad one.</span></li>
+    <li><b>Shipping a prompt fix with nothing behind it.</b> <span>The next change quietly undoes it and nobody notices for a month.</span></li>
+  </ul>
+  <p class="related">Back to the start: <a href="#diagnose">diagnose the chain</a>.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+  // sidebar current-page highlight on hash change
+  function sync(){
+    var h=(location.hash||"#overview").slice(1);
+    document.querySelectorAll("nav a").forEach(function(a){
+      if(a.getAttribute("data-nav")===h){a.setAttribute("aria-current","page")}
+      else{a.removeAttribute("aria-current")}
+    });
+    window.scrollTo(0,0);
+  }
+  addEventListener("hashchange",sync); sync();
+</script>
+</body>
+</html>
