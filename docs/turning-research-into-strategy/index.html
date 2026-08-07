@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Turning Research Into Strategy · Docs · Think Like a PM</title>
-<meta name="description" content="Docs for Turning Research Into Strategy: the agent skill that inventories your research, counts it under a rule you agree first, checks what the product really does, then writes the strategy.">
+<meta name="description" content="Docs for Turning Research Into Strategy: the agent skill that turns everything you are hearing about your product into a short, ordered list of what to do next, with the reasoning behind each item.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%232440D8'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -193,7 +193,7 @@
     </svg>
     <b>Turning Research Into Strategy</b>
   </a>
-  <div class="tagline">Evidence first. Reality check second. Strategy last.</div>
+  <div class="tagline">What to do next, and why that and not the other thing.</div>
   <nav aria-label="Docs">
     <h3>Start</h3>
     <a href="#overview" aria-current="page" data-nav="overview">Overview</a>
@@ -223,13 +223,73 @@
 <!-- ================= DOCS INDEX ================= -->
 <section class="page default" id="overview" tabindex="-1">
   <div class="crumb">Turning Research Into Strategy · <b>Overview</b></div>
-  <h1>A strategy you can back up.</h1>
-  <p class="lede">Turning Research Into Strategy is a Claude Code skill for the
-  pile of calls, notes and customer feedback nobody has turned into direction.
-  Your agent lists what you have and how far to trust each piece, counts what
-  the evidence really supports, opens the product and tries it, and only then
-  writes the strategy. It gives up the easy assertion: every number in the
-  finished document can be traced back to the person who said it.</p>
+  <h1>Your next moves, with the reasoning behind each.</h1>
+  <p class="lede">This skill puts your agent in the job of a product lead you
+  brought in for a day. You hand it everything you're hearing: the calls, the
+  feature requests, the tracker nobody reads, the deck, the half-built
+  product. It hands back a short list of what to do next, where each item says
+  why it beats the one below it and what it rests on. One page, and you can
+  forward it to whoever is building.</p>
+  <p>It will work from five minutes of you talking, if that's all there is. And
+  it never quietly turns a hunch into a number: anything you believe that
+  nobody has actually shown stays labelled a hunch the whole way through, right
+  up to the last page.</p>
+  <p class="note">It came out of business-to-business work with one buyer and a
+  handful of named customers. Untested on consumer products, big pipelines, or
+  markets with nobody specific to follow. It reads research; it doesn't invent
+  it. And it's the wrong tool if your direction is settled and you're only
+  ordering work inside it.</p>
+
+  <h2>The problem</h2>
+  <p>Usually nothing is wrong. That's what makes it hard. Too much is true at
+  once. The calls said one thing, the tracker says another, the deck promises a
+  third, the product half-does a fourth. All of it real, all of it pulling a
+  different way, and no honest way to say which one matters this week.</p>
+  <ul class="pitfalls">
+    <li><b>Everything looks urgent.</b> <span>Six things are genuinely worth doing. Nobody can say which comes first, so the loudest one wins.</span></li>
+    <li><b>Plenty of research, no instruction.</b> <span>Twenty calls, all transcribed, and still nothing you could hand a developer on Monday morning.</span></li>
+    <li><b>“Eleven customers asked for this.”</b> <span>Nobody wrote down what counted as asking, so nobody can check the number — and it's already deciding what gets built.</span></li>
+  </ul>
+
+  <h2>How it works</h2>
+  <p>It runs the whole loop itself, and comes back round when something
+  changes. You agree one sentence at the start, naming what the finished work
+  has to let you do. After that it only stops for the handful of calls that
+  are genuinely yours.</p>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>Gets what's in your head, out</b>
+      <p>Five minutes of you talking, before anyone goes looking for files. Speak it rather than write it; voice-to-text is fine and usually better. Everything you say is written back to you as hunches, never as facts.</p></div></li>
+    <li><span class="no">2.</span><div><b>Takes in whatever exists, and grades it</b>
+      <p>Transcripts, auto-notes, the tracker, old decks, access to the product. Each source is stamped with how far its words can be trusted, as it arrives.</p></div></li>
+    <li><span class="no">3.</span><div><b>Lays it all out flat</b>
+      <p>Every painpoint, quote and request in the words it was said in, next to the person who said it. Nothing grouped, ranked or interpreted yet. That is a separate job, on purpose.</p></div></li>
+    <li><span class="no">4.</span><div><b>Counts, under a rule you agree first</b>
+      <p>The rule is written before anything is counted, so the count can't drift toward the answer someone was hoping for. Then it publishes what was claimed next to what it actually found.</p></div></li>
+    <li><span class="no">5.</span><div><b>Opens the product and tries it</b>
+      <p>Every button the interface implies gets clicked. Two lists come back, with a hard line between them: what works, and what only looks like it does.</p></div></li>
+    <li><span class="no">6.</span><div><b>Writes the strategy, and takes a position</b>
+      <p>What you can honestly promise and to whom, at most two goals, and the rules that decide what gets built. Then it says what it would do next and why — signed, and marked as opinion, so you can throw out the opinion without disturbing a single fact.</p></div></li>
+    <li><span class="no">7.</span><div><b>Writes your next moves</b>
+      <p>One page. The ordered list, each item carrying its own reason and what it rests on. This is the one you forward.</p></div></li>
+  </ol>
+  <p class="note">Every step writes a real file you can open, not an answer
+  that scrolls away. Nothing starts before the thing it depends on exists. If
+  something is missing it tells you which and offers to do that first. And any
+  step can be re-run on its own when new evidence lands. Doubling back is the
+  normal shape of this, not a sign something has gone wrong.</p>
+
+  <h2>What you need to start</h2>
+  <p>Less than you think. It says which of these you're on in the first
+  minute, and what that version will not give you, so nobody is promised a
+  strategy and handed a list of questions.</p>
+  <table>
+    <thead><tr><th>What you've got</th><th>What you get back</th></tr></thead>
+    <tbody>
+      <tr><td>Just you, talking</td><td>Your hunches written down and ordered by what each one is holding up, each with what would settle it. Plus the shortlist of what to go and gather. Not a strategy.</td></tr>
+      <tr><td>A plan or a deck</td><td>The bet it's making, named and tested, and every claim that needs checking before anyone acts on it.</td></tr>
+      <tr><td>Real research</td><td>The whole loop, ending in your next moves.</td></tr>
+    </tbody>
+  </table>
 
   <h2>Install it</h2>
   <div class="cmdbox">
@@ -240,43 +300,6 @@
   brings this skill and Context is Queen together. It starts on its own when
   you have research that hasn't become direction, or you can call it by name.</p>
 
-  <h2>The problem</h2>
-  <p>Research goes stale in the gap between hearing it and using it. The calls
-  get recorded, the painpoints get logged, and then a plan gets written from
-  memory. By the time anyone checks, the plan is already ordering the work.</p>
-  <ul class="pitfalls">
-    <li><b>Twenty calls and no direction.</b> <span>All transcribed, all sitting in a folder. The owner usually calls it a mess.</span></li>
-    <li><b>“Eleven customers asked for this.”</b> <span>Nobody wrote down what counted as asking, so nobody can check the number.</span></li>
-    <li><b>“The product already does that.”</b> <span>Nobody has opened it in weeks, and the button everyone remembers has nothing behind it.</span></li>
-  </ul>
-
-  <h2>How it works</h2>
-  <p>The work runs in six steps, and each one writes its own document: a real
-  file you can open, not an answer in the chat. Nothing can start before the
-  documents it depends on exist. If one is missing, your agent says which,
-  offers to run it first, and asks before starting anything big. Order governs
-  starting, not finishing: any step can be re-run when new evidence lands, and
-  doubling back is normal.</p>
-  <ol class="agenda">
-    <li><span class="no">1.</span><div><b>Take the material in, and grade it</b>
-      <p>Transcripts, auto-notes, the painpoint tracker, the backlog, old decks, and access to the product. Each source gets a confidence grade as it arrives.</p></div></li>
-    <li><span class="no">2.</span><div><b>Unpack each call on its own</b>
-      <p>One call at a time, sorted into six buckets, with the difference between what they asked for and what they are stuck on written down.</p></div></li>
-    <li><span class="no">3.</span><div><b>Inventory everything flat</b>
-      <p>Every item, in the words it was said in, next to the person who said it. Nothing gets grouped, ranked or interpreted at this stage.</p></div></li>
-    <li><span class="no">4.</span><div><b>Check the counts</b>
-      <p>Write the counting rule, agree it with you, then count. Publish what was claimed next to what the count found.</p></div></li>
-    <li><span class="no">5.</span><div><b>Check what's real</b>
-      <p>Open the product and try each thing it appears to do. Audit every data source twice, against official documentation and a live test.</p></div></li>
-    <li><span class="no">6.</span><div><b>Write the strategy, then the backlog</b>
-      <p>What you can honestly promise to whom, at most two goals, and rules that decide what gets built. Then the ordered work list under those rules.</p></div></li>
-  </ol>
-  <p class="note">Before the first step, you and your agent agree in one
-  sentence what the finished work has to let you do. A real one:
-  <em>“Done when the people building leave the working session knowing what
-  they are prioritizing and why.”</em> Anything that doesn't serve that
-  sentence is scope, not progress.</p>
-
   <h2>Where you come in</h2>
   <p>Some decisions are yours and stay yours: the counting rule, the choice
   between candidate goals, and permission to start a long pass. At each one
@@ -285,6 +308,13 @@
   or background run, it takes its own recommendation, records it as
   provisional, and raises it the next time you're around. It never settles one
   of your decisions quietly.</p>
+  <p>Those questions have to arrive in your words, not the method's. No term
+  this skill invented, nothing you would need to have been reading along to
+  follow. If you have to ask what it meant, that was not a question, and your
+  puzzled answer is never taken as a decision.</p>
+  <p>It also won't bury you. Open questions are ranked by what each one is
+  actually holding up, and at most three reach you at a time. The rest wait in
+  the record until they start blocking something.</p>
 
   <h2>Choose a command</h2>
   <p class="note">You don't need the command names. Plain requests work and
@@ -293,6 +323,7 @@
   <table>
     <thead><tr><th>You're thinking…</th><th>Run</th></tr></thead>
     <tbody>
+      <tr><td>“Let me just talk at you for a minute”</td><td><a class="cmdlink" href="#collect">discovery</a></td></tr>
       <tr><td>“This plan doesn't smell right”</td><td><a class="cmdlink" href="#challenge">challenge</a></td></tr>
       <tr><td>“I have a pile of calls”</td><td><a class="cmdlink" href="#collect">discovery</a></td></tr>
       <tr><td>“Make sense of this one call”</td><td><a class="cmdlink" href="#collect">debrief</a></td></tr>
@@ -309,23 +340,6 @@
   <p class="pair">Useful pairs: <b>challenge → validate</b> (name the doubt, then settle the count) ·
   <b>strategy → prioritize</b> (direction, then the work it implies).</p>
 
-  <h2>The idea in one paragraph</h2>
-  <p>Two habits do most of the work here. The first is writing the counting
-  rule before you count, so the count can't drift toward the answer someone
-  was hoping for. The second is opening the product and clicking the thing
-  before anyone promises it, because a button is a claim rather than a
-  feature. Everything else exists to keep those two honest: raw evidence kept
-  raw until it's counted, sources graded by where they came from, and a
-  running record of what was decided, what is open, and who you're waiting on.</p>
-
-  <h2>Where it has been proven</h2>
-  <p>This method comes from business-to-business work with a single
-  operator-buyer and a small pipeline of named customers. It's untested on
-  consumer products, large pipelines, and markets with no named customers to
-  follow. It also needs research to exist already: it mines evidence, it
-  doesn't generate it. Skip it when direction is settled and you're only
-  sequencing work inside it, or when you want to spar on one strategic
-  question rather than produce the document.</p>
 </section>
 
 <!-- ================= CHALLENGE ================= -->
@@ -374,6 +388,23 @@
   <p class="lede">Three commands get everything into the room and written down:
   what you have and how far to trust it, what each call actually said, and a
   flat list of every item next to the person who said it.</p>
+
+  <h2>It starts with you talking</h2>
+  <p>Before anyone goes looking for a file, your agent asks you to talk for
+  five minutes. What's going on, what you believe and can't prove, what's
+  worrying you. Speak it rather than write it; voice-to-text is fine and
+  usually better. You'll be interrupted by nothing.</p>
+  <p>What comes back is your own words in three lists: your hunches, every
+  tool or folder or person you mentioned in passing (a brain dump names its
+  own sources without being asked), and what you say you want, held as a
+  hypothesis rather than an order.</p>
+  <p>Then the rule that makes this safe. Anything you believe that nobody has
+  shown yet is stamped a <b>hunch</b>, and a hunch is never a number. "Loads of
+  customers keep asking for this" does not quietly become "customers asked for
+  this" three documents later. It stays labelled the whole way, it's excluded
+  from every count, every goal and every promise, and it becomes evidence only
+  when named customers can be pointed at. What it does earn is a place at the
+  front of the queue of things to go and check.</p>
 
   <h2>When to use it</h2>
   <p>At the very start, and again whenever new material arrives: a fresh batch
@@ -567,7 +598,8 @@
     <li><span class="no">2.</span><div><b>It derives at most two goals from the counted evidence</b><p>Smaller goals sit under those two. It presents the candidates to you as a choice with its recommendation first, because goals are your call. The two aren't ranked once and for all: which one to lead with is decided per customer.</p></div></li>
     <li><span class="no">3.</span><div><b>It writes the coverage-to-promise table</b><p>The centre of the document. Each row is what a customer has connected, and says what you can honestly answer from it, what you can't, and what that's good enough for.</p></div></li>
     <li><span class="no">4.</span><div><b>It writes the build rules</b><p>A procedure for deciding, rather than a roadmap of dates.</p></div></li>
-    <li><span class="no">5.</span><div><b>It numbers the open questions and refers to them in the body</b><p>So a reader meets each question at the point where it bites, not only in a list at the end. It closes with the evidence base: the named people and their roles, and every source with its date and grade.</p></div></li>
+    <li><span class="no">5.</span><div><b>It says what it would do, and signs it</b><p>Everything above is derived, and derived work has no author, which is how a strategy can be completely correct and still leave you with nothing to do. So it closes with a short section headed <em>What I would do</em>: the one move it would make next, why, and what would change its mind. Marked as opinion rather than fact and kept away from the counted material, so you can throw out the opinion without disturbing anything else. If the only thing under it is a hunch, the recommendation has to be to go and find out, never to commit.</p></div></li>
+    <li><span class="no">6.</span><div><b>It numbers the open questions and refers to them in the body</b><p>So a reader meets each question at the point where it bites, not only in a list at the end. It closes with the evidence base: the named people and their roles, and every source with its date and grade.</p></div></li>
   </ol>
 
   <h2>The coverage-to-promise table</h2>
@@ -631,9 +663,14 @@
 <section class="page" id="prioritize">
   <div class="crumb">Turning Research Into Strategy · The steps, in order</div>
   <h1><span class="cmd">prioritize</span></h1>
-  <p class="lede">Order the work so that every item earns its place and names
-  the goal it serves. This is where a strategy either becomes instructions or
-  quietly falls apart.</p>
+  <p class="lede">This writes <b>Next moves</b>: one page, ten items at most,
+  the top three called out. It is a separate file from the strategy, never a
+  section buried inside it, because it is the one you forward. Somebody hands
+  it to a developer, or opens it on a Monday morning, without reading anything
+  else first.</p>
+  <p>The test it has to pass: send it to someone who has read none of the
+  other documents. If they can start, it worked. If they come back asking what
+  any of it means, it didn't.</p>
 
   <h2>When to use it</h2>
   <p>Once the strategy exists, and again to re-order when new customers
@@ -645,10 +682,11 @@
   <h2>How it works</h2>
   <ol class="agenda">
     <li><span class="no">1.</span><div><b>The qualifying rule goes at the top, and you confirm it</b><p>The reference shape: “a capability counts only if it helps the customer act on the goal. A chart nobody acts on does not qualify.” One real customer had already rejected the softer version: “I don't need a platform to tell me that people are silent.”</p></div></li>
-    <li><span class="no">2.</span><div><b>Every item is tagged</b><p>With the goal it serves, and with its kind: make real (a mockup becoming true), net new, or fix.</p></div></li>
-    <li><span class="no">3.</span><div><b>The order is stated, and so is the logic behind it</b><p>One line at the top. Blocking issues first, then the cheapest proof of a goal with thin evidence, is a reasonable default. Whatever the logic is, it gets written down, so the next re-order isn't a fresh argument.</p></div></li>
-    <li><span class="no">4.</span><div><b>What's deliberately excluded, and why</b><p>An exclusion with a reason can be argued again later, while a silent omission can't be. A real one: introductions were kept off a backlog “because building them now would add a third goal before we have decided to take one on.”</p></div></li>
-    <li><span class="no">5.</span><div><b>Dependencies are checked against the data-source audit</b><p>Any item resting on an unverified data claim gets that claim's settling action scheduled before or alongside it.</p></div></li>
+    <li><span class="no">2.</span><div><b>Every item carries its reasoning, on the same line</b><p>Five things per item, none optional: what to do, stated as something someone could start on Monday. Why this one now, in a sentence, meaning why it beats the item below it. What it rests on, which is the evidence or the count or the teardown finding, or an honest "a hunch, unchecked". The goal it serves. And its kind: make real, net new, or fix. Reasoning that lives in another section doesn't count. If it isn't on the line, the item doesn't have one as far as the reader is concerned.</p></div></li>
+    <li><span class="no">3.</span><div><b>A hunch can get on the list, on one condition</b><p>It has to be the cheap thing that settles the hunch, not the expensive thing that assumes it. "Ask the ten people who cancelled why" qualifies. "Build what I think they wanted" does not. A hunch earns its place by being testable, never by being believed.</p></div></li>
+    <li><span class="no">4.</span><div><b>The order is stated, and so is the logic behind it</b><p>One line at the top. Blocking issues first, then the cheapest proof of a goal with thin evidence, is a reasonable default. Whatever the logic is, it gets written down, so the next re-order isn't a fresh argument.</p></div></li>
+    <li><span class="no">5.</span><div><b>What&#8217;s deliberately excluded, and why</b><p>An exclusion with a reason can be argued again later, while a silent omission can't be. A real one: introductions were kept off a backlog “because building them now would add a third goal before we have decided to take one on.”</p></div></li>
+    <li><span class="no">6.</span><div><b>Dependencies are checked against the data-source audit</b><p>Any item resting on an unverified data claim gets that claim's settling action scheduled before or alongside it.</p></div></li>
   </ol>
 
   <h2>Try it</h2>
