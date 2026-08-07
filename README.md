@@ -4,8 +4,9 @@ Your agent makes product decisions all day and mentions almost none of
 them. These skills make it ask you first, show you the calls it made on its
 own, and hand the ones that matter back to you.
 
-For PMs, engineers, founders and designers: anyone whose agent builds
-faster than they can decide.
+They're Agent Skills: plain-English instructions you install into the agent
+you already use. For PMs, engineers, founders and designers — anyone whose
+agent builds faster than they can decide.
 
 Made by [Hiba Ganta](https://www.linkedin.com/in/hibaganta/) ·
 [thinklikeapm.style](https://www.thinklikeapm.style/)
@@ -15,26 +16,12 @@ https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
 
 | Skill | What it does | Status |
 |---|---|---|
-| **Context is Queen** | Asks before it builds, then shows you the decisions it made without you | Available now |
-| **Turning Research Into Strategy** | Traces every claim back to the person who said it | Available now |
-| Best Use of My Time | Every decision waiting on you, on one page, sorted by what you can't undo | In the workshop |
-| AI Output Clinic | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
+| **[Context is Queen](.claude/skills/context-is-queen/)** | Asks before it builds, then shows you the decisions it made without you | Available now |
+| **[Turning Research Into Strategy](.claude/skills/turning-research-into-strategy/)** | Traces every claim back to the person who said it | Available now |
+| [Best Use of My Time](https://www.thinklikeapm.style/docs/best-use-of-my-time/) | Every decision waiting on you, written so you can answer it in a few words | In the workshop |
+| [AI Output Clinic](https://www.thinklikeapm.style/docs/ai-output-clinic/) | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
 
-Context is Queen is the one you can install today. Everything below is
-about that skill.
-
----
-
-## Context is Queen
-
-**Your agent decides what "done" means the moment you stop talking. This
-makes it ask you instead.**
-
-<!-- VIDEO GOES HERE: 30-60 second screen recording of a real briefing.
-     Record it, drag the file into a GitHub issue comment, and paste the
-     URL GitHub gives you on this line. -->
-
-## Problem
+## The problem
 
 You ask your agent for something big. It starts building straight away. It
 never asks a question. Three hours later you look up and think: when did we
@@ -51,9 +38,11 @@ thing and it is not what you wanted.
 
 I'm a product person and a designer. I don't read code, so I could never
 catch a wrong turn by reading the work. I had to catch it in how the work
-got decided. That is where this skill came from.
+got decided. That is where these came from.
 
 ## Before and after
+
+Here's Context is Queen, the first of them.
 
 Without the skill:
 
@@ -75,7 +64,7 @@ Agent:  Then here is the goal I'd work to, and the calls I think are
 
 Same request. The second one cannot quietly build the wrong thing.
 
-## How to install
+## Install
 
 Paste this into Claude Code, or your favourite coding agent:
 
@@ -84,71 +73,36 @@ Install the Context is Queen skill globally from https://github.com/hgambas/thin
 ```
 
 "Globally" means it works in every project, not just the one you're in.
+Swap in any skill name marked **Available now** in the table above.
 
-There is a second way to install it, as a Claude Code plugin. Same skill,
-except it also offers itself at the start of a session instead of waiting
-to be asked. Use it if you'd rather be prompted than remember:
+There's a second way, as a Claude Code plugin. It installs every available
+skill at once, and offers itself at the start of a session instead of
+waiting to be asked:
 
 ```text
 /plugin marketplace add hgambas/think-like-a-pm
+/plugin install think-like-a-pm
 ```
 
-## How to use it
+## The skills
 
-Ask for something big in your own words. The skill starts the questions on
-its own:
+**[Context is Queen](.claude/skills/context-is-queen/)** — for when you're
+about to ask for something big and you want to be asked the right questions
+first. It interviews you one question at a time, writes down what "done"
+means so you can correct it, and lists every decision it made without you.
+[Docs](https://www.thinklikeapm.style/docs/)
 
-```text
-Rework our onboarding so people actually finish setup.
-```
+**[Turning Research Into Strategy](.claude/skills/turning-research-into-strategy/)**
+— for when you have call transcripts, a painpoint tracker and a strategy
+nobody trusts. It inventories the evidence before interpreting it, counts
+what the research actually supports, and writes a strategy where every
+number can be traced back to the person who said it.
+[Docs](https://www.thinklikeapm.style/docs/turning-research-into-strategy/)
 
-Or steer it directly:
+## What you're installing
 
-```text
-/context-is-queen interview     Ask me the right questions, one at a time
-/context-is-queen set-goal      Turn what we discussed into a goal I can correct
-/context-is-queen drift-check   Show me what got decided without me
-/context-is-queen backlog       Turn the goal into a list of work
-```
-
-Small requests skip all of this. You won't get interviewed about a typo.
-
-## What this skill lets you do
-
-- **Get asked the right questions.** One at a time, never five at once. It
-  looks up whatever it can first, so you only answer what you alone know.
-- **Correct the goal before anything is built.** It writes down what "done"
-  means, how you'll judge it, and which calls stay yours. You fix it before
-  work starts.
-- **See it check its own work.** It reports back against that goal and marks
-  each part done, not done, or unsure. It can't call the job finished while
-  something is still missing.
-- **Keep it working while you think.** Slow decisions don't stall it. It
-  works on the parts your answer doesn't affect and leaves the rest alone.
-- **Catch decisions made without you.** Ask what got decided since you set
-  the goal and it lists every one, including the ones that should have come
-  back to you:
-
-```text
-Decisions since the goal:
-- Chose a three-step flow. You didn't approve this. Should have come to you.
-- Dropped the old checklist. Changes scope.
-- Treated email verification as out of scope. Needs your confirmation.
-```
-
-I use it for the situations it was born from: features that replace
-existing ones, redesigns, and anything where I own the decisions but not
-the code.
-
-## What's inside
-
-The skill is instructions written in plain English, not code. You can read
-every word of it yourself, and there is nothing to configure.
-
-- `SKILL.md` tells your agent when to run and what to do.
-- `reference/` holds the five playbooks, one per command.
-- `hooks/` is the one small script, which offers the briefing when a
-  session starts.
+Instructions written in plain English, not code. You can read every word of
+any of them yourself, and there is nothing to configure.
 
 Everything runs on your own machine, inside the agent you already use. No
 account, no cloud service, no API key.

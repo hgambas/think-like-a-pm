@@ -5,3 +5,7 @@ workshop/
 .omc/
 .impeccable/
 .DS_Store
+
+# Installed dependencies. Only the optional MCP server needs any, and anyone who wants it
+# runs `npm install` themselves — 24MB of other people's code has no business in here.
+node_modules/
