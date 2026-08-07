@@ -39,6 +39,22 @@ ask already answers:
   a blank.
 - Plain, everyday language. No jargon. Assume the user doesn't read code.
 
+**Ask in their words, not yours.** A person cannot answer a question
+they have to decode. No term you invented earlier in the conversation,
+no word from the trade, no phrase that only makes sense to someone who
+has been reading along. Name the real thing at stake and what changes
+either way.
+
+Read it back before you send it. Could someone who just walked in
+answer this? Would a smart friend outside the team need anything
+explained? If yes, rewrite it. And if you cannot ask it plainly, you do
+not understand it well enough to ask — go and understand it first
+rather than dressing it up.
+
+Before: "Should we widen the entry gate or narrow the promise?"
+After: "Should someone with hardly any research be allowed to use
+this — yes or no?"
+
 ## When you're done
 
 Stop when you're confident you understand the job — not when the list is
@@ -58,3 +74,5 @@ from what you have and flag the unknowns as unknowns.
   ask what standard looks like here. Specificity is the whole point.
 - **Interrogating.** Past ten questions, propose the goal and let their
   corrections finish the job.
+- **Jargon in the question.** If they have to ask what you meant,
+  rewrite and re-ask. Never treat a puzzled answer as a decision.

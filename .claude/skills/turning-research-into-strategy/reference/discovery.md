@@ -8,6 +8,27 @@ Intake. Gather everything the method mines, and stamp each source with a confide
 
 First, before anything else — or whenever new material arrives mid-project (a new batch of calls, an updated deck).
 
+## Start with what is in their head, out loud
+
+Before asking for a single file, ask them to talk. Offer this first, as the preferred way in — not as the fallback for people with nothing to upload. Talking gets context out faster than writing, and it surfaces things nobody thought to write down.
+
+> "Before we go looking for anything — talk to me for five minutes. What's going on, what do you think is true, and what would you build tomorrow if you had to pick? Speak it, don't write it. Voice-to-text is fine and usually better."
+
+Three questions are enough to get a useful dump: what is going on right now, what do you believe is true and cannot prove, and what is worrying you. Let them ramble; do not interrupt to tidy. Take the recording, the transcript, or the pasted text however it arrives.
+
+Then write it back to them in their own words, sorted into three lists:
+
+1. **Smells** — everything they believe but nobody has shown yet (see the skill's main file). This is most of it, and that is fine. Each one gets recorded as theirs, unverified, with what would settle it.
+2. **Where the material lives** — every tool, folder, board or person they mentioned in passing. A brain dump names sources without being asked to; this is why it goes first.
+3. **What they say they want** — treated as a hypothesis, exactly as in `debrief`, never as a work order.
+
+Two rules hold this together:
+
+- **A smell is never a number.** "Loads of customers keep asking for this" said out loud is a smell. It does not become "customers asked for this" in any later document, and it cannot be counted, quoted, or promised on. It becomes evidence only when named customers can be pointed at. A brain dump is where this line is most often crossed.
+- **Say what the smaller answer will be.** If the dump is all there is, tell them plainly and immediately what they get: a short list of what to look at next and what to go and check, not a finished strategy. Do not let them assume otherwise and find out at the end.
+
+Record the dump itself as a source. Grade its words like anything else, and stamp it **smell** (see Grading below) — a recording of someone talking is a reliable record of what they said, and still not evidence that any of it is so.
+
 ## Before you ask for anything: find out where it lives
 
 Before gathering anything: if no finish condition has been agreed yet, settle it with the user first — one sentence on what the finished work must be able to do (see The Finish Condition in the skill's main file).
@@ -65,7 +86,7 @@ Ask about these by name rather than waiting for the user to remember them. The t
 
 ## What to collect
 
-Ask for the material one item at a time, using a question card per item where the harness supports it. Do not demand everything up front; take what exists and record what is missing as an open question.
+The spoken brain dump above comes first; everything below is what it points you at. Ask for the rest one item at a time, using a question card per item where the harness supports it. Do not demand everything up front; take what exists and record what is missing as an open question.
 
 1. **Call transcripts.** For each, record who the call was with, their role, and the date.
 2. **Auto-generated notes** (Granola, Otter, Gemini and similar). Flag them for wording verification before any quote from them is used outside the team.
@@ -92,6 +113,12 @@ State the mix openly in the intake summary (e.g. "14 of 20 calls are machine-tra
 A workshop board comes in **whole, with its clusters intact**. Somebody grouped those stickies in the room, with context you don't have, and flattening the board to get loose notes throws that judgment away. So the board arrives as one source, themes and all, graded on its words like anything else — stickies are notes, so usually G-notes.
 
 The cost is that somebody's grouping now sits inside the evidence, and a count drawn from it is partly a count of how the stickies were arranged. The stamp is what stops that going invisible: it travels with the source, and any later count leaning on it says so — "9 mentions, 6 of them from one pre-grouped board."
+
+**A second stamp: smell.** Also alongside the grade, never inside it. The grade answers how far the words can be trusted. This answers a different question: is this evidence at all, or is it somebody's belief about the evidence?
+
+Stamp **smell** on the user's own account of things — the spoken brain dump, anything they told you directly, any claim whose only source is the person you are working for. The words may be perfectly reliable (a recording of them is a recording of them) and the thing they describe still be unshown, which is exactly why this cannot be a grade.
+
+A smelled source is not weak evidence. It is not evidence. It is excluded from every count in `validate`, from the goals in `strategy`, and from every customer-facing promise, and it stays visible the whole way through as the best available guide to what to go and check next.
 
 ## A healthy run produces
 

@@ -72,7 +72,7 @@ Then either describe your situation in your own words and let it fire on its own
 | `teardown` | Walk the product screen by screen: what works versus what's a mockup |
 | `feasibility` | Audit each data source: what it yields, who grants access, what it costs |
 | `strategy` | The master command. Coverage-to-promise table, two goals, build rules |
-| `prioritize` | Order the backlog under a qualifying rule, every item tagged with its goal |
+| `prioritize` | Write **Next moves** — the short page you forward, every item carrying its own reason |
 | `decision-log` | Decisions locked, open questions, who you're waiting on |
 | `checkup` | One-time scan for conflicting skills or instructions |
 

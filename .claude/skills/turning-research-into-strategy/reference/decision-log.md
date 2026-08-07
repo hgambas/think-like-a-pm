@@ -13,8 +13,16 @@ Invoked directly: to review the current state, to record a decision made outside
 Maintain three registers, and keep them separate — the split by *who can close each item* is what makes the document actionable:
 
 1. **Decisions locked** — dated, attributed to the person who made them ("Two goals, no more — Hiba, 3 Aug"). Decisions get logged, not re-audited; a locked decision is only reopened by the person who made it.
-2. **Open questions** — numbered, so other documents can cite them ("see open question 4"). Each states what would settle it, if known.
+2. **Open questions** — numbered, so other documents can cite them ("see open question 4"). Each states what would settle it, if known, and **what it is holding up** — a next move, a promise, a customer conversation, or nothing yet. Order them by that, not by the order they came up in. A question blocking Monday's work sits above one that would merely be interesting to know.
 3. **Waiting on a named person** — the item, the name, and the date it started waiting. If an item has waited long enough to block work, surface it to the user rather than letting it age silently.
+
+## What the log holds is not what you hand over
+
+The log keeps every open question. What you put in front of a person is a much shorter list.
+
+**Never hand over the whole register.** Ask only what is blocking the next move, and no more than three at a time, each as one plain question with your recommendation attached (see Asking the User in the skill's main file). Everything else stays in the log until it starts blocking something, and then it surfaces on its own.
+
+A document closing with thirteen numbered questions tends to get none of them answered: the reader cannot tell which matters, so they answer whichever they happen to have an opinion about. Three that visibly block the next move get answered. If a skill for presenting decisions is available in this setup, hand the shortlist to it rather than rebuilding the ordering here.
 
 Housekeeping rules:
 
@@ -32,4 +40,4 @@ A working-state document where a returning reader knows in one page what is sett
 
 - **Registers blurring.** "Waiting on Jules" parked under open questions makes it nobody's job. If a name can close it, it goes in register three.
 - **Logging outcomes without owners or dates.** An unattributed decision gets relitigated; an undated wait never escalates.
-- **Using the log as a to-do list.** Work items belong in the backlog (`prioritize`); the log tracks knowledge state, not tasks.
+- **Using the log as a to-do list.** Work items belong in *Next moves* (`prioritize`); the log tracks knowledge state, not tasks.
