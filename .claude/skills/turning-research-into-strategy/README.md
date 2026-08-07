@@ -92,4 +92,5 @@ The main `SKILL.md` is a router: it holds the phase rule, the writing standard, 
 
 ## License
 
-MIT. See [LICENSE](../../../LICENSE).
+MIT. See
+[LICENSE](https://github.com/hgambas/think-like-a-pm/blob/main/LICENSE).

@@ -1,9 +1,6 @@
 ---
 name: turning-research-into-strategy
 description: Use when the user has call transcripts, user interviews, painpoint trackers, or customer feedback that hasn't been turned into product direction; when they ask what to build next and the answer would rest on unchecked claims; or when a strategy, deck, or roadmap contains numbers nobody has verified or contradicts another live document. Not for a single interview in isolation, sparring on one strategic question, or projects with no research to mine yet.
-version: 0.1.0
-user-invocable: true
-argument-hint: "[discovery|challenge|debrief|evidence|validate|teardown|feasibility|strategy|prioritize|decision-log|checkup] [target]"
 ---
 
 # Turning Research Into Strategy
