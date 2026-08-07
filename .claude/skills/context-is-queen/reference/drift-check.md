@@ -5,13 +5,13 @@ loop, or when resuming a session. It answers the question the user can't
 easily answer themselves: **which decisions got made since the goal was
 set, and were they theirs to make?**
 
-This command exists because the failure it catches is silent. Nobody
-notices decision drift while it's happening; you look up three hours later
-and think "wait, when did we decide *that*?"
+It exists because the failure it catches is silent. Nobody notices
+decision drift while it's happening; you look up three hours later and
+think "wait, when did we decide *that*?"
 
-During a briefed run, a mini version of this happens automatically at every
-checkpoint (see [brief.md](brief.md), step 5). This command is the full
-audit, on demand.
+During a briefed run, a mini version happens automatically at every
+checkpoint (see [brief.md](brief.md), step 5). This is the full audit,
+run whenever the user asks for it — however they ask.
 
 ## What to do
 

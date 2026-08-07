@@ -1,21 +1,27 @@
 # The full briefing
 
-Run this before any planning or building on a complex task. It is the default
-when the skill is invoked with no command. Expect it to take a few minutes of
-the user's time up front — the rewrites it avoids are measured in hours.
+Run this before any planning or building on a complex task. It's the default —
+what happens unless the user asked for one of the other four. Expect it to take
+a few minutes of their time up front; the rewrites it avoids are measured in
+hours.
 
 ## The steps, in order
 
 1. **Say what you need.** Tell the user what context only they can supply.
    Not questions yet — just show them what's missing.
 
-2. **Do your research.** Explore the codebase, the docs, the prior work —
-   answer for yourself everything that doesn't need the user, so every
-   question you spend on them is one only they can answer.
+2. **Do your research.** Look at whatever already exists — the codebase,
+   the doc, the deck, the last version of it, the prior work. Nothing to
+   look at? Ask where to look, before you ask anything else. Answer for
+   yourself everything that doesn't need the user, so every question you
+   spend on them is one only they can answer.
 
-3. **Interview them.** Read [interview.md](interview.md) and run it: one
-   question at a time, covering only what's genuinely unsettled after
-   your research.
+3. **Interview them — only on what's still missing.** Re-run the five
+   sufficiency questions in SKILL.md now that the research is done. Every
+   one already answered is a question you don't ask. If all five pass, say
+   so in one line and skip to step 4; never manufacture an interview to
+   look thorough. Otherwise read [interview.md](interview.md) and run it:
+   one question at a time.
 
 4. **Set the goal.** Read [set-goal.md](set-goal.md) and run it: propose a
    clear, human-readable goal built from their answers and your research,
@@ -46,9 +52,8 @@ the user's time up front — the rewrites it avoids are measured in hours.
    with [set-goal.md](set-goal.md)). Claim **done** only when every
    criterion is pass, or the user has waived it. Fail or uncertain means
    another pass, a question to the user, or an honest "blocked,
-   because…". These criteria add to whatever else gates completion in
-   this setup — review gates, verification skills, a /goal condition —
-   never replace it.
+   because…". These criteria add to whatever else gates completion here —
+   a review step, a test, a checklist they already run — never replace it.
 
 ## Open calls don't stop the clock
 

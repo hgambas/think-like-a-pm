@@ -7,13 +7,13 @@ concrete enough that the user can point at the wrong part.
 
 ## One goal authority
 
-If a Claude Code /goal is active, or another system already defines this
-run's goal, don't propose a competitor: read the existing goal back,
-propose corrections to it, and steer by it. If a design, spec, or plan
-document already exists for the task, derive the goal from it and say
-which document it came from. And when the agreed goal has a testable end
-state, offer to write it into /goal so the harness enforces it rather
-than your memory.
+If something already defines this run's goal — a goal command, a tracker,
+a brief someone else wrote — don't propose a competitor: read the existing
+goal back, propose corrections to it, and steer by it. If a design, spec,
+or plan document already exists for the task, derive the goal from it and
+say which document it came from. And when the agreed goal has a testable
+end state, put it wherever this setup enforces goals, so something other
+than your memory holds it.
 
 ## What a goal contains
 
@@ -69,10 +69,12 @@ waives it. If checkpoints show the goal itself is wrong or stale, refresh
 it here instead of pushing on. Write the judged-by criteria concretely
 enough that a pass/fail verdict on each is actually possible.
 
-Write the agreed goal down somewhere that survives the session — a /goal
-condition, a short file, or wherever this project keeps decisions. A goal
-that lives only in the conversation is gone after a compaction, and the
-drift check then has nothing to check against.
+Write the agreed goal down somewhere that survives the session — a note at
+the top of the doc you're working in, wherever this project keeps
+decisions, or a goal command if this setup has one. A goal
+that lives only in the conversation is gone once the conversation gets
+long enough to be shortened, and the drift check then has nothing to check
+against.
 
 ## Pitfalls
 

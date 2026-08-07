@@ -28,8 +28,8 @@ ask already answers:
   which ones you own.
 - **Task type** — is this planning only, planning and building, or
   something else?
-- **Roles** — does the job need multiple roles or subagents, and if so,
-  which?
+- **Help** — does the job need more than one person or helper on it, and
+  if so, doing what?
 
 ## How to ask
 

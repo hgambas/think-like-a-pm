@@ -9,9 +9,10 @@ you.
 
 ## Who it's for
 
-Anyone who owns the decisions but not the code. If you've ever looked at
-three hours of finished work and thought "when did we decide that?", this
-is for you.
+Anyone who owns the decisions but isn't doing the building — whether the
+thing being built is a product, a plan, a deck or a strategy. If you've
+ever looked at three hours of finished work and thought "when did we
+decide that?", this is for you.
 
 ## The problem it solves
 
@@ -25,7 +26,17 @@ thing and it isn't what you wanted.
 
 ## Install
 
-Paste this into Claude Code, or your favourite coding agent:
+**In the Claude app (desktop or web).** Download
+[context-is-queen.zip](https://github.com/hgambas/think-like-a-pm/releases/latest),
+then go to **Customize → Skills**, click **+**, choose **Create skill**,
+and select **Upload a skill**. Pick the ZIP. It'll appear in your skills
+list, switched on.
+
+You need "Code execution and file creation" turned on in Settings →
+Capabilities first. On a Team or Enterprise account, an owner has to
+enable Skills for the organisation before you can upload anything.
+
+**In Claude Code, or your favourite coding agent.** Paste this in:
 
 ```text
 Install the Context is Queen skill globally from https://github.com/hgambas/think-like-a-pm
@@ -40,6 +51,9 @@ the start of a session instead of waiting to be asked:
 /plugin marketplace add hgambas/think-like-a-pm
 /plugin install think-like-a-pm
 ```
+
+Installs don't carry across. Adding it in the app doesn't add it to
+Claude Code, and the other way round.
 
 ## Start here
 
@@ -92,28 +106,30 @@ Decisions since the goal:
 
 - Interview you about small things. Typos and one-line changes go straight
   through.
-- Read your code and tell you it's wrong. It watches how the work gets
-  decided, not how it's written.
+- Check the work itself and tell you it's wrong. It watches how the work
+  gets decided, not how it's made.
 - Make the calls for you. It surfaces them and waits.
 
-The situations it was born from: features that replace existing ones,
-redesigns, and anything where you own the decisions but not the code.
+The situations it was born from: things that replace something already
+there, redesigns, and anything where you own the decisions but not the
+building.
 
 ## How it's built
 
 `SKILL.md` tells your agent when to run and what to do. `reference/` holds
-one playbook per command, five in all. If you install the plugin rather
-than the folder, it also brings a small hook that offers the briefing when
-a session starts.
+one playbook per command, five in all. The Claude Code plugin adds a small
+hook that offers the briefing when a session starts — a bonus for that one
+setup, not something the skill needs.
 
-Everything runs on your own machine, inside the agent you already use. No
-account, no cloud service, no API key.
+It's plain text inside the agent you already use. No account, no separate
+service, no API key.
 
 ## More
 
 [Docs](https://www.thinklikeapm.style/docs/) ·
-[All the skills](../../../README.md)
+[All the skills](https://github.com/hgambas/think-like-a-pm)
 
 ## License
 
-MIT. See [LICENSE](../../../LICENSE).
+MIT. See
+[LICENSE](https://github.com/hgambas/think-like-a-pm/blob/main/LICENSE).
