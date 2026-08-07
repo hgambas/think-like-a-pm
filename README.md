@@ -66,7 +66,12 @@ Same request. The second one cannot quietly build the wrong thing.
 
 ## Install
 
-Paste this into Claude Code, or your favourite coding agent:
+**Using the Claude app?** Download the skill as a ZIP from
+[the latest release](https://github.com/hgambas/think-like-a-pm/releases/latest),
+then go to **Customize → Skills**, click **+**, choose **Create skill**, and
+select **Upload a skill**. Nothing to install on your machine.
+
+**In Claude Code, or your favourite coding agent.** Paste this into the chat:
 
 ```text
 Install the Context is Queen skill globally from https://github.com/hgambas/think-like-a-pm
@@ -83,6 +88,9 @@ waiting to be asked:
 /plugin marketplace add hgambas/think-like-a-pm
 /plugin install think-like-a-pm
 ```
+
+Installs don't carry across. Adding it in the app doesn't add it to Claude
+Code, or the other way round.
 
 ## The skills
 

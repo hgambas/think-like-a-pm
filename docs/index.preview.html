@@ -140,6 +140,21 @@
   ul.plain li{position:relative;padding-left:22px;margin-bottom:4px}
   ul.plain li::before{content:"";position:absolute;left:3px;top:.66em;width:6px;height:6px;background:var(--kiln);transform:rotate(45deg)}
 
+  /* ——— biomorphic illustration, one per page: right of the h1 ——— */
+  /* --cast already carries offsets, so the filter reuses it whole;
+     drop-shadow, never box-shadow, on transparent PNGs */
+  .page-head{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;align-items:center}
+  .page-head>:not(.page-illus){grid-column:1;min-width:0}
+  .page-illus{grid-column:2;grid-row:2;justify-self:center;display:block;width:clamp(110px,15vw,210px);height:auto;filter:drop-shadow(var(--cast))}
+  @media (max-width:860px){
+    .page-illus{width:clamp(96px,24vw,150px)}
+  }
+  /* on a phone the image can't earn its space next to a 2.6rem h1 — hide it
+     rather than squash the headline */
+  @media (max-width:560px){
+    .page-illus{display:none}
+  }
+
   /* ——— coming-soon block (unreleased skills) ——— */
   .soonbox{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 24px;max-width:var(--measure);margin:12px 0 18px;box-shadow:var(--cast)}
   .soonbox p{margin-bottom:12px}
@@ -219,8 +234,11 @@
 
 <!-- ================= DOCS INDEX ================= -->
 <section class="page default" id="overview" tabindex="-1">
-  <div class="crumb">Context is Queen · <b>Overview</b></div>
-  <h1 class="corrected" aria-label="Context first."><span aria-hidden="true"><s>Goal</s> <ins>Context</ins> first.</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · <b>Overview</b></div>
+    <h1 class="corrected" aria-label="Context first."><span aria-hidden="true"><s>Goal</s> <ins>Context</ins> first.</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-overview-garden-slab.png" alt="" aria-hidden="true" width="368" height="368" loading="lazy">
+  </div>
   <p class="lede">Context is Queen is a Claude Code skill for complex work,
   where an agent left alone will decide what “done” means and never mention
   it. This one asks instead. It interviews <strong>you</strong>, researches whatever it
@@ -289,8 +307,11 @@
 
 <!-- ================= BRIEF ================= -->
 <section class="page" id="brief">
-  <div class="crumb">Context is Queen · The ritual</div>
-  <h1><span class="cmd">brief</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · The ritual</div>
+    <h1><span class="cmd">brief</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-brief-rock-ribbon.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy">
+  </div>
   <p class="lede">The full briefing: interview, research, then goal. Runs by
   default when you use /context-is-queen with no command.</p>
 
@@ -325,8 +346,11 @@
 
 <!-- ================= INTERVIEW ================= -->
 <section class="page" id="interview">
-  <div class="crumb">Context is Queen · The ritual</div>
-  <h1><span class="cmd">interview</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · The ritual</div>
+    <h1><span class="cmd">interview</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-interview-stone-wave.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy">
+  </div>
   <p class="lede">Get asked the right questions, one at a time, and only the
   ones you alone can answer.</p>
 
@@ -369,8 +393,11 @@
 
 <!-- ================= SET-GOAL ================= -->
 <section class="page" id="set-goal">
-  <div class="crumb">Context is Queen · The ritual</div>
-  <h1><span class="cmd">set-goal</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · The ritual</div>
+    <h1><span class="cmd">set-goal</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-set-goal-mountain-path.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy">
+  </div>
   <p class="lede">Turn context already gathered into a specific goal you can
   correct.</p>
 
@@ -410,8 +437,11 @@
 
 <!-- ================= DRIFT-CHECK ================= -->
 <section class="page" id="drift-check">
-  <div class="crumb">Context is Queen · After the goal</div>
-  <h1><span class="cmd">drift-check</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · After the goal</div>
+    <h1><span class="cmd">drift-check</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-drift-check-mountain-ridges.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy">
+  </div>
   <p class="lede">A mid-project check: which decisions were made since the
   goal was set, and did the agent have permission to make them?</p>
 
@@ -444,8 +474,11 @@
 
 <!-- ================= BACKLOG ================= -->
 <section class="page" id="backlog">
-  <div class="crumb">Context is Queen · After the goal</div>
-  <h1><span class="cmd">backlog</span></h1>
+  <div class="page-head">
+    <div class="crumb">Context is Queen · After the goal</div>
+    <h1><span class="cmd">backlog</span></h1>
+    <img class="page-illus" src="../assets/illustrations/docs-backlog-layered-stone.png" alt="" aria-hidden="true" width="640" height="640" loading="lazy">
+  </div>
   <p class="lede">Turn the approved goal into work items: generate a backlog
   from it, or review an existing one against it.</p>
 

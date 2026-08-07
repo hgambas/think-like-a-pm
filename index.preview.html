@@ -146,6 +146,30 @@
 
   .quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.45;color:var(--ink);max-width:34ch;border-left:3px solid var(--red);padding-left:24px}
 
+  /* ——— biomorphic illustrations: punctuation, never the subject ——— */
+  /* transparent PNGs, so the hard cast shadow is a drop-shadow filter,
+     never a box-shadow (which would draw a rectangle) */
+  .sect-illus{display:block;width:clamp(110px,15vw,210px);height:auto;filter:drop-shadow(6px 6px 0 var(--cast))}
+  /* hero: heading/lede block on the left, stones on the right, centred */
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:56px;align-items:center}
+  .hero .wrap>:not(.hero-illus){grid-column:1;min-width:0}
+  .hero-illus{grid-column:2;grid-row:1/span 5;justify-self:center;width:clamp(170px,24vw,330px);height:auto;filter:drop-shadow(6px 6px 0 var(--cast-wall))}
+  /* skills/install: image to the right of the .label + h2 block only,
+     so the prose measure below is untouched */
+  /* align-content:start keeps the label sitting tight against its heading — without
+     it the two rows stretch to match the image and the label drifts away */
+  .sect-head{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:40px;align-items:start;align-content:start}
+  .sect-head>:not(.sect-illus){grid-column:1;min-width:0}
+  .sect-head .sect-illus{grid-column:2;grid-row:1/span 2;align-self:center;justify-self:center}
+  /* why/belief: the image joins an existing .two column, no third column */
+  /* the image rides directly under its neighbour inside the same column — as a
+     sibling in the .two grid it would start a second row and strand itself in
+     whatever dead space the taller column left behind */
+  .col-illus{display:flex;flex-direction:column;align-items:center;gap:34px}
+  /* the pull quote keeps its own left edge, so only the image centres */
+  #belief .col-illus{align-items:stretch;gap:40px}
+  #belief .sect-illus{align-self:center}
+
   /* ——— footer ——— */
   footer{padding:56px 0 72px}
   .foot-grid{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-end}
@@ -167,6 +191,13 @@
     .site-nav a{padding:12px 10px}
     .cmdbox{flex-direction:column;gap:14px}
     .copy{align-self:flex-start;min-height:40px}
+    /* illustrations drop below their text and shrink */
+    .hero .wrap{grid-template-columns:1fr}
+    .hero-illus{grid-column:1;grid-row:auto;justify-self:start;width:clamp(140px,36vw,220px);margin-top:44px}
+    .sect-head{grid-template-columns:1fr}
+    .sect-head .sect-illus{grid-column:1;grid-row:auto;justify-self:start;width:clamp(96px,30vw,160px);margin-top:22px}
+    .col-illus{align-items:flex-start;gap:26px}
+    #why .sect-illus,#belief .sect-illus{width:clamp(96px,30vw,160px);margin:26px 0 0}
   }
   @media (max-width:420px){
     .wordmark b{font-size:.98rem;white-space:nowrap}
@@ -216,6 +247,7 @@
         <a class="btn" href="#install">Install Context is Queen <span class="arrow" aria-hidden="true">→</span></a>
         <a class="link" href="#skills">See all the skills</a>
       </div>
+      <img class="hero-illus" src="assets/illustrations/hero-balancing-stones.png" alt="" aria-hidden="true" width="440" height="660" loading="eager" fetchpriority="high">
     </div>
   </section>
 
@@ -234,6 +266,7 @@
         which are yours. That's all these skills do: they make the agent work that
         way, so the decisions that matter stay with the person who owns them.</p>
       </div>
+      <div class="col-illus">
       <div class="transcript">
         <p class="agent"><span class="who">Agent</span>Before I start: how will you judge whether this worked?</p>
         <p><span class="who">You</span>More visitors starting a trial.</p>
@@ -241,14 +274,19 @@
         <p><span class="who">You</span>Just pricing. You own the rest.</p>
         <p class="agent"><span class="who">Agent</span>Then here's the goal I'd work to. <em>Correct anything before I start.</em></p>
       </div>
+        <img class="sect-illus" src="assets/illustrations/why-fissured-stone.png" alt="" aria-hidden="true" width="277" height="368" loading="lazy">
+      </div>
     </div>
   </section>
 
   <!-- ================= SKILLS ================= -->
   <section id="skills">
     <div class="wrap">
-      <span class="label">The skills</span>
-      <h2>Two are ready to install. Two are in the workshop.</h2>
+      <div class="sect-head">
+        <span class="label">The skills</span>
+        <h2>Two are ready to install. Two are in the workshop.</h2>
+        <img class="sect-illus" src="assets/illustrations/skills-green-quartz.png" alt="" aria-hidden="true" width="368" height="368" loading="lazy">
+      </div>
       <p>Each one takes a job a product person does by hand and teaches it to your
       agent. They work in Claude Code, and they're written in plain English:
       no code required to use them, or to read them.</p>
@@ -310,8 +348,11 @@
   <!-- ================= INSTALL ================= -->
   <section id="install">
     <div class="wrap">
-      <span class="label">Get started</span>
-      <h2>Context is Queen, in about a minute.</h2>
+      <div class="sect-head">
+        <span class="label">Get started</span>
+        <h2>Context is Queen, in about a minute.</h2>
+        <img class="sect-illus" src="assets/illustrations/install-azure-prism.png" alt="" aria-hidden="true" width="368" height="368" loading="lazy">
+      </div>
       <p><b>Using the Claude app?</b> Download the skill as a ZIP from <a href="https://github.com/hgambas/think-like-a-pm/releases/latest">the latest release</a>, then go to Customize &rarr; Skills, click +, choose Create skill, and select Upload a skill. Nothing to install on your machine.</p>
       <p><b>In Claude Code</b>, paste this into the chat instead. “Globally” makes it
       available in every project, not just this one.</p>
@@ -343,8 +384,11 @@
   <!-- ================= CLOSING ================= -->
   <section id="belief">
     <div class="wrap two">
-      <p class="quote">“Work aimed at a goal you've corrected is simply better work
-      — and you stay the decision-maker on your own project.”</p>
+      <div class="col-illus">
+        <p class="quote">“Work aimed at a goal you've corrected is simply better work
+        — and you stay the decision-maker on your own project.”</p>
+        <img class="sect-illus" src="assets/illustrations/about-green-petal.png" alt="" aria-hidden="true" width="368" height="368" loading="lazy">
+      </div>
       <div>
         <span class="label">Who's behind this</span>
         <p>I'm Hiba Ganta. I'm the product person and the designer; my agent is my
