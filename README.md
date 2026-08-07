@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
 |---|---|---|
 | **[Context is Queen](.claude/skills/context-is-queen/)** | Asks before it builds, then shows you the decisions it made without you | Available now |
 | **[Turning Research Into Strategy](.claude/skills/turning-research-into-strategy/)** | Traces every claim back to the person who said it | Available now |
-| [Best Use of My Time](https://www.thinklikeapm.style/docs/best-use-of-my-time/) | Every decision waiting on you, written so you can answer it in a few words | In the workshop |
+| [Best Use of My Time](https://www.thinklikeapm.style/docs/best-use-of-my-time/) | Every decision waiting on you, written so you can answer it in a few words, most fundamental first | In the workshop |
 | [AI Output Clinic](https://www.thinklikeapm.style/docs/ai-output-clinic/) | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
 
 ## The problem
