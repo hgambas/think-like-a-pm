@@ -55,8 +55,10 @@ With it:
 
 ```text
 You:    Rework our onboarding so people actually finish setup.
-Agent:  Before I build: what counts as finished here? Account created,
-        first integration connected, or first project made?
+Agent:  Before I start —
+        Aiming at: people reaching their first project, not just an account.
+        Assuming: the signup form stays as it is.
+        Need from you: is "finished" account created, or first project made?
 You:    First project made.
 Agent:  Then here is the goal I'd work to, and the calls I think are
         yours. Correct anything before I start.

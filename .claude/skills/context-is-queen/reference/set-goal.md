@@ -27,14 +27,36 @@ detail. It states:
    you own.
 4. **What's out of scope** — the nearest things you are deliberately NOT
    doing.
-5. **The loop** — the checkpoints for the run. For complex work, name at
-   least two: one before anything hard to reverse, one before final
-   delivery. A line or two is enough — the checkpoint mechanics live in
-   [brief.md](brief.md), not in the goal.
+5. **The loop** — the checkpoints for the run, and who is doing the work:
+   you alone, or helpers running in parallel and what each is for. For
+   complex work, name at least two checkpoints: one before anything hard
+   to reverse, one before final delivery. A line or two is enough — the
+   checkpoint mechanics live in [brief.md](brief.md), not in the goal.
 
 If the work replaces something that exists, the goal also names the
 replacement policy — migrate, dual-run, sunset, or leave untouched — or
 explicitly marks it as an open call.
+
+## Reflect the whole ask back
+
+However many things they asked for, the goal shows that many — each one
+written so it can be judged on its own. When two of their asks get
+merged into one line, one of them quietly disappears, and nobody finds
+out until the work comes back wrong.
+
+Use their own message as the checklist. Read it again with the goal
+beside it and account for every thing they asked for. Sort each one as
+you go:
+
+- **Clear** — you know what they meant. Say it back plainly and move on.
+- **Fuzzy** — you have a reading, but you could be wrong. Say it back as
+  your reading, and let them agree or correct it.
+- **Missing** — you can't write it down at all. That's a question you
+  owe them.
+
+Fuzzy is the common case, and not a failure on their part — short
+messages are how people work. Say what you think they meant rather than
+asking them to define it; [interview.md](interview.md) has how.
 
 ## Example
 
@@ -85,7 +107,10 @@ against.
 - **A grab-bag of criteria.** Criteria that describe one coherent outcome
   are held and recalled together; a list of unrelated conditions falls
   out of mind mid-run. If the criteria don't hang together, it's probably
-  two goals.
+  two goals. This is never a reason to tidy away things they asked for
+  separately. If their asks genuinely don't belong together, that's two
+  goals — say so and let them choose the order. Merging them is how an
+  ask goes missing.
 - **Goal as spec.** It's a compass, not a work plan. Keep it under ten
   lines.
 - **Setting it silently.** The user must see and correct the goal before

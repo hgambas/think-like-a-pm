@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "think-like-a-pm",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "source": "./",
       "description": "Agent skills for the person who owns the decisions, not the building. Context first, goal second, execution last — plus a method for turning a pile of customer research into a strategy you can defend.",
       "category": "productivity",

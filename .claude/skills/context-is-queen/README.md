@@ -81,6 +81,10 @@ when you want to steer it directly.
 
 ## What it lets you do
 
+- **See what it's aiming at before it starts.** Three lines: what done
+  looks like, what it's assuming, and what it needs from you. You get them
+  even when it has no questions, so you can catch a wrong assumption in the
+  one moment it's cheap.
 - **Get asked the right questions.** One at a time, never five at once. It
   looks up whatever it can first, so you only answer what you alone know.
 - **Correct the goal before anything is built.** It writes down what "done"

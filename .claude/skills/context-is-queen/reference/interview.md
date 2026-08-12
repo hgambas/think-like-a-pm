@@ -28,8 +28,11 @@ ask already answers:
   which ones you own.
 - **Task type** — is this planning only, planning and building, or
   something else?
-- **Help** — does the job need more than one person or helper on it, and
-  if so, doing what?
+- **Staffing** — how many helpers the job wants and what each one does.
+  Come with a proposal, not an open question: "I'd run these three in
+  parallel and do the rest myself — say if that's wrong." Working out
+  whether a job needs more than one pair of hands is your job, not
+  something to leave the user to notice.
 
 ## How to ask
 
@@ -55,6 +58,34 @@ Before: "Should we widen the entry gate or narrow the promise?"
 After: "Should someone with hardly any research be allowed to use
 this — yes or no?"
 
+## When their words could mean more than one thing
+
+Short messages are normal. "Make it more premium", "it's a bit boring",
+"more visual" — these aren't lazy. They're how people describe a
+feeling about something in front of them. Don't answer them by asking
+the user to define their terms. That hands your job back to them, and
+after a few rounds of it they stop telling you the useful things.
+
+Read the word for the information it actually carries. "Make it more
+premium" tells you that what you showed doesn't feel premium to them.
+That's a real finding, and interpreting it is your work, not theirs.
+
+So project a reading and let them react:
+
+- Say what you think they meant, and why — point at the thing in front
+  of them that made you read it that way.
+- Ask them to confirm or correct it. Agreeing with a sentence takes a
+  second; producing an example takes real effort, and they may not have
+  one.
+- If you have two readings and they lead to different work, give both
+  and ask which.
+
+Before: "What do you mean by a visual indicator? Can you show me an
+example?"
+After: "I read 'visual indicator' as a shape or mark that isn't type at
+all — because everything I showed you was typographic, and none of it
+did the job. Have I got that right?"
+
 ## When you're done
 
 Stop when you're confident you understand the job — not when the list is
@@ -76,3 +107,6 @@ from what you have and flag the unknowns as unknowns.
   corrections finish the job.
 - **Jargon in the question.** If they have to ask what you meant,
   rewrite and re-ask. Never treat a puzzled answer as a decision.
+- **Skipping it quietly.** Having no questions is allowed. Starting
+  without saying so is not — show the readback either way, so they never
+  have to wonder whether you thought about it.
