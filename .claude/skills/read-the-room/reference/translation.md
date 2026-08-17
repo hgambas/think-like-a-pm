@@ -3,6 +3,12 @@
 The bridge. A cultural finding and a product change are three steps apart, and
 handing someone the first and the last is why good research reads as a leap.
 
+**This file is a thinking tool, and only the first two layers go in turn one.**
+Work all four out for yourself — that's how you know a finding is worth handing
+over at all. Then hand over layers 1 and 2 first, and keep layers 3 and 4 for
+turn two, once they've picked a finding they care about. See [How to hand it
+back](read.md#how-to-hand-it-back).
+
 ## The four layers
 
 Every theme in a read runs top to bottom, and every layer is traceable to the

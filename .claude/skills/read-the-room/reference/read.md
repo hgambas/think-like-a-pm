@@ -240,67 +240,17 @@ roster has a hole.
 
 ## Move 6 — Report
 
-**The conversation is the deliverable.** Not a file, not a template.
+**The conversation is the deliverable**, and it runs over two turns rather than
+one.
 
-### How it has to read
+**The whole delivery rule lives at the end of this file: [How to hand it
+back](#how-to-hand-it-back).** Go and read it now, before you write anything.
+It's placed last on purpose — by this point in a run you have thousands of words
+of research behind you, and the delivery rule needs to be the freshest thing in
+your head rather than the stalest.
 
-Assume the reader hasn't read your sources, doesn't read code, and is going to
-skim it once between two meetings.
-
-- **Whole answer first, short.** If they asked a question, answer it in the
-  first three lines.
-- **Plain, everyday words.** No jargon, no category vocabulary, nothing that
-  needs a glossary. If you can't say it plainly you don't understand it yet.
-- **Every confident sentence carries its evidence directly underneath** — one or
-  two sentences, quoted, dated, attributed. Not a citation to go and check: the
-  actual words.
-- **Length is capped by evidence, not by ambition.** Two or three themes. If it's
-  getting long, cut themes, never cut evidence.
-
-### The shape
-
-1. **The answer** — what they asked, answered, in a few lines.
-2. **What moved in my map** — one or two lines. Did the starting guess survive
-   contact with the field?
-3. **The evidence** — the quotes. Verbatim, dated, real people. Before the
-   conclusions, because it's the reason to believe them.
-4. **Two or three themes**, most important first. Each one runs:
-   - **What people are doing or saying**, with the quote and its evidence label
-   - **What that means here** — the connection to their thing
-   - **The decision it creates** — the choice this puts in front of them
-   - **What not to read into it** — the boundary
-5. **What I couldn't reach** — rooms, platforms, languages, and what's missing
-   because of it.
-
-### The sentence rule
-
-The evidence label governs the verb. This is not decoration; it is the thing
-that stops one person's offhand remark becoming a rule.
-
-| Label | The strongest sentence you may write |
-|---|---|
-| Solid | "This leads me to think X is worth weighing." |
-| Thin | "Two people said this, which might mean X." |
-| Single-thread | "One person said this. It may not generalise, but it raises X." |
-| Contested | "There's a real argument both ways, and it turns on X." |
-| Can't tell | "The field was quiet on this. Here's what would answer it." |
-
-**Any sentence that recommends something inherits the label of the claim it
-rests on.** A thin finding cannot produce a confident instruction.
-
-### Implications, not instructions
-
-You are handing over what the world is doing and what that puts in play. **You
-are not authoring their product.**
-
-- **Don't write:** "Kill that line." "Move this to the hero." "Rename it X."
-- **Do write:** what the finding makes risky, what choice it forces, and what
-  they'd be trading either way.
-
-The failure on the other side is just as real — a beautifully-written read that
-leaves someone asking "so what?" is worthless. The middle is **decision
-pressure**: name the choice, name what each direction costs, and let them make
-it. If they ask for drafted options, give them; unasked, don't.
+The two pieces below belong to that rule, and they belong to **turn two** — the
+reply you write once they've picked a finding they care about.
 
 ### Shelf life
 
@@ -362,3 +312,133 @@ refer back to it later?*
   report, however good the research underneath it was.
 - **Treating the informant as ground truth.** They're one person in one bubble,
   and so are you.
+
+---
+
+# How to hand it back
+
+This is the delivery rule for every read — a full one, a refresh, or a single
+phrase. The size changes. The shape doesn't.
+
+**Hand it back in two turns.** The first turn is what you found. The second
+turn, only if they ask for it, is what it costs them.
+
+The reason: the material about trade-offs and boundaries is what makes a read
+useful, and it only makes sense once someone has picked a finding they care
+about. Delivered upfront for every finding at once, it triples the length and
+buries the thing that would have changed their mind.
+
+## Turn one
+
+Open with the most surprising true thing you found about the world. One or two
+sentences. If they asked something direct — "does this land", "are we right" —
+answer it in one line first, then go straight to the world. The answer is the
+doorway, not the deliverable.
+
+Then the findings, most surprising first. **One finding for a single-phrase
+question. Up to three for a full read.**
+
+Each finding has three parts, in this order:
+
+1. What people are doing or saying, in one plain sentence.
+2. The quote. Verbatim, with its date and the kind of place it came from.
+3. What it means for the thing they're building. One or two sentences.
+
+Then close with two things: the one question only they can answer, and the rooms
+you couldn't get into.
+
+Then ask whether to save it.
+
+## How long turn one runs
+
+**About two screens.** Roughly 400 to 700 words for a full read, and under 200
+for a single phrase.
+
+Choose your five strongest quotes and hold the rest. Say in one line that you
+have more and what it covers, so they can pull on it.
+
+The reason: they will read this once, probably between two meetings. Every quote
+past the fifth costs you the attention that the first five needed.
+
+## How the sentences go
+
+Write one idea per sentence. When you have four things to say, write four
+sentences.
+
+Start a new paragraph every two or three sentences.
+
+Use the words you would say out loud to a colleague who doesn't work on this.
+
+When you need a term you built up during the research, say what it means in
+ordinary words first, then use it.
+
+Keep this skill's working words in your notes: *the room, the vernacular, the
+crowded position, signal, theme, decision pressure, the field.* Hand over what
+they mean instead — what people said, the words they actually use, the position
+everyone has already taken, what you found, what it means, the choice it
+creates.
+
+The reason: those words are how you think while you work. They carry nothing for
+someone who wasn't doing the work, and they make a plain finding sound like a
+framework being applied to them.
+
+## Say how strong each finding is, by saying what you counted
+
+Give the number and the places. The count is the honesty.
+
+| What you have | Say it like this |
+|---|---|
+| Three or more sources, two or more platforms | "This held up everywhere I looked." |
+| Two sources | "Two people said this." |
+| All from one conversation | "One thread, twelve replies, and nothing like it anywhere else." |
+| Credible sources pointing both ways | "There's a real argument here, and it turns on X." |
+| Less than that | "The field was quiet on this. Here's what would answer it." |
+
+Any sentence that recommends something carries the weight of the finding
+underneath it. A thin finding produces a suggestion, and says so.
+
+The reason: a phrase like "this leads me to think" adds nothing a reader can
+check. "Two people said this, both on the same forum" tells them exactly how
+much to lean on it.
+
+## Lead with the world, then your assessment
+
+Put what people are doing first, and what you make of their thing second.
+
+The reason: they can already see their own page. What they cannot see is the
+room. A first line that judges their work turns the read into an audit, which is
+the one job this skill is not doing.
+
+## Turn two, when they ask for it
+
+Give them the rest: what the finding puts at risk, the choice it forces and what
+each direction costs, the boundary this evidence cannot cross, how long the
+finding holds, and the disconfirming pass you ran.
+
+Write drafted options when they ask for options.
+
+## What good looks like
+
+This is the register. Four separate claims, four separate sentences, each
+unpacked:
+
+> **Your main selling point is a thing your customers think is no longer
+> needed.**
+>
+> The page's proudest feature is that Formidable has a good conversation with
+> someone to find out what they need. But the marketers you're selling to have
+> watched their own buyers stop needing that conversation. Buyers turn up
+> already knowing what they want, because they researched it with ChatGPT and
+> asked their peers. So when you say "we'll have a great discovery chat with
+> your leads", a decent number of them hear "you'll make my buyers explain
+> themselves all over again."
+
+Here is the same content written the way it comes out when this rule goes
+missing. It says the same thing and it cannot be read:
+
+> The agent page is arguing the one thing the room has stopped believing
+> (discovery), on the one axis the room can't distinguish you by (naturalness).
+
+Both come from the Formidable landing read, 17 Aug 2026. The first version is
+the one that landed, and it landed only after the second version had already
+failed twice.

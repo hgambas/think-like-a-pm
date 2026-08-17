@@ -153,24 +153,35 @@ finishing it — see the soft stop in [sources.md](reference/sources.md).
 
 ## How it has to come back
 
-Rigour and readability are not a trade. A read that gets the room right and
-returns a wall of hedged jargon has failed, and the previous version of this
-skill failed that way because its only output guidance was a seven-section
-template.
+Rigour and readability are the same job. The research is only worth what the
+person can act on, so the delivery gets the same discipline as the sources.
+
+**Hand it back in two turns.** Turn one is what you found. Turn two, when they
+ask for it, is what it costs them.
 
 Every read, whichever command produced it:
 
-- **Whole answer first, short.** Answer what they asked in the first few lines.
-- **Plain, everyday words.** Assume the reader doesn't read code and hasn't read
-  your sources.
-- **Evidence directly under every confident sentence** — one or two sentences,
-  quoted, dated. The actual words, not a pointer to them.
-- **The evidence label governs the verb.** Solid earns "this leads me to think";
-  one person earns "one person said this, it may not generalise". Any sentence
-  that recommends something inherits the label of the claim beneath it.
-- **Hand over the decision, not the answer.** What the finding puts at risk,
-  what choice it forces, and what it doesn't support. Drafted options only when
-  asked.
+- **Open with the most surprising true thing you found about the world.** One or
+  two sentences. When they asked something direct, answer it in one line first,
+  then go straight to the world.
+- **Keep turn one to about two screens** — roughly 400 to 700 words for a full
+  read, under 200 for a single phrase. Choose your five strongest quotes and
+  hold the rest, saying in one line what else you have.
+- **Write one idea per sentence**, in the words you would say out loud to a
+  colleague who doesn't work on this.
+- **Put the quote under each finding** — verbatim, with its date and the kind of
+  place it came from.
+- **Say how strong a finding is by saying what you counted.** "Two people said
+  this, both on the same forum" tells them exactly how far to lean on it.
+- **Lead with the world, then your assessment of their thing.** They can already
+  see their own page. What they can't see is the room.
+
+**The full delivery rule is [How to hand it
+back](reference/read.md#how-to-hand-it-back), at the end of `read.md`** — the
+shape of turn one, the sentence craft, the strength table, what waits for turn
+two, and a worked example of the register that works. Read it again right before
+you write the reply. It sits last in that file on purpose, because by then you
+have a run's worth of research in front of it.
 
 ## Getting the context you need
 

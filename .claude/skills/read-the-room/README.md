@@ -87,12 +87,17 @@ Then it does four things:
    Murrell — after the fieldwork, never before, so their frames don't decide
    what it notices. Their thinking is kept separate from what ordinary people
    said, and credited by name.
-5. **Hands you two or three themes, short and in plain words.** Not a list of
-   findings and not a pile of edits — a stance the product needs to take, with
-   the quotes sitting directly under it, how long it will hold, the decision it
-   puts in front of you, and what the evidence doesn't stretch to. How
-   confident it's allowed to sound is set by how much evidence it actually
-   found, not by how good the sentence would be.
+5. **Hands you what it found, in about two screens, in plain words.** It opens
+   with the most surprising thing it found about the world, gives you up to three
+   findings with the quotes sitting directly under them, and says how many people
+   said each one and where. Then it stops and lets you choose what to pull on.
+   How confident it's allowed to sound is set by how much evidence it actually
+   found, rather than by how good the sentence would be.
+6. **Gives you the rest when you ask.** The choice a finding forces, what each
+   direction costs, how long it holds, the boundary the evidence can't cross, and
+   the pass it ran to try to prove itself wrong. That material is what makes a
+   read worth acting on, and it lands once you've picked the finding that matters
+   to you.
 
 **It doesn't write your copy, and it doesn't leave files lying around.** The
 read lands in the conversation. If it's worth keeping, it asks first, then saves
