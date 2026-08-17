@@ -118,7 +118,9 @@ These are the reason it works, not preferences you can tune away.
   to make the summary read better.
 - **Every finding gets a shelf life**, worked out from the dates it collected:
   a six-week fashion, a one-year mood, or a multi-year shift. They demand
-  completely different responses, and most teams can't tell them apart.
+  completely different responses, and most teams can't tell them apart. You hear
+  it straight away when a finding will expire before you've shipped, and on
+  request for the rest.
 - **It tries to prove itself wrong**, and writes down what that search found.
   Real cultural claims almost always narrow under pressure.
 - **Silence gets reported as silence.** When the field has nothing on the

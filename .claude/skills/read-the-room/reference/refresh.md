@@ -24,6 +24,15 @@ to today. Search the vernacular the old read recorded *and* search fresh — the
 words themselves may have moved, and if the old vocabulary now returns nothing,
 that is the loudest possible finding.
 
+**How a refresh splits across the two turns.** [How to hand it
+back](read.md#how-to-hand-it-back) governs a refresh too, with one difference: a
+refresh exists because decisions were already made on the old read, so "what
+this breaks" is the finding rather than the follow-up.
+
+Put steps 3 and 4 below in the first reply — what moved, and which committed
+decisions the movement undermines. Keep step 5, and the ranked cost of changing
+each decision, for the second reply. Same budget, same sentences, same counting.
+
 **3. Report the movement.** Four buckets, nothing else in the headline:
 
 - **Held** — still true, still sourced.
@@ -42,9 +51,9 @@ If that table is empty or missing — an older read, or one nobody logged agains
 rather than guessing from the repo. Don't skip this step just because the table
 is thin; it's the whole reason refresh exists.
 
-Rank them by cost to change. Something in a headline is cheap; something in a
-product name is not, and the user needs to know which conversation they're
-having.
+Name which decisions are affected in the first reply. Rank them by cost to
+change when they ask — something in a headline is cheap, something in a product
+name is expensive, and that ranking is the conversation they'll want second.
 
 **5. Read the pace.** How much moved, over how long? That number is a property
 of the space, and it should set the next refresh:

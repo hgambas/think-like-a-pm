@@ -23,10 +23,11 @@ own experience, dated, in a specific place.
 **Class B — an expert reading, already interpreted.** The analyst roster,
 researchers, named strategists. Someone with a career and a thesis.
 
-*Use in its own section, never merged into the field. "People are saying X" and
-"a named strategist argues X" are different claims, and quietly converting the
-second into the first is the most respectable-looking way this skill could lie
-to you.*
+*Keep it visibly separate from the field and always name the person. "People are
+saying X" and "a named strategist argues X" are different claims, and quietly
+converting the second into the first is the most respectable-looking way this
+skill could lie to you. For where it lands in a reply, see
+[analysts.md](analysts.md).*
 
 **Class C — a party with an interest.** Vendor blogs, product marketing, "we
 tested 10 tools" posts by someone selling an eleventh, sponsored research,
@@ -177,7 +178,11 @@ source; it's a pointer to one.
 - **Anything outside the window is labelled outside the window** at the point of
   use, every time, not just in a table.
 - Record the date on every quote. A quote without a date can't carry a shelf
-  life, and a finding without a shelf life is unusable.
+  life, and a finding whose shelf life you never worked out is unusable.
+  **Work out the shelf life for every finding.** Show it in the first reply when
+  it's short enough to change what someone does — see [How to hand it
+  back](read.md#how-to-hand-it-back) — and keep the rest for the second reply or
+  the saved document.
 
 **Recency breaks ties.** When two sources disagree and one is newer, the newer
 one wins — and **the change itself becomes a finding**. "This was true in
@@ -230,10 +235,12 @@ override anything the evidence feels like.
    can't build a solid claim on one conversation plus corroboration that doesn't
    actually say the same thing.
 2. **Class C sources never raise a label.** They can only lower it.
-3. **The label travels to the sentence.** It governs the verb in the report (see
-   the sentence rule in [read.md](read.md)), not just a note beside the finding.
-   A hedge that stays in the evidence paragraph while the recommendation
-   underneath is written as an instruction has done nothing.
+3. **The label travels to the sentence.** Say what you counted, right where the
+   finding is — "two people said this, both on the same forum" — and let any
+   recommendation underneath carry the same weight. See the strength table in
+   [How to hand it back](read.md#how-to-hand-it-back). A hedge that stays in the
+   evidence paragraph while the recommendation below it reads as an instruction
+   has done nothing.
 
 ### Say whose room you actually read
 

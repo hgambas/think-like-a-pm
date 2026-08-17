@@ -231,9 +231,14 @@ inside the window, and read them.
 Field first, always — their frames are good enough to decide what you notice,
 and you want to notice on your own first.
 
-Their thinking goes in **its own section**. Credit at the point of use, and
-credit the *frame* as loudly as the words. Where an analyst and the field
-disagree, say so — it's usually the best line in the read.
+Credit at the point of use, and credit the *frame* as loudly as the words. Keep
+their thinking visibly separate from what ordinary people said — one expert's
+reading and "people are saying this" are different claims.
+
+**Where an analyst and the field disagree, say so in turn one** — it's usually
+the best line in the read, so it goes in as one of the findings. An analyst who
+agrees with the field, or who gave you a useful frame, waits for turn two. See
+[How to hand it back](#how-to-hand-it-back).
 
 If none of them work this beat, say so. That's honest and it shows where the
 roster has a hole.
@@ -416,6 +421,39 @@ each direction costs, the boundary this evidence cannot cross, how long the
 finding holds, and the disconfirming pass you ran.
 
 Write drafted options when they ask for options.
+
+## Three things that come forward into turn one
+
+Work every layer out for yourself either way. These three earn a place in the
+first reply because holding them back would make it dishonest or useless.
+
+**A short shelf life.** When a finding won't outlive what they're building, say
+so in turn one, in the same breath as the finding. Do the arithmetic out loud.
+A finding that expires before the ship date changes whether they should act at
+all, and that belongs with the finding rather than behind a follow-up question.
+A long shelf life can wait for turn two.
+
+**A single-phrase answer.** When the whole question was one word or one line,
+how long the answer holds *is* the answer. "Safe for a year" and "this will read
+as dated by spring" lead to different decisions. Say it in turn one, inside the
+200 words.
+
+**An analyst who contradicts the field.** When someone from
+[analysts.md](analysts.md) disagrees with what real people said, that
+disagreement is usually the most valuable thing in the read, so it goes in turn
+one as one of the findings — credited by name at the point of use. Analyst
+thinking that merely agrees with the field, or adds a frame you found useful,
+waits for turn two. Either way they get credited when they appear, and their
+thinking stays labelled as one expert's reading rather than as what people said.
+
+## A refresh splits differently
+
+A refresh exists because decisions were already made on the old read, so "what
+this breaks" is the finding rather than the follow-up.
+
+Turn one of a refresh: what moved, and which committed decisions the movement
+undermines. Turn two: the ranked cost of changing each one, and the pace of the
+space. The rest of this rule holds — same budget, same sentences, same counting.
 
 ## What good looks like
 

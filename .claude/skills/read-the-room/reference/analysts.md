@@ -13,9 +13,14 @@ evidence, and the two never get merged. "People are saying X" and "Ana Andjelic
 argues X" are not the same claim, and quietly turning the second into the first
 is the most respectable-looking way this skill could lie to you.
 
-So: **the analysts get their own section in the read**, always. Where they and
-the field disagree, that stays visible and gets called out. It is often the most
-interesting line in the whole document.
+So: **their thinking stays visibly separate from what ordinary people said**,
+always, and it always carries their name.
+
+Where they and the field disagree, that goes in the first reply as one of the
+findings — it is often the most interesting line in the whole read. An analyst
+who agrees with the field, or who handed you a frame that shaped how you saw it,
+comes out in the second reply. Either way, name them at the point of use rather
+than in a list at the bottom. See [How to hand it back](read.md#how-to-hand-it-back).
 
 ## When to consult them
 
