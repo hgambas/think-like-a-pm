@@ -18,6 +18,7 @@ https://github.com/user-attachments/assets/fd5828a0-a969-40cd-87c3-169d4a243018
 |---|---|---|
 | **[Context is Queen](.claude/skills/context-is-queen/)** | Asks before it builds, then shows you the decisions it made without you | Available now |
 | **[Turning Research Into Strategy](.claude/skills/turning-research-into-strategy/)** | Counts what your research actually says, then turns it into work people can build from | Available now |
+| **[Read The Room](.claude/skills/read-the-room/)** | Reads the room around what you're building, then hands you the decision it puts in front of you | Available now |
 | [Best Use of My Time](https://www.thinklikeapm.style/docs/best-use-of-my-time/) | Turns what your agent needs from you into decisions you can actually make | In the workshop |
 | [AI Output Clinic](https://www.thinklikeapm.style/docs/ai-output-clinic/) | Finds where your AI content actually breaks, before anyone rewrites the prompt | In the workshop |
 
@@ -108,6 +109,13 @@ nobody trusts. It inventories the evidence before interpreting it, counts
 what the research actually supports, and writes a strategy where every
 number can be traced back to the person who said it.
 [Docs](https://www.thinklikeapm.style/docs/turning-research-into-strategy/)
+
+**[Read The Room](.claude/skills/read-the-room/)** — for when everything in
+your category looks the same and you want to build from somewhere other than
+your competitor's homepage. It works out who really has the problem and what
+they call it, goes and reads them live, and hands back the decision that puts
+in front of you rather than rewriting your copy for you.
+[Docs](https://www.thinklikeapm.style/docs/read-the-room/)
 
 ## What you're installing
 

@@ -8,12 +8,12 @@
   "plugins": [
     {
       "name": "think-like-a-pm",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "source": "./",
-      "description": "Agent skills for the person who owns the decisions, not the building. Context first, goal second, execution last — plus a method for turning a pile of customer research into a strategy you can defend.",
+      "description": "Agent skills for the person who owns the decisions, not the building. Context first, goal second, execution last, plus a method for turning customer research into a strategy you can defend and a way to read how people outside your category actually talk.",
       "category": "productivity",
       "homepage": "https://www.thinklikeapm.style/docs/",
-      "tags": ["planning", "goals", "interview", "briefing", "product", "research", "strategy", "decisions"]
+      "tags": ["planning", "goals", "interview", "briefing", "product", "research", "strategy", "decisions", "positioning", "culture", "copy"]
     }
   ]
 }

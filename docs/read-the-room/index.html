@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read The Room · Docs · Think Like a PM</title>
+<meta name="description" content="Docs for Read The Room: the agent skill that goes and reads how real people are actually talking about your category right now, and hands back the decisions that puts in front of you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M3%2026h26M5%2021L3%206l7%206%206-10%206%2010%207-6-2%2015z'%20fill='none'%20stroke='%232440D8'%20stroke-width='2.6'%20stroke-linejoin='round'%20stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Castoro:ital@0;1&family=Castoro+Titling&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EEE4; --panel:#E8E1D2; --line:#D6CDBC;
+    --ink:#141628; --ink-soft:#3A3F5C; --ink-faint:#5C627A;
+    --red:#2440D8; --red-deep:#182FA6; --kiln:#A54923; --ochre:#C8952F;
+    --serif:"Ibarra Real Nova",Georgia,serif; --sans:"Castoro",Georgia,serif;
+    --label:"Castoro Titling",Georgia,serif; --mono:"Courier Prime",ui-monospace,Menlo,monospace;
+    --measure:64ch;
+    /* the palm shadow: offset, zero blur, solid. never a soft drop shadow. */
+    --cast:6px 6px 0 rgba(20,22,40,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{font-size:16px}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  ::selection{background:var(--red);color:var(--paper)}
+  a{color:var(--red-deep);text-underline-offset:2px;text-decoration-thickness:1px}
+  /* Castoro ships regular and italic only — emphasis is italic, never faux bold */
+  b,strong{font-weight:400;font-style:italic}
+
+  .shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
+
+  /* ——— sidebar ——— */
+  aside{border-right:1px solid var(--line);padding:32px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+  .wordmark svg{flex:none}
+  .wordmark b{font-family:var(--serif);font-weight:600;font-style:normal;font-size:1.05rem;letter-spacing:-.01em;line-height:1.25}
+  .tagline{font-family:var(--serif);font-style:italic;font-size:.84rem;line-height:1.45;color:var(--ink-faint);margin-bottom:36px}
+  nav h3{font-family:var(--label);font-weight:400;font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);margin:28px 0 10px}
+  nav a{display:block;font-family:var(--serif);font-size:.92rem;padding:6px 10px;margin-left:-10px;text-decoration:none;color:var(--ink-soft);border-left:2px solid transparent;border-radius:0 3px 3px 0}
+  nav a:hover{color:var(--ink);background:var(--panel)}
+  nav a[aria-current="page"]{color:var(--red-deep);border-left-color:var(--red);font-weight:600;background:none}
+  nav a code{font-family:inherit}
+  .side-foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);font-size:.75rem;color:var(--ink-faint)}
+  .side-foot a{color:var(--ink-soft)}
+  nav .soon{display:block;font-family:var(--serif);font-size:.92rem;padding:6px 10px;margin-left:-10px;color:var(--ink-faint)}
+  nav .soon small{display:block;font-family:var(--label);font-weight:400;font-size:.64rem;text-transform:uppercase;letter-spacing:.12em}
+  nav a small{display:block;font-family:var(--label);font-weight:400;font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint)}
+  .backhome{display:inline-flex;align-items:center;gap:6px;font-family:var(--label);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);text-decoration:none;margin-bottom:22px}
+  .backhome:hover{color:var(--red-deep)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--red);color:var(--paper);font-family:var(--label);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;padding:10px 16px;z-index:20;box-shadow:var(--cast)}
+  .skip:focus{left:8px;top:8px}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+  /* ——— main ——— */
+  main{padding:56px 64px 120px;max-width:calc(var(--measure) + 128px)}
+  .page{display:none}
+  .page:target{display:block}
+  .page.default{display:block}
+  .page:target ~ .page.default{display:none}
+  main:has(.page:target) .page.default{display:none}
+  main:has(.page:target) .page.default:target{display:block}
+
+  .crumb{font-family:var(--label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+  .crumb b{color:var(--red-deep);font-weight:400;font-style:normal}
+
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin-bottom:14px}
+  h1 .cmd{font-size:.62em;font-weight:400;letter-spacing:0;color:var(--red-deep)}
+  .lede{font-size:1.15rem;color:var(--ink-soft);max-width:var(--measure);margin-bottom:8px}
+  .lede strong{color:var(--ink)}
+
+  h2{position:relative;font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:-.01em;margin:52px 0 14px;padding-top:22px;border-top:1px solid var(--line)}
+  /* one zellige lozenge per dividing rule — punctuation, never wallpaper */
+  h2::before{content:"";position:absolute;left:0;top:-4px;width:7px;height:7px;background:var(--ochre);transform:rotate(45deg)}
+  p{max-width:var(--measure);margin-bottom:14px}
+  p.note{color:var(--ink-soft)}
+
+  /* corrected-line signature — a wall being repainted: raw clay struck out,
+     the blue painted over it (used once, in the index hero) */
+  .corrected{font-family:var(--serif);font-weight:600}
+  .corrected s{color:var(--kiln);text-decoration:line-through;text-decoration-color:var(--kiln);text-decoration-thickness:.06em}
+  .corrected ins{color:var(--red);text-decoration:none;font-style:italic}
+
+  /* numbered agenda rows (instead of card grids) */
+  .agenda{list-style:none;max-width:var(--measure)}
+  .agenda li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .agenda li:first-child{border-top:1px solid var(--line)}
+  .agenda .no{font-family:var(--serif);font-style:italic;font-weight:600;font-size:1.35rem;color:var(--red);line-height:1}
+  .agenda b{display:block;font-family:var(--serif);font-weight:600;font-style:normal;font-size:1.02rem;line-height:1.35;margin-bottom:3px}
+  .agenda p{margin:0;color:var(--ink-soft);font-size:.92rem}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.92rem;margin:10px 0 6px}
+  th{text-align:left;font-family:var(--label);font-weight:400;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);padding:0 14px 8px 0;border-bottom:2px solid var(--ink)}
+  td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  td:first-child{white-space:nowrap}
+  tr:hover td{background:var(--panel)}
+  a.cmdlink{font-family:var(--serif);font-weight:600;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  a.cmdlink:hover{border-bottom-color:var(--red)}
+
+  /* install command blocks, matching the home page */
+  .cmdbox{display:flex;align-items:flex-start;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px;max-width:var(--measure);margin:10px 0 18px;box-shadow:var(--cast)}
+  .cmd{font-family:var(--mono)}
+  .cmdbox .cmd{flex:1;font-size:.92rem;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .prompt{color:var(--ink-faint);user-select:none}
+  .cmd .arg{color:var(--red-deep)}
+  .copy{flex:none;font-family:var(--label);font-weight:400;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:8px 12px;cursor:pointer;min-height:34px}
+  .copy:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+  .copy[data-done="1"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+  @media (max-width:560px){.cmdbox{flex-direction:column;gap:12px}}
+
+  /* try-it / command samples */
+  .try{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 18px;font-family:var(--mono);font-size:.92rem;line-height:1.6;max-width:var(--measure);margin:10px 0 18px;box-shadow:var(--cast)}
+  .try .c{color:var(--ink-faint);font-style:italic}
+
+  /* transcript sample */
+  .transcript{max-width:var(--measure);border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 24px;margin:12px 0 18px;box-shadow:var(--cast)}
+  .transcript p{font-size:.95rem;margin-bottom:12px}
+  .transcript p:last-child{margin-bottom:0}
+  .transcript .who{font-family:var(--label);font-weight:400;font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-faint);display:block;margin-bottom:2px}
+  .transcript .agent{font-style:italic}
+  .transcript .agent em{font-style:normal}
+  .transcript .agent .who{color:var(--red-deep);font-style:normal}
+
+  /* pitfalls: the clay diamond in the margin */
+  .pitfalls{list-style:none;max-width:var(--measure)}
+  .pitfalls li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .pitfalls li::before{content:"";position:absolute;left:2px;top:21px;width:7px;height:7px;background:var(--kiln);transform:rotate(45deg)}
+  .pitfalls b{font-family:var(--serif);font-weight:600;font-style:normal;color:var(--kiln)}
+  .pitfalls span{color:var(--ink-soft)}
+
+  .calibration{font-family:var(--serif);font-style:italic;font-size:1.08rem;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 2px;max-width:var(--measure);margin:18px 0}
+
+  .related{font-size:.9rem;color:var(--ink-soft)}
+  .related a{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--red-deep);text-decoration:none;border-bottom:1px solid var(--line)}
+  .related a:hover{border-bottom-color:var(--red)}
+
+  .pair{color:var(--ink-faint);font-size:.85rem}
+  ul.plain{list-style:none;max-width:var(--measure);margin:0 0 14px;color:var(--ink-soft)}
+  ul.plain li{position:relative;padding-left:22px;margin-bottom:4px}
+  ul.plain li::before{content:"";position:absolute;left:3px;top:.66em;width:6px;height:6px;background:var(--kiln);transform:rotate(45deg)}
+
+  /* ——— coming-soon block (unreleased skills) ——— */
+  .soonbox{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:22px 24px;max-width:var(--measure);margin:12px 0 18px;box-shadow:var(--cast)}
+  .soonbox p{margin-bottom:12px}
+  .soonbox p:last-child{margin-bottom:0}
+  .soon-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .soon-links a{display:inline-flex;align-items:center;font-family:var(--label);font-weight:400;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--ink-soft);padding:9px 14px;border:1px solid var(--line);border-radius:3px;background:var(--paper);min-height:38px}
+  .soon-links a:hover{color:var(--red-deep);border-color:var(--ink-faint)}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:20px 22px 22px}
+    main{padding:36px 22px 80px}
+    .tagline{margin-bottom:18px}
+    /* collapse the long stacked nav into wrapped chips so content isn't a screen away */
+    nav{display:flex;flex-wrap:wrap;gap:6px}
+    nav h3{width:100%;margin:14px 0 2px}
+    nav h3:first-child{margin-top:0}
+    nav a{margin-left:0;padding:8px 13px;border:1px solid var(--line);border-left-width:1px;border-radius:3px}
+    nav a[aria-current="page"]{color:var(--paper);background:var(--red);border-color:var(--red)}
+    nav a[aria-current="page"]:hover{color:var(--paper);background:var(--red-deep);border-color:var(--red-deep)}
+    nav .soon{margin-left:0;padding:8px 13px;border:1px dashed var(--line);border-radius:3px;font-size:.84rem}
+    nav .soon small,nav a small{display:none}
+    .side-foot{margin-top:20px;padding-top:14px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .page{animation:fade .25s ease-out}
+    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    nav a,.backhome,.copy,.soon-links a,a.cmdlink,.related a{transition:color .15s ease,background-color .15s ease,border-color .15s ease}
+  }
+
+  /* let grid columns shrink below their content, and scroll wide blocks
+     inside themselves rather than stretching the page */
+  @media (max-width:860px){
+    .shell{grid-template-columns:minmax(0,1fr)}
+    aside,main{min-width:0}
+    .try,.transcript,pre{overflow-x:auto}
+    table{table-layout:fixed;width:100%}
+    td:first-child{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+<div class="shell">
+
+<aside>
+  <a class="backhome" href="/">← Think Like a PM</a>
+  <a class="wordmark" href="#overview">
+    <svg width="22" height="18" viewBox="0 0 22 18" aria-hidden="true">
+      <path d="M1 16h20M2 13L1 4l5 4 5-7 5 7 5-4-1 9z" fill="none" stroke="#2440D8" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+    <b>Read The Room</b>
+  </a>
+  <div class="tagline">How the people you're building for actually talk, right now.</div>
+  <nav aria-label="Docs">
+    <h3>Start</h3>
+    <a href="#overview" aria-current="page" data-nav="overview">Overview</a>
+    <h3>Using it</h3>
+    <a href="#read" data-nav="read">On something you've made</a>
+    <a href="#check" data-nav="check">On a topic</a>
+    <a href="#refresh" data-nav="refresh">Months later</a>
+    <h3>More skills</h3>
+    <a href="/docs/">Context is Queen <small>Available now</small></a>
+    <a href="/docs/turning-research-into-strategy/">Turning Research Into Strategy <small>Available now</small></a>
+    <a href="/docs/best-use-of-my-time/">Best Use of My Time <small>In the workshop</small></a>
+    <a href="/docs/ai-output-clinic/">AI Output Clinic <small>In the workshop</small></a>
+  </nav>
+  <div class="side-foot">
+    Made by Hiba Ganta ·
+    <a href="https://github.com/hgambas/think-like-a-pm">GitHub</a>
+  </div>
+</aside>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="page default" id="overview" tabindex="-1">
+  <div class="crumb">Read The Room · <b>Overview</b></div>
+  <h1>Every app looks the same. This is where the way out is.</h1>
+  <p class="lede">Same screens, same chat box in the middle, same words. That's
+  not a technology problem, it's an experience one — and it happens because
+  everyone is looking at each other instead of at people. This skill goes and
+  reads how real people are actually talking right now, so what you build next
+  comes from somewhere other than your competitor's homepage.</p>
+  <p>Here's the part that makes it possible: people are telling you what they
+  care about, constantly. Not in surveys. In a video someone filmed at 1am, in a
+  joke that's funny because it's true, in a comment thread nobody was performing
+  for. Almost never in the words you'd think to search.</p>
+  <p><b>Nobody says “I'm lonely.”</b> Nobody says burnout, or that they're stuck
+  between the life they expected and the one they've got. They say something
+  sideways, and they say it constantly, and it's all sitting there for free.</p>
+  <p class="note">It reads culture, not your customers — if you need to know what
+  <i>your</i> users think, go and ask them. It reads English-language, mostly
+  online, and it reaches people who write under their own name more easily than
+  people venting anonymously, because most of the open forums have shut their
+  doors to machines. It tells you which rooms it couldn't get into, every time.</p>
+
+  <h2>Why bother</h2>
+  <p>Because the alternative is shipping the thing that looks like everything
+  else, and hoping. Emotional resonance isn't a soft goal you argue for at the
+  end of the quarter — it's the difference between a product people stay with and
+  one that reads as generated. If you don't want yours to feel like AI slop, this
+  is the work.</p>
+  <ul class="pitfalls">
+    <li><b>Search your category, find your competitors.</b> <span>Type the words your industry uses and you get vendor blogs and search-bait, because those are the only people who write them. Nobody with the actual problem talks that way.</span></li>
+    <li><b>Your agent already knows — from last year.</b> <span>Ask any AI how people feel about something and it answers confidently from a training cutoff. Nothing about the answer will look wrong.</span></li>
+    <li><b>Research that changes nothing.</b> <span>A lovely summary of the discourse that leaves you exactly where you started, with no idea what it means for the screen you're about to write.</span></li>
+  </ul>
+
+  <h2>How it works</h2>
+  <p>Five steps. The second one is the whole trick.</p>
+  <ol class="agenda">
+    <li><span class="no">1.</span><div><b>Admits what it doesn't know</b>
+      <p>Its own knowledge stops at a date. It says so, and treats that as a starting position rather than an answer. How far it turns out to be off is itself a reading of how fast your world moves.</p></div></li>
+    <li><span class="no">2.</span><div><b>Works out where the feeling actually lives</b>
+      <p>Not your category's words — those belong to whoever's selling into it. It works out who really has this problem, the moment it bites, and what <i>they</i> call it. Then it goes looking for evidence that it's got that wrong, because a hunch you only ever confirmed is still a hunch.</p></div></li>
+    <li><span class="no">3.</span><div><b>Goes and looks, live, every time</b>
+      <p>Never from memory. And if what comes back is marketing and search-bait, it changes where it's looking rather than writing up what it found.</p></div></li>
+    <li><span class="no">4.</span><div><b>Reads the good critics — afterwards</b>
+      <p>People like Jasmine Bina, Eugene Healey, Zoe Scaman, Ana Andjelic and Alex Murrell, but only once the looking is done, so their frames don't decide what it notices. Kept separate from what ordinary people said, and credited by name.</p></div></li>
+    <li><span class="no">5.</span><div><b>Hands you two or three things, in plain words</b>
+      <p>Each with the quotes that produced it, how long it's likely to last, and the decision it puts in front of you.</p></div></li>
+  </ol>
+  <p class="note">Nothing gets saved to your machine unless you ask. The read
+  lands in the conversation; if it's worth keeping, it asks first.</p>
+
+  <h2>How sure it's allowed to sound</h2>
+  <p>The most useful thing here is also the least obvious: how confident the
+  writing is permitted to be is set by how much evidence it actually found, not
+  by how good the sentence would be. Three sources across different places earns
+  a firm sentence. One person on one forum does not, however quotable they were.</p>
+  <table>
+    <thead><tr><th>What it found</th><th>What it's allowed to say</th></tr></thead>
+    <tbody>
+      <tr><td>Several people, in different places</td><td>“This leads me to think X is worth weighing.”</td></tr>
+      <tr><td>Two people, or three in one place</td><td>“Two people said this, which might mean X.”</td></tr>
+      <tr><td>One conversation</td><td>“One person said this. It may not generalise, but it raises X.”</td></tr>
+      <tr><td>A real argument both ways</td><td>Both sides, reported. Never averaged into a verdict.</td></tr>
+      <tr><td>Almost nothing</td><td>“The field was quiet. Here's what would answer it.” And it stops there.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">It won't write your copy. It names what a finding puts at
+  risk and what choice that forces, and leaves the choice with you. Ask it for
+  drafted options and it will give you some.</p>
+
+  <h2>Install it</h2>
+  <div class="cmdbox">
+    <code class="cmd" id="plugin-cmd"><span class="prompt">›</span> <span class="arg">/plugin marketplace add hgambas/think-like-a-pm</span></code>
+    <button class="copy" type="button" data-copy="#plugin-cmd" aria-live="polite">Copy</button>
+  </div>
+  <p class="note">Then <code>/plugin install think-like-a-pm</code>, which brings
+  this skill along with the others. It starts on its own when you're naming,
+  writing or positioning something, or you can call it by name.</p>
+
+  <h2>Where you come in</h2>
+  <p>Once, near the start, it shows you where it's about to point the research —
+  who it thinks this is really for, and the words it's going to search instead of
+  yours. That isn't a form to approve. It's a position you can argue with, and it
+  starts searching straight away either way. If you correct it, it folds that in
+  and tells you what changed.</p>
+  <p>The other moment is at the end, when there's a decision the evidence
+  can't make for you. It puts the choice in front of you with what each
+  direction costs, and leaves it there.</p>
+  <p>There's one place it will stop and ask: when the field is silent on the
+  thing you actually care about. You know things search can't return — something
+  a customer said, something you saw on a call. That's worth more than five
+  confident paragraphs, and it will ask for it rather than fill the gap.</p>
+
+  <h2>Keep your own list</h2>
+  <p>General search is polluted enough now that a hand-kept list of people worth
+  reading beats searching for them. The skill keeps one for you at
+  <code>~/.claude/read-the-room/sources-i-trust.md</code> — drop in anyone whose
+  writing you rate, and it reads them first on every run. That file is yours;
+  updating the skill never touches it, and it never edits it unless you ask.</p>
+
+  <h2>There's nothing to learn</h2>
+  <p>No commands, no syntax. You say &ldquo;read the room&rdquo; and then describe what
+  you're doing, the way you'd say it to a colleague. Your agent works out the rest.</p>
+  <table>
+    <thead><tr><th>You say</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>&ldquo;&hellip;on our pricing page&rdquo;</td><td><a class="cmdlink" href="#read">Reads your page first</a>, then goes out</td></tr>
+      <tr><td>&ldquo;&hellip;on how people feel about X&rdquo;</td><td><a class="cmdlink" href="#check">Straight out to the topic</a></td></tr>
+      <tr><td>&ldquo;Does <i>effortless</i> still land?&rdquo;</td><td><a class="cmdlink" href="#read">Same work, one phrase</a></td></tr>
+      <tr><td>&ldquo;Has anything moved since?&rdquo;</td><td><a class="cmdlink" href="#refresh">Diffs your saved read</a></td></tr>
+  </table>
+  <p class="note">A skill about how the industry's words fail real people has no
+  business handing you a vocabulary to memorise.</p>
+</section>
+
+<!-- ================= ON YOUR OWN WORK ================= -->
+<section class="page" id="read">
+  <div class="crumb">Read The Room · <b>On something you've made</b></div>
+  <h1>On something you've made</h1>
+  <p class="lede">A page, a screen, a name, a whole position. You point at it and
+  say what you're doing. There's nothing to learn: “read the room on our pricing
+  page” is the entire syntax.</p>
+
+  <h2>What it does with it</h2>
+  <p>First it reads your thing properly. Every word: the headline, the buttons,
+  the browser tab title, the line that shows up when someone pastes the link.
+  Then it looks at what sits around it, because a page with <code>?v=b</code> on
+  the end is one of several and the differences are usually the interesting bit.</p>
+  <p>Then it closes your page and goes outside. It isn't reviewing your work. It
+  needs your exact words so that when the field says something, there's something
+  real to hold it against.</p>
+
+  <h2>What comes back</h2>
+  <p>Your question answered in the first few lines. Whether its starting hunch
+  survived. The quotes. Then two or three things the world is doing, each with
+  the decision it puts in front of you and the bit the evidence doesn't stretch
+  to. Last, the rooms it couldn't get into, so you know what's missing.</p>
+
+  <h2>Try it</h2>
+  <div class="cmdbox">
+    <code class="cmd" id="read-cmd"><span class="prompt">›</span> <span class="arg">read the room on our pricing page</span></code>
+    <button class="copy" type="button" data-copy="#read-cmd" aria-live="polite">Copy</button>
+  </div>
+
+  <h2>One word is a fair question too</h2>
+  <p>“Does <i>effortless</i> still land?” is a real thing to ask, and it does the
+  same work, scoped small. It comes back with one of five answers: it lands, it's
+  dated, it's saturated so it now says nothing, it collides with a meaning you
+  didn't want, or the field was too quiet to tell.</p>
+  <p>If it isn't a keeper, it offers alternatives it actually found in someone's
+  mouth, with the quote attached. It won't invent a replacement, because a word
+  nobody said is worth nothing.</p>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Asking it about your own users.</b> <span>It reads the wider world. What your customers think is a different job, and a better one to do by talking to them.</span></li>
+    <li><b>Expecting a verdict.</b> <span>It hands you the room and the choice. Ask it to pick and it will, and it will tell you how sure it is.</span></li>
+    <li><b>Treating a quiet field as a quiet market.</b> <span>Sometimes nobody is talking because the doors are shut, not because there's nothing to say. It tells you which.</span></li>
+  </ul>
+</section>
+
+<!-- ================= ON A TOPIC ================= -->
+<section class="page" id="check">
+  <div class="crumb">Read The Room · <b>On a topic</b></div>
+  <h1>On a topic</h1>
+  <p class="lede">No page, no product. Just: how are people actually feeling
+  about this right now? This is the one to use when you're about to start
+  something, or when you've been in the same category so long you've stopped
+  being able to hear it.</p>
+
+  <h2>Where it goes looking</h2>
+  <p>Not your category's keywords. Those belong to whoever is selling into it,
+  and searching them gets you competitors and search-bait. It works out who
+  really has this problem, when it bites them, and what they call it between
+  themselves. Then it goes there.</p>
+  <p>Before it trusts any of that, it goes looking for evidence it's got the
+  wrong people. That's the difference between reading a room and inventing one.</p>
+
+  <h2>Try it</h2>
+  <div class="cmdbox">
+    <code class="cmd" id="check-cmd"><span class="prompt">›</span> <span class="arg">read the room on how people talk about meal planning now</span></code>
+    <button class="copy" type="button" data-copy="#check-cmd" aria-live="polite">Copy</button>
+  </div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Asking too narrow a question.</b> <span>“How do people feel about our category” gets the category's own voice back. “What's it like to be the person who has this problem” gets you somewhere.</span></li>
+    <li><b>Taking one loud thread as the room.</b> <span>A single scornful post is a single scornful post, and it will say so rather than turn it into a rule.</span></li>
+  </ul>
+</section>
+
+<!-- ================= MONTHS LATER ================= -->
+<section class="page" id="refresh">
+  <div class="crumb">Read The Room · <b>Months later</b></div>
+  <h1>Months later</h1>
+  <p class="lede">Culture moves faster than product ships. A call you made
+  against a read from four months ago might be standing on ground that isn't
+  there any more.</p>
+
+  <h2>How it happens</h2>
+  <p>Mostly you don't have to ask. If you saved a read on this topic and it's
+  still recent, your agent notices and picks it up rather than starting over,
+  and says so in a line. You can also just ask: “has anything moved since we
+  looked at this in March?”</p>
+  <p class="note">It needs a saved read to compare against, and reads are only
+  saved when you ask for one. If there's no file it will say so and offer to
+  start fresh, rather than reconstructing a baseline from memory. That's the
+  exact thing this skill exists to prevent.</p>
+
+  <h2>What comes back</h2>
+  <p>Four buckets and nothing else in the headline: what held, what moved and
+  which way, what died, and what's new. Then the part that matters. The
+  decisions you made on the old reading, and whether they still stand.</p>
+
+  <h2>Try it</h2>
+  <div class="cmdbox">
+    <code class="cmd" id="refresh-cmd"><span class="prompt">›</span> <span class="arg">has anything moved since we read this in March?</span></code>
+    <button class="copy" type="button" data-copy="#refresh-cmd" aria-live="polite">Copy</button>
+  </div>
+
+  <h2>Pitfalls</h2>
+  <ul class="pitfalls">
+    <li><b>Going back too soon.</b> <span>Every read says how long it's likely to hold. Six weeks and a year are very different answers.</span></li>
+    <li><b>Reading the movement and stopping there.</b> <span>What moved is interesting. What it broke is the point.</span></li>
+  </ul>
+</section>
+
+</main>
+</div>
+</main>
+</div>
+
+<script>
+  // sidebar current-page highlight on hash change
+  function sync(){
+    var h=(location.hash||"#overview").slice(1);
+    document.querySelectorAll("nav a").forEach(function(a){
+      if(a.getAttribute("data-nav")===h){a.setAttribute("aria-current","page")}
+      else{a.removeAttribute("aria-current")}
+    });
+    window.scrollTo(0,0);
+  }
+  addEventListener("hashchange",sync); sync();
+</script>
+</body>
+</html>
